@@ -4,228 +4,94 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Supplier Performance Evaluation — Post Evaluation</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --green-dark:   #1a6b3a;
-  --green-mid:    #2d8a52;
-  --green-header: #1e7e42;
-  --green-row:    #c8e6d4;
-  --green-row2:   #e8f5ee;
-  --blue-hdr:     #1565c0;
-  --blue-dark:    #0d47a1;
-
-  /* Section colours (match Excel) */
-  --sec1: #1565c0;  /* Quality */
-  --sec2: #1976d2;  /* Delivery */
-  --sec3: #0288d1;  /* Service */
-  --sec4: #00838f;  /* Price */
-  --sec5: #558b2f;  /* ESG/Dev */
-
-  --gray-bg:   #f4f4f4;
-  --gray-line: #d0d0d0;
-  --white:     #ffffff;
-
-  /* Level chips */
-  --l1-bg:#ffcdd2; --l1-txt:#b71c1c; --l1-sel:#ef5350;
-  --l2-bg:#fff9c4; --l2-txt:#bf360c; --l2-sel:#ffa726;
-  --l3-bg:#c8e6c9; --l3-txt:#1b5e20; --l3-sel:#43a047;
-
-  --font-main: 'IBM Plex Sans Thai','Noto Sans Thai',sans-serif;
-  --font-mono: 'IBM Plex Mono',monospace;
+:root{
+  --green-dark:#1a6b3a;--green-mid:#2d8a52;--green-row:#c8e6d4;--green-row2:#e8f5ee;
+  --blue-mid:#1565c0;--blue-dark:#0d47a1;--blue-light:#e3f0ff;
+  --gray-bg:#e8e8e8;--gray-line:#d0d0d0;--white:#fff;
+  --l1-bg:#ffcdd2;--l1-txt:#b71c1c;--l1-sel:#ef5350;
+  --l2-bg:#fff9c4;--l2-txt:#bf360c;--l2-sel:#ffa726;
+  --l3-bg:#c8e6c9;--l3-txt:#1b5e20;--l3-sel:#43a047;
+  --font:'IBM Plex Sans Thai',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
 }
-
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:var(--font-main);
-  background:#d8d8d8;
-  min-height:100vh;
-  padding:24px 10px 70px;
-  color:#1a1a1a;
-}
+body{font-family:var(--font);background:var(--gray-bg);min-height:100vh;padding:20px 10px 60px;color:#1a1a1a;}
 
-/* ───── PAPER ───── */
-.paper{
-  max-width:1160px;
-  margin:0 auto;
-  background:var(--white);
-  box-shadow:0 4px 36px rgba(0,0,0,.20);
-  border:1px solid #aaa;
-}
+/* TOPBAR */
+.topbar{background:var(--green-dark);padding:0;box-shadow:0 2px 12px rgba(0,0,0,.18);margin-bottom:0;}
+.topbar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 24px;}
+.back-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 14px;border-radius:6px;font-family:var(--font);font-size:12.5px;cursor:pointer;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;}
+.back-btn:hover{background:rgba(255,255,255,.22);}
+.topbar-title{color:#fff;}
+.topbar-title h1{font-size:15px;font-weight:700;}
+.topbar-title p{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px;}
+.topbar-badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;letter-spacing:.3px;white-space:nowrap;}
+.badge.role-user{background:rgba(255,255,255,.9);color:var(--green-dark);}
+.badge.role-gcp {background:#fff3e0;color:#bf360c;}
+.badge.type-post{background:#fce4ec;color:#880e4f;}
+.badge.gcp-readonly{background:#ffcdd2;color:#b71c1c;}
 
-/* ───── TITLE BAR ───── */
-.title-bar{
-  background:var(--green-dark);
-  color:#fff;
-  text-align:center;
-  padding:13px 20px 11px;
-  border-bottom:3px solid #12522c;
-}
-.title-bar h1{
-  font-size:18.5px;
-  font-weight:700;
-  letter-spacing:.3px;
-  line-height:1.4;
-}
-.title-bar h1 em{
-  font-weight:400;
-  font-size:14.5px;
-  opacity:.82;
-  font-style:normal;
-}
-.post-badge{
-  display:inline-block;
-  background:#fff;
-  color:var(--green-dark);
-  font-size:11px;
-  font-weight:700;
-  border-radius:3px;
-  padding:2px 10px;
-  margin-left:10px;
-  letter-spacing:.5px;
-  vertical-align:middle;
-}
+/* PAPER */
+.paper{max-width:1180px;margin:0 auto;background:var(--white);box-shadow:0 4px 32px rgba(0,0,0,.18);border:1px solid #bbb;}
 
-/* ───── COMPANY ROW ───── */
-.company-row{
-  background:var(--green-row2);
-  border-bottom:1px solid var(--gray-line);
-  padding:6px 16px;
-  font-size:12px;
-  color:var(--green-dark);
-  font-style:italic;
-  font-weight:500;
-}
+/* TITLE */
+.title-bar{background:var(--green-dark);color:#fff;text-align:center;padding:13px 20px 11px;border-bottom:3px solid #12522c;}
+.title-bar h1{font-size:18px;font-weight:700;letter-spacing:.3px;line-height:1.4;}
+.title-bar h1 em{font-weight:400;font-size:14px;opacity:.82;font-style:normal;}
+.post-badge{display:inline-block;background:#fff;color:var(--green-dark);font-size:10.5px;font-weight:700;border-radius:3px;padding:2px 9px;margin-left:10px;letter-spacing:.4px;vertical-align:middle;}
 
-/* ───── HEADER FIELDS ───── */
-.header-fields{
-  background:#fafafa;
-  border-bottom:2.5px solid var(--green-dark);
-}
-.hf-row{
-  display:grid;
-  border-bottom:1px solid var(--gray-line);
-}
+/* COMPANY ROW */
+.company-row{background:var(--green-row2);border-bottom:1px solid var(--gray-line);padding:6px 16px;font-size:12px;color:var(--green-dark);font-style:italic;font-weight:500;}
+
+/* HEADER FIELDS */
+.header-fields{background:#fafafa;border-bottom:2.5px solid var(--green-dark);}
+.hf-row{display:grid;border-bottom:1px solid var(--gray-line);}
 .hf-row.r1{grid-template-columns:2fr 1.1fr 1fr;}
 .hf-row.r2{grid-template-columns:2fr 1.4fr 1fr;}
-.hf-cell{
-  display:flex;
-  align-items:stretch;
-  border-right:1px solid var(--gray-line);
-  min-height:36px;
-}
+.hf-cell{display:flex;align-items:stretch;border-right:1px solid var(--gray-line);min-height:36px;}
 .hf-cell:last-child{border-right:none;}
-.hf-label{
-  background:var(--green-row);
-  color:var(--green-dark);
-  font-size:12px;
-  font-weight:600;
-  padding:7px 10px;
-  white-space:nowrap;
-  display:flex;
-  align-items:center;
-  border-right:1px solid #a8d5b8;
-  min-width:fit-content;
-}
-.hf-input{
-  flex:1;border:none;outline:none;
-  padding:7px 10px;
-  font-family:var(--font-main);
-  font-size:12.5px;
-  color:#1a1a1a;
-  background:transparent;
-  width:100%;
-}
+.hf-label{background:var(--green-row);color:var(--green-dark);font-size:12px;font-weight:600;padding:7px 10px;white-space:nowrap;display:flex;align-items:center;border-right:1px solid #a8d5b8;min-width:fit-content;}
+.hf-val{flex:1;padding:7px 10px;font-family:var(--font);font-size:12.5px;color:#1a1a1a;display:flex;align-items:center;}
+.hf-input{flex:1;border:none;outline:none;padding:7px 10px;font-family:var(--font);font-size:12.5px;color:#1a1a1a;background:transparent;width:100%;}
 .hf-input:focus{background:#fffde7;}
 .hf-input::placeholder{color:#bbb;font-size:11.5px;}
-select.hf-input{cursor:pointer;}
+.hf-val strong{font-weight:600;color:var(--green-dark);}
+.auto-tag{font-size:10px;background:#dff0e4;color:var(--green-dark);border-radius:3px;padding:2px 7px;margin-left:8px;}
 
-/* ───── LEGEND BAR ───── */
-.legend-bar{
-  background:#f5f5f5;
-  border-bottom:1px solid var(--gray-line);
-  padding:6px 16px;
-  display:flex;
-  align-items:center;
-  gap:18px;
-  flex-wrap:wrap;
-}
+/* LEGEND */
+.legend-bar{background:#f5f5f5;border-bottom:1px solid var(--gray-line);padding:6px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
 .legend-bar>span{font-size:11.5px;color:#555;font-weight:600;}
 .legend-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;}
 .chip-dot{width:12px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.18);flex-shrink:0;}
+.gcp-warn{margin-left:auto;display:flex;align-items:center;gap:5px;background:#ffcdd2;border:1px solid #ef9a9a;border-radius:4px;padding:3px 10px;font-size:11px;color:#b71c1c;font-weight:600;}
 
-/* ───── TABLE ───── */
+/* TABLE */
 .eval-table{width:100%;border-collapse:collapse;font-size:12.5px;}
-
 .eval-table thead tr{background:var(--green-dark);color:#fff;}
-.eval-table thead th{
-  padding:8px 7px;
-  font-weight:600;
-  font-size:12px;
-  border:1px solid #145c2e;
-  text-align:center;
-  vertical-align:middle;
-  line-height:1.4;
-}
+.eval-table thead th{padding:8px 7px;font-weight:600;font-size:12px;border:1px solid #145c2e;text-align:center;vertical-align:middle;line-height:1.4;}
 .eval-table thead th.left{text-align:left;padding-left:10px;}
-.col-no    {width:46px;}
-.col-topic {width:162px;}
-.col-detail{min-width:190px;}
-.col-wt    {width:62px;}
-.col-lv    {width:185px;}
-.col-sc    {width:80px;}
-.col-nt    {width:120px;}
+.col-no{width:44px;}.col-topic{width:160px;}.col-detail{min-width:185px;}
+.col-wt{width:60px;}.col-lv{width:183px;}.col-sc{width:78px;}.col-nt{width:118px;}
 
-/* Section rows */
-.section-row td{
-  padding:7px 12px;
-  font-weight:700;
-  font-size:13px;
-  color:#fff;
-  border:1px solid rgba(255,255,255,.22);
-  letter-spacing:.1px;
-}
-
-/* data rows */
+/* SECTION */
+.section-row td{padding:7px 12px;font-weight:700;font-size:12.5px;color:#fff;border:1px solid rgba(255,255,255,.2);}
 .data-row:hover{background:#f0faf4;}
-
-.eval-table td{
-  border:1px solid #d4d4d4;
-  vertical-align:middle;
-  padding:6px 7px;
-}
-.td-no   {text-align:center;font-weight:600;color:#555;background:#f8f8f8;width:46px;}
+.eval-table td{border:1px solid #d4d4d4;vertical-align:middle;padding:6px 7px;}
+.td-no{text-align:center;font-weight:600;color:#555;background:#f8f8f8;width:44px;}
 .td-topic{font-weight:600;font-size:12.5px;padding-left:10px;background:#fafafa;}
 .td-detail{font-size:12px;color:#424242;line-height:1.55;padding:7px 9px;}
-.td-wt   {text-align:center;font-family:var(--font-mono);font-weight:600;font-size:12.5px;color:var(--green-dark);background:var(--green-row2);}
+.td-wt{text-align:center;font-family:var(--mono);font-weight:600;font-size:12.5px;color:var(--green-dark);background:var(--green-row2);}
 
-/* ───── LEVEL SELECTOR ───── */
+/* LEVEL */
 .td-levels{padding:4px 3px;}
 .level-group{display:flex;gap:3px;}
 .level-opt{display:none;}
-.level-btn{
-  flex:1;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:flex-start;
-  padding:5px 3px 5px;
-  border:1.5px solid #ccc;
-  border-radius:3px;
-  cursor:pointer;
-  transition:all .13s;
-  font-family:var(--font-main);
-  font-size:10px;
-  line-height:1.35;
-  text-align:center;
-  color:#555;
-  background:#fff;
-  min-height:56px;
-}
+.level-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:5px 3px 5px;border:1.5px solid #ccc;border-radius:3px;cursor:pointer;transition:all .13s;font-family:var(--font);font-size:10px;line-height:1.35;text-align:center;color:#555;background:#fff;min-height:54px;}
 .level-btn:hover{border-color:#888;background:#f2f2f2;transform:translateY(-1px);}
-.level-btn .lv-num{
-  font-size:15px;font-weight:700;
-  font-family:var(--font-mono);
-  line-height:1;margin-bottom:2px;
-}
+.level-btn .lv-num{font-size:15px;font-weight:700;font-family:var(--mono);line-height:1;margin-bottom:2px;}
 .level-btn .lv-lbl{font-size:10px;font-weight:600;}
 .level-btn .lv-dsc{font-size:9.5px;color:#888;line-height:1.3;margin-top:2px;}
 
@@ -236,202 +102,120 @@ select.hf-input{cursor:pointer;}
 .level-opt.l3:checked+.level-btn{background:var(--l3-bg);border-color:var(--l3-sel);color:var(--l3-txt);}
 .level-opt.l3:checked+.level-btn .lv-dsc{color:#2e7d32;}
 
-/* ───── SCORE CELL ───── */
+/* SCORE */
 .td-score{text-align:center;background:#f0faf4;}
-.score-val{
-  display:block;
-  font-family:var(--font-mono);
-  font-size:16px;font-weight:700;
-  color:var(--green-dark);
-}
+.score-val{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:var(--green-dark);}
 .score-sub{font-size:10px;color:#888;}
 
-/* ───── NOTE ───── */
+/* NOTE */
 .td-note{padding:4px;}
-.note-input{
-  width:100%;border:1px solid #e0e0e0;border-radius:2px;
-  padding:5px 6px;
-  font-family:var(--font-main);font-size:11px;
-  color:#1a1a1a;background:#fff;
-  resize:none;outline:none;
-  transition:border-color .15s;
-  height:54px;
-}
+.note-input{width:100%;border:1px solid #e0e0e0;border-radius:2px;padding:5px 6px;font-family:var(--font);font-size:11px;color:#1a1a1a;background:#fff;resize:none;outline:none;transition:border-color .15s;height:52px;}
 .note-input:focus{border-color:var(--green-mid);background:#fffde7;}
+.note-input:disabled{background:#f5f5f5;cursor:not-allowed;color:#999;}
 
-/* ───── TOTAL ROW ───── */
-.total-row td{
-  background:#e8f5e9;
-  font-weight:700;font-size:13px;
-  color:var(--green-dark);
-  padding:9px 10px;
-  border:1px solid #a5d6a7;
-}
-.total-row .total-score{
-  font-family:var(--font-mono);
-  font-size:21px;font-weight:700;
-  color:var(--green-dark);
-  display:block;text-align:center;
-}
-.result-badge{
-  display:inline-block;padding:4px 12px;
-  border-radius:3px;font-size:12px;font-weight:700;
-}
+/* TOTAL */
+.total-row td{background:#e8f5e9;font-weight:700;font-size:13px;color:var(--green-dark);padding:9px 10px;border:1px solid #a5d6a7;}
+.total-score{font-family:var(--mono);font-size:21px;font-weight:700;color:var(--green-dark);display:block;text-align:center;}
+.result-badge{display:inline-block;padding:4px 12px;border-radius:3px;font-size:12px;font-weight:700;}
 .badge-pass{background:var(--l3-bg);color:var(--l3-txt);border:1px solid var(--l3-sel);}
 .badge-cond{background:var(--l2-bg);color:var(--l2-txt);border:1px solid var(--l2-sel);}
 .badge-fail{background:var(--l1-bg);color:var(--l1-txt);border:1px solid var(--l1-sel);}
 
-/* score summary table */
-.summary-area{
-  background:#f9f9f9;
-  border-top:1.5px solid var(--gray-line);
-  padding:12px 18px;
-  display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;
-}
-.summary-box{
-  background:#fff;border:1px solid #d0d0d0;border-radius:3px;
-  padding:10px 16px;flex:1;min-width:140px;
-}
+/* SUMMARY BOX */
+.summary-area{background:#f9f9f9;border-top:1.5px solid var(--gray-line);padding:12px 18px;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;}
+.summary-box{background:#fff;border:1px solid #d0d0d0;border-radius:3px;padding:10px 15px;flex:1;min-width:130px;}
 .summary-box .sb-title{font-size:11px;color:#777;font-weight:600;margin-bottom:4px;}
-.summary-box .sb-val{
-  font-family:var(--font-mono);font-size:20px;font-weight:700;
-  color:var(--green-dark);
-}
+.summary-box .sb-val{font-family:var(--mono);font-size:19px;font-weight:700;color:var(--green-dark);}
 .summary-box .sb-max{font-size:11px;color:#aaa;}
 
-/* ───── SIGNATURE ───── */
+/* SIGNATURE */
 .signature-area{background:#fafafa;border-top:2px solid var(--green-dark);}
 .sig-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--gray-line);}
-.sig-cell{padding:13px 14px;border-right:1px solid var(--gray-line);text-align:center;}
+.sig-cell{padding:12px 14px;border-right:1px solid var(--gray-line);text-align:center;}
 .sig-cell:last-child{border-right:none;}
-.sig-label{font-size:11.5px;color:#424242;font-weight:600;margin-bottom:10px;}
-.sig-line{border-bottom:1px solid #333;height:34px;margin:0 20px 5px;}
-.sig-input{
-  border:none;border-bottom:1px dashed #bbb;outline:none;
-  text-align:center;font-family:var(--font-main);font-size:12px;
-  color:#1a1a1a;width:100%;padding:3px;background:transparent;
-}
+.sig-label{font-size:11.5px;color:#424242;font-weight:600;margin-bottom:9px;}
+.sig-line{border-bottom:1px solid #333;height:32px;margin:0 20px 5px;}
+.sig-input{border:none;border-bottom:1px dashed #bbb;outline:none;text-align:center;font-family:var(--font);font-size:12px;color:#1a1a1a;width:100%;padding:3px;background:transparent;}
 .sig-input:focus{background:#fffde7;}
 .sig-date{font-size:10.5px;color:#888;margin-top:4px;}
-.sig-date input{border:none;border-bottom:1px dashed #bbb;outline:none;font-size:10.5px;background:transparent;font-family:var(--font-main);}
+.sig-date input{border:none;border-bottom:1px dashed #bbb;outline:none;font-size:10.5px;background:transparent;font-family:var(--font);}
 
-/* ───── FOOTER / BUTTONS ───── */
-.form-footer{
-  background:var(--green-dark);padding:13px 20px;
-  display:flex;justify-content:flex-end;align-items:center;gap:12px;
-}
-.btn-reset{
-  background:transparent;
-  border:1.5px solid rgba(255,255,255,.5);
-  color:rgba(255,255,255,.85);
-  padding:8px 20px;border-radius:3px;
-  font-family:var(--font-main);font-size:13px;cursor:pointer;
-  transition:all .18s;
-}
-.btn-reset:hover{background:rgba(255,255,255,.12);}
-.btn-print{
-  background:rgba(255,255,255,.15);
-  border:1.5px solid rgba(255,255,255,.5);
-  color:#fff;padding:8px 20px;border-radius:3px;
-  font-family:var(--font-main);font-size:13px;cursor:pointer;
-  transition:all .18s;
-}
-.btn-print:hover{background:rgba(255,255,255,.25);}
-.btn-submit{
-  background:#fff;border:none;
-  color:var(--green-dark);padding:9px 28px;border-radius:3px;
-  font-family:var(--font-main);font-size:13.5px;font-weight:700;
-  cursor:pointer;transition:all .18s;
-  box-shadow:0 2px 8px rgba(0,0,0,.18);
-}
-.btn-submit:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22);}
+/* FOOTER */
+.form-footer{background:var(--green-dark);padding:12px 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px;}
+.btn-secondary{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:rgba(255,255,255,.85);padding:8px 20px;border-radius:3px;font-family:var(--font);font-size:13px;cursor:pointer;transition:all .18s;}
+.btn-secondary:hover{background:rgba(255,255,255,.12);}
+.btn-primary{background:#fff;border:none;color:var(--green-dark);padding:9px 28px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:700;cursor:pointer;transition:all .18s;box-shadow:0 2px 8px rgba(0,0,0,.18);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22);}
 
-/* ───── OVERLAY ───── */
-.overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.52);z-index:999;
-  align-items:center;justify-content:center;
-}
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center;}
 .overlay.show{display:flex;}
-.overlay-card{
-  background:#fff;border-radius:4px;
-  padding:38px 46px;text-align:center;
-  box-shadow:0 8px 40px rgba(0,0,0,.28);
-  max-width:430px;width:90%;
-}
-.ov-icon{width:62px;height:62px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
-.ov-icon svg{width:34px;height:34px;}
-.overlay-card h2{font-size:19px;font-weight:700;color:var(--green-dark);margin-bottom:7px;}
-.overlay-card p{font-size:13.5px;color:#555;margin-bottom:5px;}
-.ov-ref{
-  font-family:var(--font-mono);font-size:15px;font-weight:700;
-  color:var(--green-dark);background:var(--green-row2);
-  border:1px solid #a5d6a7;border-radius:3px;
-  padding:7px 18px;display:inline-block;margin:8px 0 18px;
-}
-.btn-ov{
-  background:var(--green-dark);color:#fff;border:none;
-  padding:9px 26px;border-radius:3px;
-  font-family:var(--font-main);font-size:13.5px;font-weight:600;cursor:pointer;
-}
+.overlay-card{background:#fff;border-radius:4px;padding:36px 44px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.25);max-width:420px;width:90%;}
+.ov-icon{width:60px;height:60px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.ov-icon svg{width:32px;height:32px;}
+.overlay-card h2{font-size:18px;font-weight:700;color:var(--green-dark);margin-bottom:7px;}
+.overlay-card p{font-size:13px;color:#555;margin-bottom:5px;}
+.ov-ref{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--green-dark);background:var(--green-row2);border:1px solid #a5d6a7;border-radius:3px;padding:7px 18px;display:inline-block;margin:8px 0 18px;}
+.btn-ov{background:var(--green-dark);color:#fff;border:none;padding:9px 24px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:600;cursor:pointer;margin:4px;}
+.btn-ov-outline{background:#fff;color:var(--green-dark);border:1.5px solid var(--green-dark);padding:8px 24px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:600;cursor:pointer;margin:4px;text-decoration:none;display:inline-block;}
 
-/* scrollbar */
-::-webkit-scrollbar{width:6px;height:6px;}
-::-webkit-scrollbar-track{background:#eee;}
-::-webkit-scrollbar-thumb{background:#aaa;border-radius:3px;}
-
-@media print{
-  body{background:#fff;padding:0;}
-  .paper{box-shadow:none;border:none;}
-  .form-footer,.overlay{display:none!important;}
-}
+@media print{body{background:#fff;padding:0;}.paper{box-shadow:none;border:none;}.form-footer,.overlay,.topbar{display:none!important;}}
 </style>
 </head>
 <body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back-btn" href="index.html">&#8592; กลับหน้าหลัก</a>
+    <div class="topbar-title">
+      <h1>Supplier Performance Evaluation — Post</h1>
+      <p id="tb-sub">กำลังโหลดข้อมูล...</p>
+    </div>
+    <div class="topbar-badges">
+      <span class="badge type-post">POST-EVALUATION</span>
+      <span class="badge role-user" id="role-badge">USER</span>
+      <span class="badge gcp-readonly" id="readonly-badge" style="display:none">🔒 GCP Mode</span>
+    </div>
+  </div>
+</div>
 
 <div class="paper">
 
   <!-- TITLE -->
   <div class="title-bar">
-    <h1>
-      แบบประเมินผู้ขาย (Supplier Performance Evaluation)
-      <em>&nbsp;— รายปี / ครึ่งปี</em>
-      <span class="post-badge">POST EVALUATION</span>
-    </h1>
+    <h1>แบบประเมินผู้ขาย (Supplier Performance Evaluation) <em>— รายปี / ครึ่งปี</em><span class="post-badge">POST EVALUATION</span></h1>
   </div>
-
-  <div class="company-row">
-    บริษัทในกลุ่ม : Consumer / Packaging / Retail / Manufacturer &nbsp;|&nbsp; รอบการประเมิน : รายปี / ครึ่งปี
-  </div>
+  <div class="company-row">บริษัทในกลุ่ม : Consumer / Packaging / Retail / Manufacturer &nbsp;|&nbsp; รอบการประเมิน : รายปี / ครึ่งปี</div>
 
   <!-- HEADER FIELDS -->
   <div class="header-fields">
     <div class="hf-row r1">
       <div class="hf-cell">
         <div class="hf-label">ชื่อผู้ขาย/ผู้ให้บริการ :</div>
-        <input class="hf-input" type="text" placeholder="กรอกชื่อบริษัท / ผู้ให้บริการ">
+        <input class="hf-input" id="h-supplier" type="text" placeholder="กรอกชื่อบริษัท / ผู้ให้บริการ">
       </div>
       <div class="hf-cell">
         <div class="hf-label">รหัสผู้ขาย (Vendor Code) :</div>
-        <input class="hf-input" type="text" placeholder="เช่น SUP-0012" style="font-family:var(--font-mono);font-weight:600">
+        <input class="hf-input" id="h-vendor" type="text" placeholder="เช่น SUP-0012" style="font-family:var(--mono);font-weight:600">
       </div>
       <div class="hf-cell">
-        <div class="hf-label">รอบประเมิน (ปี/ไตรมาส) :</div>
-        <input class="hf-input" type="text" id="period-val" placeholder="เช่น 2567 / Q2">
+        <div class="hf-label">เลขที่อ้างอิง :</div>
+        <div class="hf-val"><strong id="ref-no">-</strong><span class="auto-tag">Auto</span></div>
       </div>
     </div>
     <div class="hf-row r2">
       <div class="hf-cell">
-        <div class="hf-label">ประเภทสินค้า/บริการ :</div>
-        <input class="hf-input" type="text" placeholder="ระบุประเภทสินค้าหรือบริการ">
+        <div class="hf-label">หน่วยงาน / ชื่องาน :</div>
+        <div class="hf-val" id="h-dept-job">-</div>
       </div>
       <div class="hf-cell">
-        <div class="hf-label">ผู้ประเมิน / แผนก :</div>
-        <input class="hf-input" type="text" placeholder="ชื่อผู้ประเมิน / แผนก">
+        <div class="hf-label">ผู้ประเมิน / รหัส :</div>
+        <div class="hf-val" id="h-emp">-</div>
       </div>
       <div class="hf-cell">
-        <div class="hf-label">ผู้อนุมัติ :</div>
-        <input class="hf-input" type="text" placeholder="ชื่อผู้อนุมัติ">
+        <div class="hf-label">รอบประเมิน :</div>
+        <div class="hf-val" id="h-period">-</div>
       </div>
     </div>
   </div>
@@ -439,19 +223,11 @@ select.hf-input{cursor:pointer;}
   <!-- LEGEND -->
   <div class="legend-bar">
     <span>เกณฑ์คะแนน :</span>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#ffcdd2;border-color:#ef9a9a"></div>
-      <span style="color:#b71c1c"><b>ระดับ 1</b> = ต้องปรับปรุง</span>
-    </div>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#fff9c4;border-color:#ffcc02"></div>
-      <span style="color:#bf360c"><b>ระดับ 2</b> = เป็นที่พอใจ</span>
-    </div>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#c8e6c9;border-color:#81c784"></div>
-      <span style="color:#1b5e20"><b>ระดับ 3</b> = ดีเกินความคาดหวัง</span>
-    </div>
-    <span style="margin-left:auto;font-size:11px;color:#999">* คลิกเลือกระดับในแต่ละหัวข้อ</span>
+    <div class="legend-chip"><div class="chip-dot" style="background:#ffcdd2;border-color:#ef9a9a"></div><span style="color:#b71c1c"><b>ระดับ 1</b> = ต้องปรับปรุง</span></div>
+    <div class="legend-chip"><div class="chip-dot" style="background:#fff9c4;border-color:#ffcc02"></div><span style="color:#bf360c"><b>ระดับ 2</b> = เป็นที่พอใจ</span></div>
+    <div class="legend-chip"><div class="chip-dot" style="background:#c8e6c9;border-color:#81c784"></div><span style="color:#1b5e20"><b>ระดับ 3</b> = ดีเกินความคาดหวัง</span></div>
+    <span id="gcp-warn-legend" style="display:none" class="gcp-warn">🔒 GCP: กรอกได้เฉพาะหมวดฝ่ายจัดซื้อ</span>
+    <span style="margin-left:auto;font-size:11px;color:#999">* คลิกเลือกระดับ</span>
   </div>
 
   <!-- TABLE -->
@@ -463,7 +239,7 @@ select.hf-input{cursor:pointer;}
         <th class="col-topic left">หัวข้อการประเมิน</th>
         <th class="col-detail left">รายละเอียด / เกณฑ์</th>
         <th class="col-wt">น้ำหนัก<br>(%)</th>
-        <th class="col-lv" colspan="3" style="letter-spacing:10px">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</th>
+        <th class="col-lv" colspan="3" style="letter-spacing:8px">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</th>
         <th class="col-sc">คะแนน<br>ที่ได้</th>
         <th class="col-nt">หมายเหตุ</th>
       </tr>
@@ -472,23 +248,20 @@ select.hf-input{cursor:pointer;}
   </table>
   </div>
 
-  <!-- SCORE SUMMARY -->
+  <!-- SUMMARY -->
   <div class="summary-area" id="summary-area" style="display:none">
     <div class="summary-box">
       <div class="sb-title">คะแนนรวม (Total)</div>
       <div><span class="sb-val" id="sum-total">0.00</span><span class="sb-max"> / 100</span></div>
     </div>
-    <div class="summary-box" id="sum-result-box">
+    <div class="summary-box">
       <div class="sb-title">ผลการประเมิน</div>
-      <div id="sum-badge"></div>
+      <div id="sum-badge" style="margin-top:4px"></div>
     </div>
     <div class="summary-box">
-      <div class="sb-title">เกณฑ์ผ่าน</div>
-      <div style="font-size:12px;color:#555;line-height:1.7">
-        ≥ 80 = ดีเยี่ยม (A)<br>
-        70–79 = ดี (B)<br>
-        60–69 = พอใช้ (C)<br>
-        &lt; 60 = ต้องปรับปรุง (D)
+      <div class="sb-title">เกณฑ์ตัดสิน</div>
+      <div style="font-size:11.5px;color:#555;line-height:1.8">
+        ≥ 80 = A ดีเยี่ยม<br>70–79 = B ดี<br>60–69 = C พอใช้<br>&lt; 60 = D ต้องปรับปรุง
       </div>
     </div>
   </div>
@@ -503,7 +276,7 @@ select.hf-input{cursor:pointer;}
         <div class="sig-date">วันที่ : <input type="date" id="sig-date1"></div>
       </div>
       <div class="sig-cell">
-        <div class="sig-label">ผู้จัดการ / หัวหน้าแผนก (Manager)</div>
+        <div class="sig-label">ผู้จัดการ / หัวหน้าแผนก</div>
         <div class="sig-line"></div>
         <input class="sig-input" type="text" placeholder="ชื่อ - นามสกุล">
         <div class="sig-date">วันที่ : <input type="date"></div>
@@ -519,9 +292,9 @@ select.hf-input{cursor:pointer;}
 
   <!-- FOOTER -->
   <div class="form-footer">
-    <button class="btn-reset" onclick="resetForm()">&#8635; รีเซ็ต</button>
-    <button class="btn-print" onclick="window.print()">&#128438; พิมพ์</button>
-    <button class="btn-submit" onclick="submitForm()">&#10003; ส่งแบบประเมิน</button>
+    <button class="btn-secondary" onclick="resetForm()">&#8635; รีเซ็ต</button>
+    <button class="btn-secondary" onclick="window.print()">&#128438; พิมพ์</button>
+    <button class="btn-primary" onclick="submitForm()">&#10003; ส่งแบบประเมิน</button>
   </div>
 
 </div><!-- /paper -->
@@ -535,199 +308,141 @@ select.hf-input{cursor:pointer;}
       </svg>
     </div>
     <h2>ส่งแบบประเมินเรียบร้อย!</h2>
-    <p>ระบบได้รับข้อมูล Post Evaluation แล้ว</p>
+    <p>Post Evaluation ถูกบันทึกในระบบแล้ว</p>
     <p style="font-size:11.5px;color:#999">เลขที่อ้างอิง</p>
     <div class="ov-ref" id="ov-ref">-</div>
-    <p style="font-size:13px">คะแนนรวม : <b id="ov-score" style="color:#1a6b3a;font-size:18px"></b></p>
-    <p style="font-size:13px;margin-bottom:18px">ผลการประเมิน : <span id="ov-grade"></span></p>
-    <button class="btn-ov" onclick="document.getElementById('overlay').classList.remove('show')">ปิด</button>
+    <p style="font-size:13px;margin-bottom:18px">คะแนน : <b id="ov-score" style="color:#1a6b3a;font-size:17px"></b> &nbsp;|&nbsp; ผล : <span id="ov-result"></span></p>
+    <a class="btn-ov-outline" href="index.html">&#8592; หน้าหลัก</a>
+    <button class="btn-ov" onclick="window.print()">&#128438; พิมพ์</button>
   </div>
 </div>
 
 <script>
-/* =================== DATA ===================
-   Sections from the Excel image (visible rows + reasonable continuation)
-   Weight totals: Q40% + D20% + S10% + Price15% + ESG/Dev15% = 100%
-   ============================================ */
+/* ===== URL PARAMS ===== */
+const P = new URLSearchParams(location.search);
+const ROLE = P.get('role')||'user';
+const EMP  = P.get('emp') ||'';
+const DEPT = P.get('dept')||'';
+const JOB  = P.get('job') ||'';
+const IS_GCP = ROLE==='gcp';
+
+/* ===== SECTIONS
+   gcpEditable: true = GCP กรอกได้ (ฝ่ายจัดซื้อ = pricing, delivery, payment)
+   ===== */
 const SECTIONS = [
   {
-    id:'quality', color:'#1565c0', totalW:40,
-    label:'1. ด้านคุณภาพ (Quality) — น้ำหนักรวม 40%',
+    id:'quality',label:'1. ด้านคุณภาพ (Quality) — น้ำหนักรวม 40%',
+    color:'#1565c0', gcpEditable:false,
     rows:[
-      {
-        no:'1.1', topic:'คุณภาพสินค้า/บริการ',
-        detail:'ความสอดคล้องกับมาตรฐานที่กำหนด / อัตราของเสีย',
-        weight:14,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'Defect rate > 5% / ไม่ผ่าน spec บอกครั้ง'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'Defect rate 1–5% / ผ่าน spec บางส่วน'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'Defect rate < 1% / ผ่าน spec 100% ต่อเนื่อง'},
-      },
-      {
-        no:'1.2', topic:'ความน่าเชื่อถือของคุณภาพ',
-        detail:'ความสม่ำเสมอของคุณภาพตลอดปี / ระบบ QC',
-        weight:8,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'คุณภาพไม่สม่ำเสมอ ร้องเรียน > 3 ครั้ง/ปี'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ร้องเรียน 1–3 ครั้ง/ปี มีการแก้ไขบางส่วน'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ไม่มีร้องเรียน หรือแก้ไขได้ภายใน 24 ชม.'},
-      },
-      {
-        no:'1.3', topic:'ความรับผิดชอบเมื่อสินค้าไม่ผ่าน',
-        detail:'ความรวดเร็วในการแก้ไขและการรับผิดชอบ',
-        weight:8,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ปฏิเสธความรับผิดชอบ / แก้ไขช้า > 7 วัน'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'รับผิดชอบบางส่วน แก้ไขภายใน 3–7 วัน'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'รับผิดชอบเต็มที่ แก้ไขภายใน 24–48 ชม.'},
-      },
-      {
-        no:'1.4', topic:'ระบบ QMS / การรับรองมาตรฐาน',
-        detail:'ISO 9001 / มาตรฐานที่เกี่ยวข้อง',
-        weight:10,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ไม่มีระบบ QMS ที่ชัดเจน'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'มีระบบ QMS แต่ยังไม่ได้รับการรับรอง'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ได้รับการรับรอง ISO 9001 หรือสูงกว่า'},
-      },
+      {no:'1.1',topic:'คุณภาพสินค้า/บริการ',detail:'ความสอดคล้องกับมาตรฐานที่กำหนด / อัตราของเสีย',weight:14,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'Defect > 5% / ไม่ผ่าน spec บอกครั้ง'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'Defect 1–5% / ผ่าน spec บางส่วน'},
+       l3:{lbl:'ดีเกินคาด',dsc:'Defect < 1% / ผ่าน spec 100% ต่อเนื่อง'}},
+      {no:'1.2',topic:'ความน่าเชื่อถือของคุณภาพ',detail:'ความสม่ำเสมอของคุณภาพตลอดปี / ระบบ QC',weight:8,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'คุณภาพไม่สม่ำเสมอ ร้องเรียน > 3 ครั้ง/ปี'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ร้องเรียน 1–3 ครั้ง/ปี มีการแก้ไข'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ไม่มีร้องเรียน หรือแก้ไขได้ภายใน 24 ชม.'}},
+      {no:'1.3',topic:'ความรับผิดชอบเมื่อสินค้าไม่ผ่าน',detail:'ความรวดเร็วในการแก้ไขและการรับผิดชอบ',weight:8,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ปฏิเสธความรับผิดชอบ / แก้ช้า > 7 วัน'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'รับผิดชอบบางส่วน แก้ไขใน 3–7 วัน'},
+       l3:{lbl:'ดีเกินคาด',dsc:'รับผิดชอบเต็มที่ แก้ไขใน 24–48 ชม.'}},
+      {no:'1.4',topic:'ระบบ QMS / การรับรองมาตรฐาน',detail:'ISO 9001 / มาตรฐานที่เกี่ยวข้อง',weight:10,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ไม่มีระบบ QMS ที่ชัดเจน'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'มีระบบ QMS แต่ยังไม่ได้รับการรับรอง'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ได้รับการรับรอง ISO 9001 หรือสูงกว่า'}},
     ]
   },
   {
-    id:'delivery', color:'#1976d2', totalW:20,
-    label:'2. ด้านการจัดส่ง (Delivery) — น้ำหนักรวม 20%',
+    id:'delivery',label:'2. ด้านการจัดส่ง (Delivery) — น้ำหนักรวม 20%',
+    color:'#1976d2', gcpEditable:true,
     rows:[
-      {
-        no:'2.1', topic:'การจัดส่งตรงเวลา (On-time delivery)',
-        detail:'% การส่งมอบตรงตามกำหนด เทียบกับ PO ทั้งหมดในปี',
-        weight:10,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'OTD < 80% / มีปัญหาการส่งมอบบ่อยครั้ง'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'OTD 80–94% / สาย เป็นครั้งคราว'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'OTD ≥ 95% ต่อเนื่องตลอดปี'},
-      },
-      {
-        no:'2.2', topic:'ความถูกต้องของเอกสาร',
-        detail:'ความถูกต้องของใบส่งสินค้า / Invoice / COA',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'เอกสารผิดพลาด > 3 ครั้ง/ปี'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ผิดพลาด 1–3 ครั้ง/ปี แก้ไขได้เร็ว'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ถูกต้องครบ 100% ไม่มีข้อผิดพลาด'},
-      },
-      {
-        no:'2.3', topic:'ความยืดหยุ่นในการจัดส่ง',
-        detail:'ความสามารถรองรับการเปลี่ยนแปลง Volume / Schedule',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ไม่สามารถปรับเปลี่ยนได้ / ต้องแจ้งล่วงหน้า > 4 สัปดาห์'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ปรับได้บางส่วน แจ้งล่วงหน้า 2–4 สัปดาห์'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ปรับได้รวดเร็ว แจ้งล่วงหน้า < 2 สัปดาห์'},
-      },
+      {no:'2.1',topic:'การจัดส่งตรงเวลา (On-time delivery)',detail:'% การส่งมอบตรงตามกำหนด เทียบกับ PO ทั้งหมดในปี',weight:10,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'OTD < 80% / มีปัญหาส่งมอบบ่อย'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'OTD 80–94% / สายเป็นครั้งคราว'},
+       l3:{lbl:'ดีเกินคาด',dsc:'OTD ≥ 95% ต่อเนื่องตลอดปี'}},
+      {no:'2.2',topic:'ความถูกต้องของเอกสาร',detail:'ความถูกต้องของใบส่งสินค้า / Invoice / COA',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'เอกสารผิดพลาด > 3 ครั้ง/ปี'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ผิดพลาด 1–3 ครั้ง/ปี แก้ไขได้เร็ว'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ถูกต้อง 100% ไม่มีข้อผิดพลาด'}},
+      {no:'2.3',topic:'ความยืดหยุ่นในการจัดส่ง',detail:'ความสามารถรองรับการเปลี่ยนแปลง Volume / Schedule',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ไม่สามารถปรับเปลี่ยนได้ / ต้องแจ้งล่วงหน้า > 4 สัปดาห์'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ปรับได้บางส่วน แจ้งล่วงหน้า 2–4 สัปดาห์'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ปรับได้รวดเร็ว แจ้งล่วงหน้า < 2 สัปดาห์'}},
     ]
   },
   {
-    id:'service', color:'#0288d1', totalW:10,
-    label:'3. ด้านการบริการ (Service) — น้ำหนักรวม 10%',
+    id:'service',label:'3. ด้านการบริการ (Service) — น้ำหนักรวม 10%',
+    color:'#0288d1', gcpEditable:false,
     rows:[
-      {
-        no:'3.1', topic:'การตอบสนองต่อคำร้อง/ปัญหา',
-        detail:'ความรวดเร็วและคุณภาพในการแก้ไขปัญหา',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ตอบช้า > 3 วันทำการ / ปัญหาซ้ำบ่อย'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ตอบภายใน 1–3 วัน แก้ไขได้ส่วนใหญ่'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ตอบภายในวัน มี SLA ชัดเจน ปัญหาไม่ซ้ำ'},
-      },
-      {
-        no:'3.2', topic:'การสื่อสารและความร่วมมือ',
-        detail:'ความชัดเจนในการสื่อสาร / Proactive communication',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ต้องติดตามเองทุกครั้ง สื่อสารไม่ชัดเจน'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'สื่อสารได้ แจ้งเมื่อถาม'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'Proactive แจ้งปัญหาก่อน มีรายงานสม่ำเสมอ'},
-      },
+      {no:'3.1',topic:'การตอบสนองต่อคำร้อง/ปัญหา',detail:'ความรวดเร็วและคุณภาพในการแก้ไขปัญหา',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ตอบช้า > 3 วันทำการ / ปัญหาซ้ำ'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ตอบใน 1–3 วัน แก้ไขได้ส่วนใหญ่'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ตอบภายในวัน มี SLA ปัญหาไม่ซ้ำ'}},
+      {no:'3.2',topic:'การสื่อสารและความร่วมมือ',detail:'ความชัดเจนในการสื่อสาร / Proactive',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ต้องติดตามเองทุกครั้ง สื่อสารไม่ชัดเจน'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'สื่อสารได้ แจ้งเมื่อถาม'},
+       l3:{lbl:'ดีเกินคาด',dsc:'Proactive แจ้งก่อน มีรายงานสม่ำเสมอ'}},
     ]
   },
   {
-    id:'price', color:'#00838f', totalW:15,
-    label:'4. ด้านราคาและเงื่อนไข (Pricing & Terms) — น้ำหนักรวม 15%',
+    id:'price',label:'4. ด้านราคาและเงื่อนไข (Pricing & Terms) — น้ำหนักรวม 15%',
+    color:'#00838f', gcpEditable:true,
     rows:[
-      {
-        no:'4.1', topic:'ความสามารถด้านราคา',
-        detail:'ราคาเปรียบเทียบตลาด / คู่แข่ง',
-        weight:8,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ราคาสูงกว่าตลาด > 10%'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ราคาอยู่ในระดับตลาด ±10%'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ราคาต่ำกว่าตลาด หรือแข่งขันได้ชัดเจน'},
-      },
-      {
-        no:'4.2', topic:'เงื่อนไขการชำระเงิน',
-        detail:'ระยะเวลาที่ให้เครดิตการชำระเงิน',
-        weight:4,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'Credit term < 30 วัน'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'Credit term 30–59 วัน'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'Credit term ≥ 60 วัน'},
-      },
-      {
-        no:'4.3', topic:'ความโปร่งใสด้านราคา',
-        detail:'มีการเปิดเผยโครงสร้างต้นทุน / ไม่มีค่าใช้จ่ายแอบแฝง',
-        weight:3,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'มีค่าใช้จ่ายแอบแฝง / ไม่โปร่งใส'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ราคาชัดเจน แต่ไม่เปิดโครงสร้างต้นทุน'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'เปิดเผยโครงสร้างต้นทุนครบ ไม่มีค่าใช้จ่ายแฝง'},
-      },
+      {no:'4.1',topic:'ความสามารถด้านราคา',detail:'ราคาเปรียบเทียบตลาด / คู่แข่ง',weight:8,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ราคาสูงกว่าตลาด > 10%'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ราคาอยู่ในระดับตลาด ±10%'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ราคาต่ำกว่าตลาด หรือแข่งขันได้'}},
+      {no:'4.2',topic:'เงื่อนไขการชำระเงิน',detail:'ระยะเวลาที่ให้เครดิตการชำระเงิน',weight:4,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'Credit term < 30 วัน'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'Credit term 30–59 วัน'},
+       l3:{lbl:'ดีเกินคาด',dsc:'Credit term ≥ 60 วัน'}},
+      {no:'4.3',topic:'ความโปร่งใสด้านราคา',detail:'มีการเปิดเผยโครงสร้างต้นทุน / ไม่มีค่าใช้จ่ายแอบแฝง',weight:3,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'มีค่าใช้จ่ายแอบแฝง / ไม่โปร่งใส'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ราคาชัดเจน แต่ไม่เปิดโครงสร้างต้นทุน'},
+       l3:{lbl:'ดีเกินคาด',dsc:'เปิดเผยโครงสร้างต้นทุนครบ ไม่มีค่าแฝง'}},
     ]
   },
   {
-    id:'esg', color:'#558b2f', totalW:15,
-    label:'5. ด้านความยั่งยืนและพัฒนา (ESG / Development) — น้ำหนักรวม 15%',
+    id:'esg',label:'5. ด้านความยั่งยืนและพัฒนา (ESG / Development) — น้ำหนักรวม 15%',
+    color:'#558b2f', gcpEditable:false,
     rows:[
-      {
-        no:'5.1', topic:'นโยบายและการปฏิบัติ ESG',
-        detail:'สิ่งแวดล้อม / สังคม / ธรรมาภิบาล',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ไม่มีนโยบาย ESG ใดๆ'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'มีนโยบาย แต่ไม่มีหลักฐานการปฏิบัติจริง'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'มีนโยบาย + หลักฐาน + รายงานประจำปี'},
-      },
-      {
-        no:'5.2', topic:'การปฏิบัติตามกฎหมาย',
-        detail:'แรงงาน / ภาษี / กฎหมายที่เกี่ยวข้อง',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'มีประวัติละเมิดกฎหมาย / ถูกปรับ'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'ปฏิบัติตามขั้นพื้นฐาน ไม่มีประวัติร้ายแรง'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'ปฏิบัติครบ มีระบบตรวจสอบภายใน'},
-      },
-      {
-        no:'5.3', topic:'ความสามารถพัฒนาต่อเนื่อง',
-        detail:'การนำเสนอนวัตกรรม / ลดต้นทุน / ปรับปรุงอย่างต่อเนื่อง',
-        weight:5,
-        l1:{lbl:'ต้องปรับปรุง', dsc:'ไม่มีการพัฒนาหรือนำเสนอใหม่ใดๆ'},
-        l2:{lbl:'เป็นที่พอใจ',  dsc:'มีการปรับปรุงบ้าง เมื่อถูกร้องขอ'},
-        l3:{lbl:'ดีเกินคาด',    dsc:'Proactive นำเสนอแนวทางใหม่ มี roadmap ชัดเจน'},
-      },
+      {no:'5.1',topic:'นโยบายและการปฏิบัติ ESG',detail:'สิ่งแวดล้อม / สังคม / ธรรมาภิบาล',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ไม่มีนโยบาย ESG ใดๆ'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'มีนโยบาย แต่ไม่มีหลักฐานการปฏิบัติ'},
+       l3:{lbl:'ดีเกินคาด',dsc:'มีนโยบาย + หลักฐาน + รายงาน'}},
+      {no:'5.2',topic:'การปฏิบัติตามกฎหมาย',detail:'แรงงาน / ภาษี / กฎหมายที่เกี่ยวข้อง',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'มีประวัติละเมิดกฎหมาย / ถูกปรับ'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'ปฏิบัติตามขั้นพื้นฐาน ไม่มีประวัติร้ายแรง'},
+       l3:{lbl:'ดีเกินคาด',dsc:'ปฏิบัติครบ มีระบบตรวจสอบภายใน'}},
+      {no:'5.3',topic:'ความสามารถพัฒนาต่อเนื่อง',detail:'การนำเสนอนวัตกรรม / ลดต้นทุน / ปรับปรุงต่อเนื่อง',weight:5,
+       l1:{lbl:'ต้องปรับปรุง',dsc:'ไม่มีการพัฒนาหรือนำเสนอใหม่ใดๆ'},
+       l2:{lbl:'เป็นที่พอใจ',dsc:'มีการปรับปรุงบ้าง เมื่อถูกร้องขอ'},
+       l3:{lbl:'ดีเกินคาด',dsc:'Proactive นำเสนอแนวทางใหม่ มี roadmap'}},
     ]
   },
 ];
 
-// Generate ref
 function genRef(){
-  const d=new Date();
-  const yr=d.getFullYear();
-  const mo=String(d.getMonth()+1).padStart(2,'0');
-  const rnd=String(Math.floor(Math.random()*9000)+1000);
-  return `SPE-POST-${yr}${mo}-${rnd}`;
+  const d=new Date(),yr=d.getFullYear(),mo=String(d.getMonth()+1).padStart(2,'0');
+  return `SPE-POST-${yr}${mo}-${String(Math.floor(Math.random()*9000)+1000)}`;
 }
 
-// Build table
 function buildTable(){
   const tbody=document.getElementById('eval-tbody');
   tbody.innerHTML='';
   SECTIONS.forEach(sec=>{
-    // Section row
-    const secTr=document.createElement('tr');
-    secTr.className='section-row';
-    secTr.innerHTML=`<td colspan="9" style="background:${sec.color}">&#9654;&nbsp; ${sec.label}</td>`;
-    tbody.appendChild(secTr);
+    const canEdit = !IS_GCP || sec.gcpEditable;
+    const str=document.createElement('tr');
+    str.className='section-row';
+    const lockIcon = IS_GCP && !sec.gcpEditable ? ' 🔒' : IS_GCP && sec.gcpEditable ? ' ✏️ (GCP กรอกได้)' : '';
+    str.innerHTML=`<td colspan="9" style="background:${sec.color}">&#9654;&nbsp; ${sec.label}${lockIcon}</td>`;
+    tbody.appendChild(str);
 
     sec.rows.forEach(row=>{
-      const uid=`q${row.no.replace('.','_')}`;
+      const uid=`q${row.no.replace(/\./g,'_')}`;
       const tr=document.createElement('tr');
       tr.className='data-row';
-      tr.dataset.uid=uid;
-      tr.dataset.weight=row.weight;
+      if(IS_GCP && !canEdit) tr.style.cssText='opacity:.7;';
       tr.innerHTML=`
         <td class="td-no">${row.no}</td>
         <td class="td-topic">${row.topic}</td>
@@ -735,20 +450,20 @@ function buildTable(){
         <td class="td-wt">${row.weight}%</td>
         <td class="td-levels" colspan="3">
           <div class="level-group">
-            <input type="radio" name="${uid}" id="${uid}_l1" class="level-opt l1" value="1">
-            <label for="${uid}_l1" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l1" class="level-opt l1" value="1" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l1" class="level-btn" style="${canEdit?'':'cursor:not-allowed;'}">
               <span class="lv-num" style="color:#c62828">1</span>
               <span class="lv-lbl">${row.l1.lbl}</span>
               <span class="lv-dsc">${row.l1.dsc}</span>
             </label>
-            <input type="radio" name="${uid}" id="${uid}_l2" class="level-opt l2" value="2">
-            <label for="${uid}_l2" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l2" class="level-opt l2" value="2" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l2" class="level-btn" style="${canEdit?'':'cursor:not-allowed;'}">
               <span class="lv-num" style="color:#e65100">2</span>
               <span class="lv-lbl">${row.l2.lbl}</span>
               <span class="lv-dsc">${row.l2.dsc}</span>
             </label>
-            <input type="radio" name="${uid}" id="${uid}_l3" class="level-opt l3" value="3">
-            <label for="${uid}_l3" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l3" class="level-opt l3" value="3" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l3" class="level-btn" style="${canEdit?'':'cursor:not-allowed;'}">
               <span class="lv-num" style="color:#2e7d32">3</span>
               <span class="lv-lbl">${row.l3.lbl}</span>
               <span class="lv-dsc">${row.l3.dsc}</span>
@@ -760,26 +475,24 @@ function buildTable(){
           <span class="score-sub">/ ${row.weight}</span>
         </td>
         <td class="td-note">
-          <textarea class="note-input" placeholder="หมายเหตุ / หลักฐาน..."></textarea>
+          <textarea class="note-input" placeholder="หมายเหตุ..." ${canEdit?'':'disabled'}></textarea>
         </td>
       `;
       tbody.appendChild(tr);
-
-      tr.querySelectorAll(`input[name="${uid}"]`).forEach(inp=>{
-        inp.addEventListener('change',()=>updateScore(uid,row.weight));
-      });
+      if(canEdit){
+        tr.querySelectorAll(`input[name="${uid}"]`).forEach(i=>i.addEventListener('change',()=>updateScore(uid,row.weight)));
+      }
     });
   });
 
-  // Total row
   const ttr=document.createElement('tr');
   ttr.className='total-row';
   ttr.innerHTML=`
-    <td colspan="3" style="text-align:right;font-size:13.5px">คะแนนรวมทั้งหมด (Grand Total)</td>
+    <td colspan="3" style="text-align:right;font-size:13px">คะแนนรวม (Grand Total)</td>
     <td class="td-wt">100%</td>
     <td colspan="3"></td>
     <td class="td-score" style="background:#e8f5e9">
-      <span class="total-score score-val" id="grand-total">0.00</span>
+      <span class="total-score" id="grand-total">0.00</span>
       <span class="score-sub">/ 100</span>
     </td>
     <td><span id="result-badge"></span></td>
@@ -792,57 +505,50 @@ function updateScore(uid,weight){
   const cell=document.getElementById(`sc_${uid}`);
   if(sel){
     const lv=parseInt(sel.value);
-    const sc=((lv/3)*weight).toFixed(2);
-    cell.querySelector('.score-val').textContent=sc;
+    cell.querySelector('.score-val').textContent=((lv/3)*weight).toFixed(2);
     cell.style.background=lv===1?'#fff5f5':lv===2?'#fffde7':'#e8f5e9';
     cell.querySelector('.score-val').style.color=lv===1?'#c62828':lv===2?'#e65100':'#2e7d32';
   }
   calcTotal();
 }
 
-function getGrade(score){
-  if(score>=80) return {text:'A — ดีเยี่ยม',cls:'badge-pass'};
-  if(score>=70) return {text:'B — ดี',cls:'badge-pass'};
-  if(score>=60) return {text:'C — พอใช้',cls:'badge-cond'};
-  return {text:'D — ต้องปรับปรุง',cls:'badge-fail'};
+function getGrade(t){
+  if(t>=80) return {cls:'badge-pass',txt:'A — ดีเยี่ยม'};
+  if(t>=70) return {cls:'badge-pass',txt:'B — ดี'};
+  if(t>=60) return {cls:'badge-cond',txt:'C — พอใช้'};
+  return {cls:'badge-fail',txt:'D — ต้องปรับปรุง'};
 }
 
 function calcTotal(){
   let total=0, answered=0;
   const allRows=SECTIONS.reduce((a,s)=>a+s.rows.length,0);
-  SECTIONS.forEach(sec=>{
-    sec.rows.forEach(row=>{
-      const uid=`q${row.no.replace('.','_')}`;
-      const sel=document.querySelector(`input[name="${uid}"]:checked`);
-      if(sel){ total+=(parseInt(sel.value)/3)*row.weight; answered++; }
-    });
-  });
+  SECTIONS.forEach(sec=>sec.rows.forEach(row=>{
+    const uid=`q${row.no.replace(/\./g,'_')}`;
+    const sel=document.querySelector(`input[name="${uid}"]:checked`);
+    if(sel){total+=(parseInt(sel.value)/3)*row.weight;answered++;}
+  }));
   const t=parseFloat(total.toFixed(2));
   document.getElementById('grand-total').textContent=t.toFixed(2);
-
-  const rb=document.getElementById('result-badge');
   const sa=document.getElementById('summary-area');
+  const rb=document.getElementById('result-badge');
   if(answered===allRows){
     sa.style.display='flex';
     document.getElementById('sum-total').textContent=t.toFixed(2);
     const g=getGrade(t);
-    document.getElementById('sum-badge').innerHTML=`<span class="result-badge ${g.cls}" style="font-size:14px">${g.text}</span>`;
-    rb.innerHTML=`<span class="result-badge ${g.cls}">${g.text}</span>`;
-  } else {
-    sa.style.display='none';
-    rb.innerHTML='';
-  }
-  return {total:t,answered,allRows};
+    document.getElementById('sum-badge').innerHTML=`<span class="result-badge ${g.cls}" style="font-size:13px">${g.txt}</span>`;
+    rb.innerHTML=`<span class="result-badge ${g.cls}">${g.txt}</span>`;
+  } else { sa.style.display='none'; rb.innerHTML=''; }
+  return t;
 }
 
 function resetForm(){
-  if(!confirm('ต้องการรีเซ็ตข้อมูลทั้งหมดหรือไม่?')) return;
+  if(!confirm('รีเซ็ตข้อมูลทั้งหมด?')) return;
   document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
   document.querySelectorAll('.note-input').forEach(t=>t.value='');
   document.querySelectorAll('.td-score').forEach(td=>{
     td.style.background='';
     const sv=td.querySelector('.score-val');
-    if(sv && !sv.classList.contains('total-score')){ sv.textContent='–'; sv.style.color=''; }
+    if(sv){sv.textContent='–';sv.style.color='';}
   });
   document.getElementById('grand-total').textContent='0.00';
   document.getElementById('result-badge').innerHTML='';
@@ -850,31 +556,40 @@ function resetForm(){
 }
 
 function submitForm(){
-  const allRows=SECTIONS.reduce((a,s)=>a+s.rows.length,0);
   const missing=[];
   SECTIONS.forEach(sec=>{
+    const mustFill = !IS_GCP || sec.gcpEditable;
+    if(!mustFill) return;
     sec.rows.forEach(row=>{
-      const uid=`q${row.no.replace('.','_')}`;
-      if(!document.querySelector(`input[name="${uid}"]:checked`)) missing.push(`${row.no} ${row.topic}`);
+      const uid=`q${row.no.replace(/\./g,'_')}`;
+      if(!document.querySelector(`input[name="${uid}"]:checked`))
+        missing.push(`${row.no} ${row.topic}`);
     });
   });
-  if(missing.length>0){
-    alert(`กรุณาเลือกระดับในหัวข้อที่ยังไม่ได้กรอก:\n• ${missing.join('\n• ')}`);
-    return;
-  }
-  const {total}=calcTotal();
-  const ref=genRef();
-  const g=getGrade(total);
+  if(missing.length){ alert(`กรุณาเลือกระดับในหัวข้อที่ยังไม่ได้กรอก:\n• ${missing.join('\n• ')}`); return; }
+  const t=calcTotal();
+  const ref=document.getElementById('ref-no').textContent;
+  const g=getGrade(t);
   document.getElementById('ov-ref').textContent=ref;
-  document.getElementById('ov-score').textContent=total.toFixed(2)+' / 100';
-  document.getElementById('ov-grade').innerHTML=`<span class="result-badge ${g.cls}">${g.text}</span>`;
+  document.getElementById('ov-score').textContent=t.toFixed(2)+' / 100';
+  document.getElementById('ov-result').innerHTML=`<span class="result-badge ${g.cls}">${g.txt}</span>`;
   document.getElementById('overlay').classList.add('show');
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('sig-date1').value=new Date().toISOString().split('T')[0];
+  document.getElementById('ref-no').textContent=genRef();
   const d=new Date();
-  document.getElementById('period-val').value=`${d.getFullYear()+543} / Q${Math.ceil((d.getMonth()+1)/3)}`;
+  document.getElementById('h-emp').textContent=EMP||'–';
+  document.getElementById('h-dept-job').textContent=(DEPT&&JOB)?`${DEPT} / ${JOB}`:DEPT||JOB||'–';
+  document.getElementById('h-period').textContent=`${d.getFullYear()+543} / Q${Math.ceil((d.getMonth()+1)/3)}`;
+  document.getElementById('sig-date1').value=d.toISOString().split('T')[0];
+  document.getElementById('tb-sub').textContent=`${EMP} | ${DEPT} | ${JOB}`;
+  if(IS_GCP){
+    document.getElementById('role-badge').textContent='GCP';
+    document.getElementById('role-badge').className='badge role-gcp';
+    document.getElementById('readonly-badge').style.display='';
+    document.getElementById('gcp-warn-legend').style.display='';
+  }
   buildTable();
 });
 </script>
