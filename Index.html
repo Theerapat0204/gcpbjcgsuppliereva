@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplier Evaluation System</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-dark: #1a6b3a;
+  --green-mid:  #2d8a52;
+  --green-light:#e8f5ee;
+  --blue-dark:  #0d47a1;
+  --blue-mid:   #1565c0;
+  --blue-light: #e3f0ff;
+  --amber:      #e65100;
+  --amber-light:#fff3e0;
+  --gray-bg:    #eef0f3;
+  --gray-line:  #d0d5dd;
+  --white:      #ffffff;
+  --text-dark:  #1a1a2e;
+  --text-mid:   #424242;
+  --text-light: #757575;
+  --shadow-sm:  0 2px 12px rgba(0,0,0,.08);
+  --shadow-md:  0 6px 28px rgba(0,0,0,.12);
+  --shadow-lg:  0 12px 48px rgba(0,0,0,.16);
+  --radius:     12px;
+  --radius-sm:  8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  background:var(--gray-bg);
+  min-height:100vh;
+  color:var(--text-dark);
+}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:var(--green-dark);
+  padding:0;
+  box-shadow:0 2px 16px rgba(0,0,0,.2);
+  position:sticky;top:0;z-index:100;
+}
+.topbar-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:center;gap:14px;
+  padding:12px 28px;
+}
+.logo{
+  width:40px;height:40px;
+  background:#fff;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.logo svg{width:24px;height:24px;fill:var(--green-dark);}
+.topbar-title h1{
+  font-size:16px;font-weight:700;color:#fff;letter-spacing:.3px;
+}
+.topbar-title p{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px;}
+.topbar-right{
+  margin-left:auto;
+  display:flex;align-items:center;gap:10px;
+}
+.topbar-badge{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:20px;padding:3px 12px;
+  font-size:11px;color:rgba(255,255,255,.75);
+}
+#clock{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12px;color:rgba(255,255,255,.6);
+  background:rgba(0,0,0,.2);
+  border-radius:5px;padding:3px 10px;
+}
+
+/* ── MAIN ── */
+.main{max-width:980px;margin:0 auto;padding:44px 20px 80px;}
+
+.hero{text-align:center;margin-bottom:44px;}
+.hero h2{
+  font-size:26px;font-weight:700;
+  color:var(--text-dark);margin-bottom:8px;
+  letter-spacing:.2px;
+}
+.hero p{font-size:15px;color:var(--text-light);}
+.hero-line{
+  width:60px;height:3px;
+  background:linear-gradient(90deg,var(--green-dark),var(--blue-mid));
+  border-radius:2px;margin:14px auto 0;
+}
+
+/* ── PORTAL GRID ── */
+.portal-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px;
+}
+@media(max-width:640px){.portal-grid{grid-template-columns:1fr;}}
+
+/* ── PORTAL CARD ── */
+.portal-card{
+  background:var(--white);
+  border:1.5px solid var(--gray-line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:all .22s ease;
+}
+.portal-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-lg);
+  border-color:transparent;
+}
+.card-top{
+  padding:24px 24px 20px;
+  border-bottom:1px solid var(--gray-line);
+}
+.card-top.green{border-top:4px solid var(--green-dark);}
+.card-top.blue {border-top:4px solid var(--blue-mid);}
+.card-icon{
+  width:50px;height:50px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.card-icon.green{background:var(--green-light);}
+.card-icon.blue {background:var(--blue-light);}
+.card-icon svg{width:28px;height:28px;}
+.card-icon.green svg{fill:var(--green-dark);}
+.card-icon.blue  svg{fill:var(--blue-mid);}
+.card-top h3{
+  font-size:18px;font-weight:700;margin-bottom:5px;color:var(--text-dark);
+}
+.card-top p{font-size:13px;color:var(--text-light);line-height:1.6;}
+
+/* ── FORM INSIDE CARD ── */
+.card-form{padding:20px 24px 24px;}
+
+.field{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.field label{
+  font-size:12px;font-weight:600;color:var(--text-mid);
+  display:flex;align-items:center;gap:4px;
+}
+.field label .req{color:#c62828;}
+.field input,.field select{
+  border:1.5px solid var(--gray-line);
+  border-radius:var(--radius-sm);
+  padding:9px 12px;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  font-size:13px;color:var(--text-dark);
+  background:#fff;outline:none;
+  transition:border-color .18s,box-shadow .18s;
+  width:100%;
+}
+.field input:focus,.field select:focus{
+  border-color:var(--green-mid);
+  box-shadow:0 0 0 3px rgba(45,138,82,.12);
+}
+.field select{cursor:pointer;}
+.field input::placeholder{color:#bbb;font-size:12px;}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* pre/post radio */
+.prepost-group{display:flex;gap:8px;}
+.pp-opt{display:none;}
+.pp-label{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  border:1.5px solid var(--gray-line);
+  border-radius:var(--radius-sm);
+  padding:8px 12px;cursor:pointer;
+  font-size:13px;color:var(--text-mid);
+  transition:all .16s;text-align:center;
+}
+.pp-label:hover{border-color:var(--green-mid);background:var(--green-light);}
+.pp-opt:checked+.pp-label{
+  border-color:var(--green-mid);
+  background:var(--green-light);
+  color:var(--green-dark);font-weight:600;
+}
+.pp-dot{
+  width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--gray-line);background:#fff;
+  transition:all .16s;flex-shrink:0;
+}
+.pp-opt:checked+.pp-label .pp-dot{
+  border-color:var(--green-dark);
+  background:var(--green-dark);
+  box-shadow:inset 0 0 0 3px #fff;
+}
+
+/* eval type buttons */
+.eval-btns{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.eval-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 16px;border-radius:var(--radius-sm);
+  border:none;cursor:pointer;
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  font-size:13.5px;font-weight:600;
+  transition:all .18s;text-align:left;
+  text-decoration:none;
+}
+.eval-btn.green{
+  background:var(--green-dark);color:#fff;
+  box-shadow:0 2px 10px rgba(26,107,58,.3);
+}
+.eval-btn.green:hover{background:var(--green-mid);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,107,58,.4);}
+.eval-btn.outline-green{
+  background:#fff;color:var(--green-dark);
+  border:1.5px solid var(--green-dark);
+}
+.eval-btn.outline-green:hover{background:var(--green-light);transform:translateY(-1px);}
+.eval-btn.blue{
+  background:var(--blue-mid);color:#fff;
+  box-shadow:0 2px 10px rgba(21,101,192,.3);
+}
+.eval-btn.blue:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 4px 16px rgba(21,101,192,.4);}
+
+.eval-btn .btn-icon{font-size:16px;width:20px;text-align:center;}
+.eval-btn .btn-arrow{margin-left:auto;opacity:.7;}
+
+/* GCP note */
+.gcp-note{
+  display:flex;align-items:flex-start;gap:8px;
+  background:var(--blue-light);border:1px solid #90caf9;
+  border-radius:var(--radius-sm);padding:10px 12px;
+  margin-bottom:14px;font-size:12px;color:#0d47a1;line-height:1.6;
+}
+.gcp-note svg{width:15px;height:15px;fill:#1565c0;flex-shrink:0;margin-top:1px;}
+
+/* divider */
+.divider{
+  border:none;border-top:1px dashed var(--gray-line);
+  margin:16px 0;
+}
+
+/* ── INFO FOOTER ── */
+.info-footer{
+  margin-top:44px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+@media(max-width:640px){.info-footer{grid-template-columns:1fr;}}
+.info-box{
+  background:var(--white);
+  border:1px solid var(--gray-line);
+  border-radius:var(--radius-sm);
+  padding:16px 18px;
+  display:flex;align-items:flex-start;gap:10px;
+}
+.info-box .ib-icon{
+  width:34px;height:34px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.info-box .ib-icon.g{background:var(--green-light);}
+.info-box .ib-icon.b{background:var(--blue-light);}
+.info-box .ib-icon.a{background:var(--amber-light);}
+.info-box .ib-icon svg{width:18px;height:18px;}
+.info-box .ib-icon.g svg{fill:var(--green-dark);}
+.info-box .ib-icon.b svg{fill:var(--blue-mid);}
+.info-box .ib-icon.a svg{fill:var(--amber);}
+.info-box h4{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:3px;}
+.info-box p{font-size:12px;color:var(--text-light);line-height:1.55;}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.45);z-index:200;
+  align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-overlay.show{display:flex;}
+.modal{
+  background:#fff;border-radius:var(--radius);
+  padding:28px 30px;max-width:400px;width:100%;
+  box-shadow:var(--shadow-lg);
+}
+.modal h3{font-size:17px;font-weight:700;color:#c62828;margin-bottom:10px;}
+.modal p{font-size:13.5px;color:var(--text-mid);line-height:1.65;margin-bottom:18px;}
+.modal ul{margin:0 0 18px 20px;font-size:13px;color:var(--text-mid);line-height:2;}
+.btn-modal-close{
+  background:var(--green-dark);color:#fff;border:none;
+  padding:9px 24px;border-radius:var(--radius-sm);
+  font-family:'IBM Plex Sans Thai',sans-serif;
+  font-size:13.5px;font-weight:600;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="topbar-title">
+      <h1>Supplier Evaluation System</h1>
+      <p>ระบบประเมินผล Supplier &amp; Buyer — ภายในองค์กร</p>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-badge">Internal System</div>
+      <div id="clock">--:--:--</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="hero">
+    <h2>เลือกประเภทการเข้าใช้งาน</h2>
+    <p>กรุณากรอกข้อมูล และเลือกแบบประเมินที่ต้องการดำเนินการ</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="portal-grid">
+
+    <!-- ─── USER CARD ─── -->
+    <div class="portal-card">
+      <div class="card-top green">
+        <div class="card-icon green">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>สำหรับ User (ผู้ใช้งานทั่วไป)</h3>
+        <p>ประเมิน Supplier หรือประเมิน Buyer — กรอกข้อมูลและเลือกแบบประเมินด้านล่าง</p>
+      </div>
+      <div class="card-form">
+        <div class="field">
+          <label>รหัสพนักงาน <span class="req">*</span></label>
+          <input id="u-emp" type="text" placeholder="เช่น EMP00123" maxlength="10">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>หน่วยงาน <span class="req">*</span></label>
+            <select id="u-dept" onchange="loadJobs('u')">
+              <option value="">-- เลือกหน่วยงาน --</option>
+              <option>ฝ่ายจัดซื้อ</option>
+              <option>ฝ่ายการเงิน</option>
+              <option>ฝ่ายวิศวกรรม</option>
+              <option>ฝ่ายผลิต</option>
+              <option>ฝ่ายคลังสินค้า</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>ชื่องาน <span class="req">*</span></label>
+            <select id="u-job">
+              <option value="">-- เลือกก่อน --</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>ประเภทการประเมิน <span class="req">*</span></label>
+          <div class="prepost-group">
+            <input type="radio" name="u-pp" id="u-pre" class="pp-opt" value="pre">
+            <label for="u-pre" class="pp-label">
+              <span class="pp-dot"></span> Pre-Evaluation
+            </label>
+            <input type="radio" name="u-pp" id="u-post" class="pp-opt" value="post">
+            <label for="u-post" class="pp-label">
+              <span class="pp-dot"></span> Post-Evaluation
+            </label>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="eval-btns">
+          <button class="eval-btn green" onclick="goEval('user','supplier')">
+            <span class="btn-icon">📋</span>
+            ประเมิน Supplier
+            <span class="btn-arrow">›</span>
+          </button>
+          <button class="eval-btn outline-green" onclick="goEval('user','buyer')">
+            <span class="btn-icon">🤝</span>
+            Supplier ประเมิน Buyer
+            <span class="btn-arrow">›</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── GCP CARD ─── -->
+    <div class="portal-card">
+      <div class="card-top blue">
+        <div class="card-icon blue">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>สำหรับ GCP (เจ้าหน้าที่จัดซื้อ)</h3>
+        <p>ประเมิน Supplier โดยเจ้าหน้าที่ GCP — สามารถกรอกข้อมูลและมองเห็นแบบประเมินทั้งหมด</p>
+      </div>
+      <div class="card-form">
+        <div class="gcp-note">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+          <span>เจ้าหน้าที่ GCP จะเห็นแบบประเมินทั้งหมด แต่สามารถกรอกได้เฉพาะส่วนของฝ่ายจัดซื้อเท่านั้น ส่วนอื่นจะแสดงเป็น Read-only</span>
+        </div>
+        <div class="field">
+          <label>รหัสพนักงาน GCP <span class="req">*</span></label>
+          <input id="g-emp" type="text" placeholder="เช่น GCP00456" maxlength="10">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>หน่วยงาน <span class="req">*</span></label>
+            <select id="g-dept" onchange="loadJobs('g')">
+              <option value="">-- เลือกหน่วยงาน --</option>
+              <option>ฝ่ายจัดซื้อ</option>
+              <option>ฝ่ายการเงิน</option>
+              <option>ฝ่ายวิศวกรรม</option>
+              <option>ฝ่ายผลิต</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>ชื่องาน <span class="req">*</span></label>
+            <select id="g-job">
+              <option value="">-- เลือกก่อน --</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>ประเภทการประเมิน <span class="req">*</span></label>
+          <div class="prepost-group">
+            <input type="radio" name="g-pp" id="g-pre" class="pp-opt" value="pre">
+            <label for="g-pre" class="pp-label">
+              <span class="pp-dot"></span> Pre-Evaluation
+            </label>
+            <input type="radio" name="g-pp" id="g-post" class="pp-opt" value="post">
+            <label for="g-post" class="pp-label">
+              <span class="pp-dot"></span> Post-Evaluation
+            </label>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="eval-btns">
+          <button class="eval-btn blue" onclick="goEval('gcp','supplier')">
+            <span class="btn-icon">📋</span>
+            GCP ประเมิน Supplier
+            <span class="btn-arrow">›</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /portal-grid -->
+
+  <!-- INFO FOOTER -->
+  <div class="info-footer">
+    <div class="info-box">
+      <div class="ib-icon g">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div>
+        <h4>Pre-Evaluation</h4>
+        <p>ประเมินก่อนเริ่มงาน ใช้คัดเลือก Supplier รายใหม่ ตรวจสอบคุณสมบัติเบื้องต้น</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="ib-icon b">
+        <svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+      </div>
+      <div>
+        <h4>Post-Evaluation</h4>
+        <p>ประเมินประสิทธิภาพหลังใช้งาน รายปี/ครึ่งปี วัดผลการทำงานจริง</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="ib-icon a">
+        <svg viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div>
+        <h4>ข้อมูลจะถูกบันทึก</h4>
+        <p>ทุกการประเมินจะได้รับเลขที่อ้างอิงอัตโนมัติ เก็บข้อมูลไว้ในระบบ</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- VALIDATION MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>⚠ กรุณากรอกข้อมูลให้ครบ</h3>
+    <p>ต้องการข้อมูลต่อไปนี้ก่อนเข้าสู่แบบประเมิน:</p>
+    <ul id="modal-list"></ul>
+    <button class="btn-modal-close" onclick="document.getElementById('modal').classList.remove('show')">ตกลง</button>
+  </div>
+</div>
+
+<script>
+const DEPT_JOBS = {
+  'ฝ่ายจัดซื้อ':   ['JB-001 จัดซื้อวัสดุสำนักงาน','JB-002 จัดซื้ออุปกรณ์ IT','JB-003 จัดซื้อวัตถุดิบ'],
+  'ฝ่ายการเงิน':   ['JB-010 ตรวจสอบบัญชี','JB-011 จัดทำงบการเงิน'],
+  'ฝ่ายวิศวกรรม':  ['JB-020 ก่อสร้างอาคาร A','JB-021 ซ่อมบำรุงเครื่องจักร','JB-022 ออกแบบระบบไฟฟ้า'],
+  'ฝ่ายผลิต':      ['JB-030 งานบรรจุภัณฑ์','JB-031 แปรรูปผลิตภัณฑ์'],
+  'ฝ่ายคลังสินค้า':['JB-040 ขนส่งสินค้า','JB-041 บริหารคลัง'],
+};
+
+function loadJobs(prefix){
+  const dept = document.getElementById(prefix+'-dept').value;
+  const jobSel = document.getElementById(prefix+'-job');
+  jobSel.innerHTML = '<option value="">-- เลือกชื่องาน --</option>';
+  (DEPT_JOBS[dept]||[]).forEach(j=>{
+    const o=document.createElement('option');o.value=j;o.textContent=j;jobSel.appendChild(o);
+  });
+}
+
+function goEval(role, target){
+  const prefix = role==='gcp'?'g':'u';
+  const emp  = document.getElementById(prefix+'-emp').value.trim();
+  const dept = document.getElementById(prefix+'-dept').value;
+  const job  = document.getElementById(prefix+'-job').value;
+  const pp   = document.querySelector(`input[name="${prefix}-pp"]:checked`);
+
+  const missing=[];
+  if(!emp)  missing.push('รหัสพนักงาน');
+  if(!dept) missing.push('หน่วยงาน');
+  if(!job)  missing.push('ชื่องาน');
+  if(!pp)   missing.push('ประเภทการประเมิน (Pre/Post)');
+
+  if(missing.length){
+    document.getElementById('modal-list').innerHTML=missing.map(m=>`<li>${m}</li>`).join('');
+    document.getElementById('modal').classList.add('show');
+    return;
+  }
+
+  /* buyer route — ไม่ต้องการ pre/post */
+  if(target==='buyer'){
+    const params=new URLSearchParams({role,emp,dept,job,pp:pp.value,target});
+    window.location.href=`buyer.html?${params}`;
+    return;
+  }
+
+  const file = pp.value==='pre' ? 'pre.html' : 'post.html';
+  const params=new URLSearchParams({role,emp,dept,job,pp:pp.value});
+  window.location.href=`${file}?${params}`;
+}
+
+/* clock */
+function tick(){
+  const n=new Date();
+  const hh=String(n.getHours()).padStart(2,'0');
+  const mm=String(n.getMinutes()).padStart(2,'0');
+  const ss=String(n.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent=`${hh}:${mm}:${ss}`;
+}
+setInterval(tick,1000);tick();
+</script>
+</body>
+</html>
