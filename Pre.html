@@ -3,587 +3,268 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>New Supplier Pre-Qualification Form</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Pre-Qualification Form — Supplier Evaluation</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --green-dark: #1a6b3a;
-  --green-mid: #2d8a52;
-  --green-header: #217a46;
-  --green-row: #c8e6d4;
-  --green-row2: #e8f5ee;
-  --blue-section: #1565c0;
-  --blue-light: #e3eeff;
-  --teal-section: #0277bd;
-  --orange-section: #e65100;
-  --purple-section: #6a1b9a;
-  --amber-section: #f57c00;
-  --red-section: #c62828;
-  --gray-bg: #f5f5f5;
-  --gray-line: #d0d0d0;
-  --text-dark: #1a1a1a;
-  --text-mid: #424242;
-  --text-light: #757575;
-  --white: #ffffff;
-  --level1-bg: #ffcdd2;
-  --level1-text: #b71c1c;
-  --level1-sel: #ef5350;
-  --level2-bg: #fff9c4;
-  --level2-text: #e65100;
-  --level2-sel: #ffa726;
-  --level3-bg: #c8e6c9;
-  --level3-text: #1b5e20;
-  --level3-sel: #43a047;
-  --score-box: #e8f5e9;
-  --score-text: #2e7d32;
-  --shadow: 0 2px 12px rgba(0,0,0,0.10);
-  --radius: 2px;
+:root{
+  --green-dark:#1a6b3a;--green-mid:#2d8a52;--green-row:#c8e6d4;--green-row2:#e8f5ee;
+  --blue-mid:#1565c0;--blue-dark:#0d47a1;--blue-light:#e3f0ff;
+  --amber:#e65100;
+  --gray-bg:#e8e8e8;--gray-line:#d0d0d0;--white:#fff;
+  --l1-bg:#ffcdd2;--l1-txt:#b71c1c;--l1-sel:#ef5350;
+  --l2-bg:#fff9c4;--l2-txt:#bf360c;--l2-sel:#ffa726;
+  --l3-bg:#c8e6c9;--l3-txt:#1b5e20;--l3-sel:#43a047;
+  --font:'IBM Plex Sans Thai',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--gray-bg);min-height:100vh;padding:20px 10px 60px;color:#1a1a1a;}
+
+/* TOPBAR */
+.topbar{background:var(--green-dark);padding:0;box-shadow:0 2px 12px rgba(0,0,0,.18);margin-bottom:0;}
+.topbar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 24px;}
+.back-btn{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
+  color:#fff;padding:6px 14px;border-radius:6px;
+  font-family:var(--font);font-size:12.5px;cursor:pointer;
+  transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+}
+.back-btn:hover{background:rgba(255,255,255,.22);}
+.topbar-title{color:#fff;}
+.topbar-title h1{font-size:15px;font-weight:700;}
+.topbar-title p{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px;}
+.topbar-badges{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.badge{
+  font-size:11px;font-weight:600;padding:3px 10px;border-radius:4px;
+  letter-spacing:.3px;white-space:nowrap;
+}
+.badge.role-user{background:rgba(255,255,255,.9);color:var(--green-dark);}
+.badge.role-gcp {background:#fff3e0;color:#bf360c;}
+.badge.type-pre {background:#e3f0ff;color:var(--blue-dark);}
+.badge.gcp-readonly{background:#ffcdd2;color:#b71c1c;}
+
+/* PAPER */
+.paper{max-width:1180px;margin:0 auto;background:var(--white);box-shadow:0 4px 32px rgba(0,0,0,.18);border:1px solid #bbb;}
+
+/* TITLE */
+.title-bar{background:var(--green-dark);color:#fff;text-align:center;padding:13px 20px 11px;border-bottom:3px solid #12522c;}
+.title-bar h1{font-size:18px;font-weight:700;letter-spacing:.3px;line-height:1.4;}
+.title-bar h1 em{font-weight:400;font-size:14px;opacity:.82;font-style:normal;}
+
+/* COMPANY ROW */
+.company-row{background:var(--green-row2);border-bottom:1px solid var(--gray-line);padding:6px 16px;font-size:12px;color:var(--green-dark);font-style:italic;font-weight:500;}
+
+/* HEADER FIELDS */
+.header-fields{background:#fafafa;border-bottom:2.5px solid var(--green-dark);}
+.hf-row{display:grid;border-bottom:1px solid var(--gray-line);}
+.hf-row.r1{grid-template-columns:2fr 200px 220px;}
+.hf-row.r2{grid-template-columns:2fr 200px 1fr;}
+.hf-cell{display:flex;align-items:stretch;border-right:1px solid var(--gray-line);min-height:36px;}
+.hf-cell:last-child{border-right:none;}
+.hf-label{background:var(--green-row);color:var(--green-dark);font-size:12px;font-weight:600;padding:7px 10px;white-space:nowrap;display:flex;align-items:center;border-right:1px solid #a8d5b8;min-width:fit-content;}
+.hf-val{flex:1;padding:7px 10px;font-family:var(--font);font-size:12.5px;color:#1a1a1a;display:flex;align-items:center;}
+.hf-input{flex:1;border:none;outline:none;padding:7px 10px;font-family:var(--font);font-size:12.5px;color:#1a1a1a;background:transparent;width:100%;}
+.hf-input:focus{background:#fffde7;}
+.hf-input::placeholder{color:#bbb;font-size:11.5px;}
+.hf-val strong{font-weight:600;color:var(--green-dark);}
+.auto-tag{font-size:10px;background:#dff0e4;color:var(--green-dark);border-radius:3px;padding:2px 7px;margin-left:8px;}
+
+/* LEGEND */
+.legend-bar{background:#f5f5f5;border-bottom:1px solid var(--gray-line);padding:6px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.legend-bar>span{font-size:11.5px;color:#555;font-weight:600;}
+.legend-chip{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;}
+.chip-dot{width:12px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.18);flex-shrink:0;}
+.gcp-warn{
+  margin-left:auto;display:flex;align-items:center;gap:5px;
+  background:#ffcdd2;border:1px solid #ef9a9a;border-radius:4px;
+  padding:3px 10px;font-size:11px;color:#b71c1c;font-weight:600;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* TABLE */
+.eval-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+.eval-table thead tr{background:var(--green-dark);color:#fff;}
+.eval-table thead th{padding:8px 7px;font-weight:600;font-size:12px;border:1px solid #145c2e;text-align:center;vertical-align:middle;line-height:1.4;}
+.eval-table thead th.left{text-align:left;padding-left:10px;}
+.col-no{width:44px;}.col-topic{width:160px;}.col-detail{min-width:185px;}
+.col-wt{width:60px;}.col-lv{width:183px;}.col-sc{width:78px;}.col-nt{width:118px;}
 
-body {
-  font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
-  background: #e8e8e8;
-  color: var(--text-dark);
-  min-height: 100vh;
-  padding: 24px 12px 60px;
-}
+/* SECTION */
+.section-row td{padding:7px 12px;font-weight:700;font-size:12.5px;color:#fff;border:1px solid rgba(255,255,255,.2);}
 
-/* ===== OUTER WRAPPER (paper) ===== */
-.paper {
-  max-width: 1120px;
-  margin: 0 auto;
-  background: var(--white);
-  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
-  border: 1px solid #bbb;
-}
+/* DATA ROW */
+.data-row:hover{background:#f0faf4;}
+.eval-table td{border:1px solid #d4d4d4;vertical-align:middle;padding:6px 7px;}
+.td-no{text-align:center;font-weight:600;color:#555;background:#f8f8f8;width:44px;}
+.td-topic{font-weight:600;font-size:12.5px;padding-left:10px;background:#fafafa;}
+.td-detail{font-size:12px;color:#424242;line-height:1.55;padding:7px 9px;}
+.td-wt{text-align:center;font-family:var(--mono);font-weight:600;font-size:12.5px;color:var(--green-dark);background:var(--green-row2);}
 
-/* ===== TOP TITLE BAR ===== */
-.title-bar {
-  background: var(--green-dark);
-  color: var(--white);
-  text-align: center;
-  padding: 14px 20px 12px;
-  border-bottom: 3px solid #145c30;
+/* LEVEL SELECTOR */
+.td-levels{padding:4px 3px;}
+.level-group{display:flex;gap:3px;}
+.level-opt{display:none;}
+.level-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:5px 3px 5px;border:1.5px solid #ccc;border-radius:3px;cursor:pointer;
+  transition:all .13s;font-family:var(--font);font-size:10px;line-height:1.35;
+  text-align:center;color:#555;background:#fff;min-height:54px;
 }
-.title-bar h1 {
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  line-height: 1.4;
-}
-.title-bar h1 span {
-  font-weight: 400;
-  font-size: 15px;
-  opacity: 0.85;
-}
+.level-btn:hover{border-color:#888;background:#f2f2f2;transform:translateY(-1px);}
+.level-btn .lv-num{font-size:15px;font-weight:700;font-family:var(--mono);line-height:1;margin-bottom:2px;}
+.level-btn .lv-lbl{font-size:10px;font-weight:600;}
+.level-btn .lv-dsc{font-size:9.5px;color:#888;line-height:1.3;margin-top:2px;}
 
-/* ===== COMPANY ROW ===== */
-.company-row {
-  background: var(--green-row2);
-  border-bottom: 1px solid var(--gray-line);
-  padding: 7px 16px;
-}
-.company-row p {
-  font-size: 12.5px;
-  color: var(--green-dark);
-  font-style: italic;
-  font-weight: 500;
-}
+.level-opt.l1:checked+.level-btn{background:var(--l1-bg);border-color:var(--l1-sel);color:var(--l1-txt);}
+.level-opt.l1:checked+.level-btn .lv-dsc{color:#c62828;}
+.level-opt.l2:checked+.level-btn{background:var(--l2-bg);border-color:var(--l2-sel);color:var(--l2-txt);}
+.level-opt.l2:checked+.level-btn .lv-dsc{color:#bf360c;}
+.level-opt.l3:checked+.level-btn{background:var(--l3-bg);border-color:var(--l3-sel);color:var(--l3-txt);}
+.level-opt.l3:checked+.level-btn .lv-dsc{color:#2e7d32;}
 
-/* ===== HEADER FIELDS GRID ===== */
-.header-fields {
-  background: #fafafa;
-  border-bottom: 2px solid var(--green-dark);
+/* READ-ONLY section for GCP */
+.readonly-section{position:relative;}
+.readonly-section::after{
+  content:'🔒 ส่วนนี้กรอกโดยผู้รับผิดชอบอื่น';
+  position:absolute;inset:0;
+  background:rgba(240,240,240,.75);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:#757575;
+  pointer-events:none;
+  border:2px dashed #bbb;
+  z-index:10;
 }
-.hf-row {
-  display: grid;
-  border-bottom: 1px solid var(--gray-line);
-}
-.hf-row.r1 { grid-template-columns: 1fr 200px 220px; }
-.hf-row.r2 { grid-template-columns: 1fr 200px 1fr; }
-.hf-cell {
-  padding: 0;
-  border-right: 1px solid var(--gray-line);
-  display: flex;
-  align-items: stretch;
-  min-height: 38px;
-}
-.hf-cell:last-child { border-right: none; }
-.hf-label {
-  background: var(--green-row);
-  color: var(--green-dark);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 8px 10px;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid #a8d5b8;
-  min-width: fit-content;
-}
-.hf-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 7px 10px;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 13px;
-  color: var(--text-dark);
-  background: transparent;
-  width: 100%;
-}
-.hf-input:focus { background: #fffde7; }
-.hf-input::placeholder { color: #bbb; font-size: 12px; }
+.readonly-section .level-btn{cursor:not-allowed !important;}
 
-/* ===== TABLE ===== */
-.eval-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
+/* SCORE */
+.td-score{text-align:center;background:#f0faf4;}
+.score-val{display:block;font-family:var(--mono);font-size:16px;font-weight:700;color:var(--green-dark);}
+.score-sub{font-size:10px;color:#888;}
 
-/* Column header */
-.eval-table thead tr {
-  background: var(--green-dark);
-  color: white;
+/* NOTE */
+.td-note{padding:4px;}
+.note-input{
+  width:100%;border:1px solid #e0e0e0;border-radius:2px;
+  padding:5px 6px;font-family:var(--font);font-size:11px;
+  color:#1a1a1a;background:#fff;resize:none;outline:none;
+  transition:border-color .15s;height:52px;
 }
-.eval-table thead th {
-  padding: 9px 8px;
-  font-weight: 600;
-  font-size: 12.5px;
-  border: 1px solid #155230;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 1.4;
-}
-.eval-table thead th.left { text-align: left; padding-left: 12px; }
-.col-no { width: 44px; }
-.col-topic { width: 170px; }
-.col-detail { min-width: 200px; }
-.col-weight { width: 74px; }
-.col-level { width: 195px; }
-.col-score { width: 90px; }
-.col-note { width: 130px; }
+.note-input:focus{border-color:var(--green-mid);background:#fffde7;}
+.note-input:disabled{background:#f5f5f5;cursor:not-allowed;color:#999;}
 
-/* ===== SECTION ROWS ===== */
-.section-row td {
-  padding: 7px 12px;
-  font-weight: 700;
-  font-size: 13px;
-  color: white;
-  letter-spacing: 0.2px;
-  border: 1px solid rgba(255,255,255,0.25);
-}
-.section-blue   td { background: #1565c0; }
-.section-teal   td { background: #00838f; }
-.section-orange td { background: #bf5000; }
-.section-purple td { background: #6a1b9a; }
-.section-amber  td { background: #e65100; }
-.section-red    td { background: #c62828; }
-.section-indigo td { background: #283593; }
+/* TOTAL */
+.total-row td{background:#e8f5e9;font-weight:700;font-size:13px;color:var(--green-dark);padding:9px 10px;border:1px solid #a5d6a7;}
+.total-score{font-family:var(--mono);font-size:21px;font-weight:700;color:var(--green-dark);display:block;text-align:center;}
+.result-badge{display:inline-block;padding:4px 12px;border-radius:3px;font-size:12px;font-weight:700;}
+.badge-pass{background:var(--l3-bg);color:var(--l3-txt);border:1px solid var(--l3-sel);}
+.badge-cond{background:var(--l2-bg);color:var(--l2-txt);border:1px solid var(--l2-sel);}
+.badge-fail{background:var(--l1-bg);color:var(--l1-txt);border:1px solid var(--l1-sel);}
 
-/* ===== DATA ROWS ===== */
-.eval-table tbody tr.data-row {
-  transition: background 0.15s;
-}
-.eval-table tbody tr.data-row:hover { background: #f0faf4; }
-.eval-table tbody tr.data-row:nth-child(even) .bg-alt { background: #f8fffe; }
+/* SIGNATURE */
+.signature-area{background:#fafafa;border-top:2px solid var(--green-dark);}
+.sig-grid{display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--gray-line);}
+.sig-cell{padding:12px 14px;border-right:1px solid var(--gray-line);text-align:center;}
+.sig-cell:last-child{border-right:none;}
+.sig-label{font-size:11.5px;color:#424242;font-weight:600;margin-bottom:9px;}
+.sig-line{border-bottom:1px solid #333;height:32px;margin:0 20px 5px;}
+.sig-input{border:none;border-bottom:1px dashed #bbb;outline:none;text-align:center;font-family:var(--font);font-size:12px;color:#1a1a1a;width:100%;padding:3px;background:transparent;}
+.sig-input:focus{background:#fffde7;}
+.sig-date{font-size:10.5px;color:#888;margin-top:4px;}
+.sig-date input{border:none;border-bottom:1px dashed #bbb;outline:none;font-size:10.5px;background:transparent;font-family:var(--font);}
 
-.eval-table td {
-  border: 1px solid #d8d8d8;
-  vertical-align: middle;
-  padding: 8px 8px;
-}
-.td-no {
-  text-align: center;
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-mid);
-  background: #f9f9f9;
-}
-.td-topic {
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--text-dark);
-  padding-left: 12px;
-  background: #fafafa;
-}
-.td-detail {
-  font-size: 12.5px;
-  color: var(--text-mid);
-  line-height: 1.55;
-  padding: 8px 10px;
-}
-.td-weight {
-  text-align: center;
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--green-dark);
-  background: var(--green-row2);
-}
+/* FOOTER */
+.form-footer{background:var(--green-dark);padding:12px 20px;display:flex;justify-content:flex-end;align-items:center;gap:12px;}
+.btn-secondary{background:transparent;border:1.5px solid rgba(255,255,255,.5);color:rgba(255,255,255,.85);padding:8px 20px;border-radius:3px;font-family:var(--font);font-size:13px;cursor:pointer;transition:all .18s;}
+.btn-secondary:hover{background:rgba(255,255,255,.12);}
+.btn-primary{background:#fff;border:none;color:var(--green-dark);padding:9px 28px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:700;cursor:pointer;transition:all .18s;box-shadow:0 2px 8px rgba(0,0,0,.18);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.22);}
 
-/* ===== LEVEL SELECTOR ===== */
-.td-levels { padding: 5px 4px; }
-.level-group {
-  display: flex;
-  gap: 3px;
-}
-.level-opt { display: none; }
-.level-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 5px 4px 6px;
-  border: 1.5px solid #ccc;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.14s;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 10.5px;
-  line-height: 1.4;
-  text-align: center;
-  color: var(--text-mid);
-  background: #fff;
-  min-height: 52px;
-  position: relative;
-}
-.level-btn:hover { border-color: #888; background: #f5f5f5; transform: translateY(-1px); }
-.level-btn .lv-num {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 3px;
-  font-family: 'IBM Plex Mono', monospace;
-}
-.level-btn .lv-label { font-size: 10px; font-weight: 600; }
-.level-btn .lv-desc { font-size: 9.5px; color: #888; line-height: 1.3; margin-top: 2px; }
+/* OVERLAY */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;align-items:center;justify-content:center;}
+.overlay.show{display:flex;}
+.overlay-card{background:#fff;border-radius:4px;padding:36px 44px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.25);max-width:420px;width:90%;}
+.ov-icon{width:60px;height:60px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+.ov-icon svg{width:32px;height:32px;}
+.overlay-card h2{font-size:18px;font-weight:700;color:var(--green-dark);margin-bottom:7px;}
+.overlay-card p{font-size:13px;color:#555;margin-bottom:5px;}
+.ov-ref{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--green-dark);background:var(--green-row2);border:1px solid #a5d6a7;border-radius:3px;padding:7px 18px;display:inline-block;margin:8px 0 18px;}
+.btn-ov{background:var(--green-dark);color:#fff;border:none;padding:9px 24px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:600;cursor:pointer;margin:4px;}
+.btn-ov-outline{background:#fff;color:var(--green-dark);border:1.5px solid var(--green-dark);padding:8px 24px;border-radius:3px;font-family:var(--font);font-size:13.5px;font-weight:600;cursor:pointer;margin:4px;text-decoration:none;display:inline-block;}
 
-/* Level 1 */
-.level-opt.l1:checked + .level-btn {
-  background: var(--level1-bg);
-  border-color: var(--level1-sel);
-  color: var(--level1-text);
-}
-.level-opt.l1:checked + .level-btn .lv-desc { color: #c62828; }
-
-/* Level 2 */
-.level-opt.l2:checked + .level-btn {
-  background: var(--level2-bg);
-  border-color: var(--level2-sel);
-  color: var(--level2-text);
-}
-.level-opt.l2:checked + .level-btn .lv-desc { color: #bf360c; }
-
-/* Level 3 */
-.level-opt.l3:checked + .level-btn {
-  background: var(--level3-bg);
-  border-color: var(--level3-sel);
-  color: var(--level3-text);
-}
-.level-opt.l3:checked + .level-btn .lv-desc { color: #2e7d32; }
-
-/* ===== SCORE CELL ===== */
-.td-score {
-  text-align: center;
-  background: #f0faf4;
-}
-.score-val {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--green-dark);
-  display: block;
-}
-.score-sub { font-size: 10px; color: #888; }
-
-/* ===== NOTE CELL ===== */
-.td-note { padding: 5px; }
-.note-input {
-  width: 100%;
-  border: 1px solid #e0e0e0;
-  border-radius: 2px;
-  padding: 5px 6px;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 11.5px;
-  color: var(--text-dark);
-  background: #fff;
-  resize: none;
-  outline: none;
-  transition: border-color 0.15s;
-  height: 52px;
-}
-.note-input:focus { border-color: var(--green-mid); background: #fffde7; }
-
-/* ===== TOTAL ROW ===== */
-.total-section {
-  border-top: 2px solid var(--green-dark);
-}
-.total-row td {
-  background: #e8f5e9;
-  font-weight: 700;
-  font-size: 13.5px;
-  color: var(--green-dark);
-  padding: 10px 12px;
-  border: 1px solid #a5d6a7;
-}
-.total-row .total-score {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--green-dark);
-  text-align: center;
-}
-.result-badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 3px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-left: 8px;
-}
-.badge-pass { background: var(--level3-bg); color: var(--level3-text); border: 1px solid var(--level3-sel); }
-.badge-cond { background: var(--level2-bg); color: var(--level2-text); border: 1px solid var(--level2-sel); }
-.badge-fail { background: var(--level1-bg); color: var(--level1-text); border: 1px solid var(--level1-sel); }
-
-/* ===== SIGNATURE ROW ===== */
-.signature-area {
-  background: #fafafa;
-  border-top: 2px solid var(--green-dark);
-  padding: 0;
-}
-.sig-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-top: 1px solid var(--gray-line);
-}
-.sig-cell {
-  padding: 14px 16px;
-  border-right: 1px solid var(--gray-line);
-  text-align: center;
-}
-.sig-cell:last-child { border-right: none; }
-.sig-label {
-  font-size: 11.5px;
-  color: var(--text-mid);
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-.sig-line {
-  border-bottom: 1px solid var(--text-dark);
-  height: 36px;
-  margin: 0 20px 6px;
-}
-.sig-name-input {
-  border: none;
-  border-bottom: 1px dashed #bbb;
-  outline: none;
-  text-align: center;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 12px;
-  color: var(--text-dark);
-  width: 100%;
-  padding: 3px;
-  background: transparent;
-}
-.sig-name-input:focus { background: #fffde7; }
-.sig-date {
-  font-size: 11px;
-  color: var(--text-light);
-  margin-top: 4px;
-}
-
-/* ===== SUBMIT BTN ===== */
-.form-footer {
-  background: var(--green-dark);
-  padding: 14px 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-}
-.btn-reset {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.5);
-  color: rgba(255,255,255,0.85);
-  padding: 9px 22px;
-  border-radius: 3px;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.18s;
-}
-.btn-reset:hover { background: rgba(255,255,255,0.1); }
-.btn-submit {
-  background: var(--white);
-  border: none;
-  color: var(--green-dark);
-  padding: 10px 30px;
-  border-radius: 3px;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.18s;
-  letter-spacing: 0.3px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-}
-.btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.22); }
-
-/* ===== LEGEND ===== */
-.legend-bar {
-  background: #f5f5f5;
-  border-bottom: 1px solid var(--gray-line);
-  padding: 7px 16px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.legend-bar span { font-size: 11.5px; color: var(--text-mid); font-weight: 600; }
-.legend-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11.5px;
-}
-.chip-dot {
-  width: 12px; height: 12px; border-radius: 2px;
-  border: 1px solid rgba(0,0,0,0.2);
-  flex-shrink: 0;
-}
-
-/* SUCCESS OVERLAY */
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  align-items: center;
-  justify-content: center;
-}
-.overlay.show { display: flex; }
-.overlay-card {
-  background: #fff;
-  border-radius: 4px;
-  padding: 40px 48px;
-  text-align: center;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-  max-width: 420px;
-}
-.ov-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: var(--score-box);
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px;
-}
-.ov-icon svg { width: 36px; height: 36px; }
-.overlay-card h2 {
-  font-size: 20px; font-weight: 700; color: var(--green-dark);
-  margin-bottom: 8px;
-}
-.overlay-card p { font-size: 14px; color: var(--text-mid); margin-bottom: 6px; }
-.ov-ref {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 16px; font-weight: 700;
-  color: var(--green-dark);
-  background: var(--green-row2);
-  border: 1px solid #a5d6a7;
-  border-radius: 3px;
-  padding: 8px 20px;
-  display: inline-block;
-  margin: 10px 0 20px;
-}
-.btn-ov {
-  background: var(--green-dark);
-  color: #fff; border: none;
-  padding: 10px 28px;
-  border-radius: 3px;
-  font-family: 'IBM Plex Sans Thai', sans-serif;
-  font-size: 14px; font-weight: 600;
-  cursor: pointer;
-}
-
-/* scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #eee; }
-::-webkit-scrollbar-thumb { background: #aaa; border-radius: 3px; }
+@media print{body{background:#fff;padding:0;}.paper{box-shadow:none;border:none;}.form-footer,.overlay,.topbar{display:none!important;}}
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="back-btn" href="index.html">&#8592; กลับหน้าหลัก</a>
+    <div class="topbar-title">
+      <h1>New Supplier Pre-Qualification Form</h1>
+      <p id="tb-sub">กำลังโหลดข้อมูล...</p>
+    </div>
+    <div class="topbar-badges">
+      <span class="badge type-pre">PRE-EVALUATION</span>
+      <span class="badge role-user" id="role-badge">USER</span>
+      <span class="badge gcp-readonly" id="readonly-badge" style="display:none">🔒 GCP Mode</span>
+    </div>
+  </div>
+</div>
+
 <div class="paper">
 
-  <!-- ===== TITLE ===== -->
+  <!-- TITLE -->
   <div class="title-bar">
-    <h1>แบบประเมินและคัดเลือกผู้ขาย/ผู้ให้บริการรายใหม่ &nbsp;<span>(New Supplier Pre-Qualification Form)</span></h1>
+    <h1>แบบประเมินและคัดเลือกผู้ขาย/ผู้ให้บริการรายใหม่ &nbsp;<em>(New Supplier Pre-Qualification Form)</em></h1>
   </div>
-  <div class="company-row">
-    <p>บริษัทในกลุ่ม : Consumer / Packaging / Retail / Manufacturer</p>
-  </div>
+  <div class="company-row">บริษัทในกลุ่ม : Consumer / Packaging / Retail / Manufacturer</div>
 
-  <!-- ===== HEADER FIELDS ===== -->
+  <!-- HEADER FIELDS -->
   <div class="header-fields">
     <div class="hf-row r1">
       <div class="hf-cell">
         <div class="hf-label">ชื่อผู้ขาย/ผู้ให้บริการ (Supplier Name) :</div>
-        <input class="hf-input" type="text" placeholder="กรอกชื่อบริษัท / ผู้ให้บริการ">
+        <input class="hf-input" id="h-supplier" type="text" placeholder="กรอกชื่อบริษัท / ผู้ให้บริการ">
       </div>
       <div class="hf-cell">
         <div class="hf-label">ประเภท :</div>
-        <select class="hf-input" style="cursor:pointer">
+        <select class="hf-input" id="h-type">
           <option value="">-- เลือก --</option>
-          <option>สินค้า</option>
-          <option>บริการ</option>
-          <option>สินค้าและบริการ</option>
+          <option>สินค้า</option><option>บริการ</option><option>สินค้าและบริการ</option>
         </select>
       </div>
       <div class="hf-cell">
         <div class="hf-label">เลขที่อ้างอิง (Ref. No.) :</div>
-        <input class="hf-input" id="ref-no" type="text" placeholder="รันอัตโนมัติ" readonly style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#1a6b3a">
+        <div class="hf-val"><strong id="ref-no">-</strong><span class="auto-tag">Auto</span></div>
       </div>
     </div>
     <div class="hf-row r2">
       <div class="hf-cell">
-        <div class="hf-label">ที่อยู่/สถานที่ผลิต :</div>
-        <input class="hf-input" type="text" placeholder="กรอกที่อยู่">
+        <div class="hf-label">หน่วยงาน / ชื่องาน :</div>
+        <div class="hf-val" id="h-dept-job">-</div>
       </div>
       <div class="hf-cell">
         <div class="hf-label">วันที่ประเมิน :</div>
-        <input class="hf-input" type="date" id="eval-date">
+        <div class="hf-val" id="h-date">-</div>
       </div>
       <div class="hf-cell">
-        <div class="hf-label">ผู้ประเมิน / แผนก :</div>
-        <input class="hf-input" type="text" placeholder="ชื่อผู้ประเมิน / แผนก">
+        <div class="hf-label">ผู้ประเมิน / รหัส :</div>
+        <div class="hf-val" id="h-emp">-</div>
       </div>
     </div>
   </div>
 
-  <!-- ===== LEGEND ===== -->
+  <!-- LEGEND -->
   <div class="legend-bar">
     <span>เกณฑ์การให้คะแนน :</span>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#ffcdd2;border-color:#ef9a9a"></div>
-      <span style="color:#b71c1c"><b>ระดับ 1</b> = ไม่ผ่าน</span>
-    </div>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#fff9c4;border-color:#ffcc02"></div>
-      <span style="color:#e65100"><b>ระดับ 2</b> = พอใช้</span>
-    </div>
-    <div class="legend-chip">
-      <div class="chip-dot" style="background:#c8e6c9;border-color:#81c784"></div>
-      <span style="color:#1b5e20"><b>ระดับ 3</b> = ดีมาก</span>
-    </div>
-    <span style="margin-left:auto;font-size:11px;color:#999">* คลิกเลือกระดับในแต่ละหัวข้อ</span>
+    <div class="legend-chip"><div class="chip-dot" style="background:#ffcdd2;border-color:#ef9a9a"></div><span style="color:#b71c1c"><b>ระดับ 1</b> = ไม่ผ่าน</span></div>
+    <div class="legend-chip"><div class="chip-dot" style="background:#fff9c4;border-color:#ffcc02"></div><span style="color:#bf360c"><b>ระดับ 2</b> = พอใช้</span></div>
+    <div class="legend-chip"><div class="chip-dot" style="background:#c8e6c9;border-color:#81c784"></div><span style="color:#1b5e20"><b>ระดับ 3</b> = ดีมาก</span></div>
+    <span id="gcp-warn-legend" style="display:none" class="gcp-warn">🔒 GCP: กรอกได้เฉพาะหมวดฝ่ายจัดซื้อ</span>
+    <span style="margin-left:auto;font-size:11px;color:#999">* คลิกเลือกระดับ</span>
   </div>
 
-  <!-- ===== TABLE ===== -->
+  <!-- TABLE -->
   <div style="overflow-x:auto">
   <table class="eval-table">
     <thead>
@@ -591,22 +272,13 @@ body {
         <th class="col-no">ลำดับ</th>
         <th class="col-topic left">หัวข้อการประเมิน</th>
         <th class="col-detail left">รายละเอียด / เกณฑ์การให้คะแนน</th>
-        <th class="col-weight">น้ำหนัก<br>(Weight %)</th>
-        <th class="col-level" colspan="3">ระดับ 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ 3</th>
-        <th class="col-score">คะแนน<br>(Score)</th>
-        <th class="col-note">หมายเหตุ / หลักฐาน</th>
+        <th class="col-wt">น้ำหนัก<br>(%)</th>
+        <th class="col-lv" colspan="3" style="letter-spacing:8px">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3</th>
+        <th class="col-sc">คะแนน<br>ที่ได้</th>
+        <th class="col-nt">หมายเหตุ / หลักฐาน</th>
       </tr>
     </thead>
-    <tbody id="eval-tbody">
-
-      <!-- SECTION 1 -->
-      <tr class="section-row section-blue">
-        <td colspan="9">&#9654;&nbsp; คุณภาพสินค้า / บริการ (Quality of Goods/Services)</td>
-      </tr>
-
-      <!-- Row data template will be generated by JS -->
-
-    </tbody>
+    <tbody id="eval-tbody"></tbody>
   </table>
   </div>
 
@@ -616,33 +288,34 @@ body {
       <div class="sig-cell">
         <div class="sig-label">ผู้ประเมิน (Evaluator)</div>
         <div class="sig-line"></div>
-        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
-        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+        <input class="sig-input" id="sig1" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date" id="sig-date1"></div>
       </div>
       <div class="sig-cell">
         <div class="sig-label">ผู้จัดการ / หัวหน้าแผนก (Manager)</div>
         <div class="sig-line"></div>
-        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
-        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+        <input class="sig-input" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date"></div>
       </div>
       <div class="sig-cell">
         <div class="sig-label">ผู้อนุมัติ (Approved by)</div>
         <div class="sig-line"></div>
-        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
-        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+        <input class="sig-input" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date"></div>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
   <div class="form-footer">
-    <button class="btn-reset" onclick="resetForm()">&#8635; รีเซ็ตฟอร์ม</button>
-    <button class="btn-submit" onclick="submitForm()">&#10003; ส่งแบบประเมิน</button>
+    <button class="btn-secondary" onclick="resetForm()">&#8635; รีเซ็ต</button>
+    <button class="btn-secondary" onclick="window.print()">&#128438; พิมพ์</button>
+    <button class="btn-primary" onclick="submitForm()">&#10003; ส่งแบบประเมิน</button>
   </div>
 
 </div><!-- /paper -->
 
-<!-- SUCCESS OVERLAY -->
+<!-- OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="overlay-card">
     <div class="ov-icon">
@@ -651,312 +324,278 @@ body {
       </svg>
     </div>
     <h2>ส่งแบบประเมินเรียบร้อย!</h2>
-    <p>ระบบได้รับข้อมูลการประเมินแล้ว</p>
-    <p style="font-size:12px;color:#999">เลขที่อ้างอิง</p>
+    <p>Pre-Qualification Form ถูกบันทึกในระบบแล้ว</p>
+    <p style="font-size:11.5px;color:#999">เลขที่อ้างอิง</p>
     <div class="ov-ref" id="ov-ref">-</div>
-    <br>
-    <p style="font-size:13px">คะแนนรวม : <b id="ov-score" style="color:#1a6b3a;font-size:18px"></b></p>
-    <p style="font-size:13px;margin-bottom:20px">ผลการประเมิน : <span id="ov-result"></span></p>
-    <button class="btn-ov" onclick="document.getElementById('overlay').classList.remove('show')">ปิด</button>
+    <p style="font-size:13px;margin-bottom:18px">คะแนนรวม : <b id="ov-score" style="color:#1a6b3a;font-size:17px"></b> &nbsp;|&nbsp; ผล : <span id="ov-result"></span></p>
+    <a class="btn-ov-outline" href="index.html">&#8592; หน้าหลัก</a>
+    <button class="btn-ov" onclick="window.print()">&#128438; พิมพ์</button>
   </div>
 </div>
 
 <script>
-// ==================== DATA ====================
+/* ========== URL PARAMS ========== */
+const P = new URLSearchParams(location.search);
+const ROLE = P.get('role')||'user';
+const EMP  = P.get('emp') ||'';
+const DEPT = P.get('dept')||'';
+const JOB  = P.get('job') ||'';
+
+const IS_GCP = ROLE==='gcp';
+
+/* ========== SECTIONS DATA ========== */
+/* gcpEditable: true = GCP สามารถกรอกได้, false = readonly สำหรับ GCP */
 const SECTIONS = [
   {
-    id: 'quality',
-    label: 'คุณภาพสินค้า / บริการ (Quality of Goods/Services)',
-    color: 'section-blue',
-    rows: [
-      {
-        no: 1,
-        topic: 'คุณภาพสินค้า/บริการ',
-        detail: 'ระดับคุณภาพของสินค้าหรือบริการที่จะส่งมอบ',
-        weight: 20,
-        l1: { label: 'ไม่ผ่าน', desc: 'คุณภาพไม่ตรงตามที่กำหนด / ตัวอย่างไม่ผ่าน' },
-        l2: { label: 'พอใช้', desc: 'คุณภาพตรงตามสเปคบางส่วน มีข้อแนะนำ' },
-        l3: { label: 'ดีมาก', desc: 'คุณภาพตรงตามสเปคครบส่วน ตัวอย่างผ่านทุกรายการ' },
-      },
+    id:'quality',label:'คุณภาพสินค้า / บริการ (Quality of Goods/Services)',
+    color:'#1565c0', gcpEditable:false,
+    rows:[
+      {no:'1',topic:'คุณภาพสินค้า/บริการ',detail:'ความสอดคล้องกับมาตรฐานที่กำหนด / อัตราของเสีย',weight:20,
+       l1:{lbl:'ไม่ผ่าน',dsc:'คุณภาพไม่ตรงตามที่กำหนด / ตัวอย่างไม่ผ่าน'},
+       l2:{lbl:'พอใช้',dsc:'คุณภาพตรงตามสเปคบางส่วน มีข้อแนะนำ'},
+       l3:{lbl:'ดีมาก',dsc:'คุณภาพตรงตามสเปคครบ ตัวอย่างผ่านทุกรายการ'}},
     ]
   },
   {
-    id: 'pricing',
-    label: 'ราคา (Pricing)',
-    color: 'section-teal',
-    rows: [
-      {
-        no: 2,
-        topic: 'ความสามารถด้านราคา',
-        detail: 'ราคาเปรียบเทียบกับตลาด / คู่แข่ง',
-        weight: 15,
-        l1: { label: 'ไม่ผ่าน', desc: 'ราคาสูงกว่าตลาดมากกว่า 10%' },
-        l2: { label: 'พอใช้', desc: 'ราคาอยู่ในระดับตลาด ±10%' },
-        l3: { label: 'ดีมาก', desc: 'ราคาต่ำกว่าตลาด หรือแข่งขันได้ชัดเจน' },
-      },
+    id:'pricing',label:'ราคา (Pricing)',
+    color:'#00838f', gcpEditable:true,
+    rows:[
+      {no:'2',topic:'ความสามารถด้านราคา',detail:'ราคาเปรียบเทียบกับตลาด / คู่แข่ง',weight:15,
+       l1:{lbl:'ไม่ผ่าน',dsc:'ราคาสูงกว่าตลาดมากกว่า 10%'},
+       l2:{lbl:'พอใช้',dsc:'ราคาอยู่ในระดับตลาด ±10%'},
+       l3:{lbl:'ดีมาก',dsc:'ราคาต่ำกว่าตลาด หรือแข่งขันได้ชัดเจน'}},
     ]
   },
   {
-    id: 'delivery',
-    label: 'ความสามารถด้านการจัดส่ง (Delivery Capability)',
-    color: 'section-orange',
-    rows: [
-      {
-        no: 3,
-        topic: 'ความสามารถจัดส่งตามกำหนด',
-        detail: 'การส่งมอบตรงเวลา / Lead time ที่ระบุ',
-        weight: 15,
-        l1: { label: 'ไม่ผ่าน', desc: 'Lead time ยาว ไม่มีแผนสำรอง' },
-        l2: { label: 'พอใช้', desc: 'Lead time พอรับได้ มีแผนสำรองบางส่วน' },
-        l3: { label: 'ดีมาก', desc: 'Lead time สั้น มีแผนสำรองชัดเจน ส่งได้ตรงเวลา 100%' },
-      },
+    id:'delivery',label:'ความสามารถด้านการจัดส่ง (Delivery Capability)',
+    color:'#bf5000', gcpEditable:true,
+    rows:[
+      {no:'3',topic:'ความสามารถจัดส่งตามกำหนด',detail:'การส่งมอบตรงเวลา / Lead time ที่ระบุ',weight:15,
+       l1:{lbl:'ไม่ผ่าน',dsc:'Lead time ยาว ไม่มีแผนสำรอง'},
+       l2:{lbl:'พอใช้',dsc:'Lead time พอรับได้ มีแผนสำรองบางส่วน'},
+       l3:{lbl:'ดีมาก',dsc:'Lead time สั้น ส่งได้ตรงเวลา 100%'}},
     ]
   },
   {
-    id: 'payment',
-    label: 'เงื่อนไขการชำระเงิน (Payment Term)',
-    color: 'section-purple',
-    rows: [
-      {
-        no: 4,
-        topic: 'เงื่อนไขการชำระเงิน',
-        detail: 'ระยะเวลาที่ให้เครดิตการชำระ',
-        weight: 10,
-        l1: { label: 'ไม่ผ่าน', desc: 'Credit term < 30 วัน' },
-        l2: { label: 'พอใช้', desc: 'Credit term 30–59 วัน' },
-        l3: { label: 'ดีมาก', desc: 'Credit term ≥ 60 วัน' },
-      },
+    id:'payment',label:'เงื่อนไขการชำระเงิน (Payment Term)',
+    color:'#6a1b9a', gcpEditable:true,
+    rows:[
+      {no:'4',topic:'เงื่อนไขการชำระเงิน',detail:'ระยะเวลาที่ให้เครดิตการชำระ',weight:10,
+       l1:{lbl:'ไม่ผ่าน',dsc:'Credit term < 30 วัน'},
+       l2:{lbl:'พอใช้',dsc:'Credit term 30–59 วัน'},
+       l3:{lbl:'ดีมาก',dsc:'Credit term ≥ 60 วัน'}},
     ]
   },
   {
-    id: 'prequalify',
-    label: 'Pre-Qualification (คุณสมบัติเบื้องต้น)',
-    color: 'section-amber',
-    rows: [
-      {
-        no: 5,
-        topic: 'ความมั่นคงทางธุรกิจ',
-        detail: 'ประวัติและความมั่นคงทางการเงิน / อายุกิจการ',
-        weight: 10,
-        l1: { label: 'ไม่ผ่าน', desc: 'กิจการใหม่ < 1 ปี หรือมีปัญหาด้านการเงิน' },
-        l2: { label: 'พอใช้', desc: 'อายุกิจการ 1–3 ปี สถานะปานกลาง' },
-        l3: { label: 'ดีมาก', desc: 'อายุกิจการ > 3 ปี สถานะทางการเงินดี' },
-      },
-      {
-        no: 6,
-        topic: 'การรับรองมาตรฐาน',
-        detail: 'ใบรับรอง ISO / มาตรฐานที่เกี่ยวข้อง',
-        weight: 10,
-        l1: { label: 'ไม่ผ่าน', desc: 'ไม่มีใบรับรองใดๆ' },
-        l2: { label: 'พอใช้', desc: 'มีใบรับรองบางส่วน อยู่ระหว่างขอ' },
-        l3: { label: 'ดีมาก', desc: 'ผ่าน ISO หรือมาตรฐานสากลครบ' },
-      },
+    id:'prequalify',label:'Pre-Qualification (คุณสมบัติเบื้องต้น)',
+    color:'#bf5000', gcpEditable:false,
+    rows:[
+      {no:'5',topic:'ความมั่นคงทางธุรกิจ',detail:'ประวัติและความมั่นคงทางการเงิน / อายุกิจการ',weight:10,
+       l1:{lbl:'ไม่ผ่าน',dsc:'กิจการใหม่ < 1 ปี หรือมีปัญหาด้านการเงิน'},
+       l2:{lbl:'พอใช้',dsc:'อายุกิจการ 1–3 ปี สถานะปานกลาง'},
+       l3:{lbl:'ดีมาก',dsc:'อายุกิจการ > 3 ปี สถานะทางการเงินดี'}},
+      {no:'6',topic:'การรับรองมาตรฐาน',detail:'ใบรับรอง ISO / มาตรฐานที่เกี่ยวข้อง',weight:10,
+       l1:{lbl:'ไม่ผ่าน',dsc:'ไม่มีใบรับรองใดๆ'},
+       l2:{lbl:'พอใช้',dsc:'มีใบรับรองบางส่วน อยู่ระหว่างขอ'},
+       l3:{lbl:'ดีมาก',dsc:'ผ่าน ISO หรือมาตรฐานสากลครบ'}},
     ]
   },
   {
-    id: 'service',
-    label: 'การบริการหลังการขาย (After-Sales Service)',
-    color: 'section-red',
-    rows: [
-      {
-        no: 7,
-        topic: 'การตอบสนองและแก้ปัญหา',
-        detail: 'ความรวดเร็วในการแก้ไขปัญหา / ข้อร้องเรียน',
-        weight: 10,
-        l1: { label: 'ไม่ผ่าน', desc: 'แก้ปัญหาช้า > 3 วันทำการ' },
-        l2: { label: 'พอใช้', desc: 'แก้ปัญหาได้ภายใน 1–2 วัน' },
-        l3: { label: 'ดีมาก', desc: 'แก้ปัญหาภายในวันเดียวกัน มี SLA ชัดเจน' },
-      },
+    id:'service',label:'การบริการหลังการขาย (After-Sales Service)',
+    color:'#c62828', gcpEditable:false,
+    rows:[
+      {no:'7',topic:'การตอบสนองและแก้ปัญหา',detail:'ความรวดเร็วในการแก้ไขปัญหา / ข้อร้องเรียน',weight:10,
+       l1:{lbl:'ไม่ผ่าน',dsc:'แก้ปัญหาช้า > 3 วันทำการ'},
+       l2:{lbl:'พอใช้',dsc:'แก้ปัญหาได้ภายใน 1–2 วัน'},
+       l3:{lbl:'ดีมาก',dsc:'แก้ปัญหาภายในวันเดียวกัน มี SLA ชัดเจน'}},
     ]
   },
   {
-    id: 'esg',
-    label: 'ความรับผิดชอบต่อสังคมและสิ่งแวดล้อม (CSR / ESG)',
-    color: 'section-indigo',
-    rows: [
-      {
-        no: 8,
-        topic: 'นโยบาย ESG',
-        detail: 'การปฏิบัติตามนโยบายสิ่งแวดล้อม / สังคม / ธรรมาภิบาล',
-        weight: 10,
-        l1: { label: 'ไม่ผ่าน', desc: 'ไม่มีนโยบาย ESG ใดๆ' },
-        l2: { label: 'พอใช้', desc: 'มีนโยบายแต่ยังไม่มีการปฏิบัติจริง' },
-        l3: { label: 'ดีมาก', desc: 'มีนโยบายและหลักฐานการปฏิบัติชัดเจน' },
-      },
+    id:'esg',label:'ความรับผิดชอบต่อสังคมและสิ่งแวดล้อม (CSR / ESG)',
+    color:'#283593', gcpEditable:false,
+    rows:[
+      {no:'8',topic:'นโยบายและการปฏิบัติ ESG',detail:'สิ่งแวดล้อม / สังคม / ธรรมาภิบาล',weight:10,
+       l1:{lbl:'ไม่ผ่าน',dsc:'ไม่มีนโยบาย ESG ใดๆ'},
+       l2:{lbl:'พอใช้',dsc:'มีนโยบาย แต่ไม่มีหลักฐานการปฏิบัติจริง'},
+       l3:{lbl:'ดีมาก',dsc:'มีนโยบาย + หลักฐาน + รายงานประจำปี'}},
     ]
   },
 ];
 
-// Generate reference number
-function genRef() {
-  const d = new Date();
-  const yr = d.getFullYear();
-  const mo = String(d.getMonth()+1).padStart(2,'0');
-  const rnd = String(Math.floor(Math.random()*9000)+1000);
-  return `SPQ-${yr}${mo}-${rnd}`;
+function genRef(){
+  const d=new Date(),yr=d.getFullYear(),mo=String(d.getMonth()+1).padStart(2,'0');
+  return `SPQ-PRE-${yr}${mo}-${String(Math.floor(Math.random()*9000)+1000)}`;
 }
 
-// Build table
-function buildTable() {
-  const tbody = document.getElementById('eval-tbody');
-  tbody.innerHTML = '';
-  let rowIdx = 0;
-  SECTIONS.forEach(sec => {
-    // Section header
-    const secTr = document.createElement('tr');
-    secTr.className = `section-row ${sec.color}`;
-    secTr.innerHTML = `<td colspan="9">&#9654;&nbsp; ${sec.label}</td>`;
-    tbody.appendChild(secTr);
+function buildTable(){
+  const tbody=document.getElementById('eval-tbody');
+  tbody.innerHTML='';
+  SECTIONS.forEach(sec=>{
+    const canEdit = !IS_GCP || sec.gcpEditable;
+    // section row
+    const str=document.createElement('tr');
+    str.className='section-row';
+    const lockIcon = IS_GCP && !sec.gcpEditable ? ' 🔒' : IS_GCP && sec.gcpEditable ? ' ✏️ (GCP กรอกได้)' : '';
+    str.innerHTML=`<td colspan="9" style="background:${sec.color}">&#9654;&nbsp; ${sec.label}${lockIcon}</td>`;
+    tbody.appendChild(str);
 
-    // Data rows
-    sec.rows.forEach(row => {
-      rowIdx++;
-      const uid = `q${row.no}`;
-      const tr = document.createElement('tr');
-      tr.className = 'data-row';
-      tr.dataset.uid = uid;
-      tr.dataset.weight = row.weight;
-      tr.innerHTML = `
+    sec.rows.forEach(row=>{
+      const uid=`q${row.no}`;
+      const tr=document.createElement('tr');
+      tr.className='data-row'+(IS_GCP && !canEdit?' readonly-section':'');
+      tr.innerHTML=`
         <td class="td-no">${row.no}</td>
         <td class="td-topic">${row.topic}</td>
         <td class="td-detail">${row.detail}</td>
-        <td class="td-weight">${row.weight}%</td>
+        <td class="td-wt">${row.weight}%</td>
         <td class="td-levels" colspan="3">
           <div class="level-group">
-            <input type="radio" name="${uid}" id="${uid}_l1" class="level-opt l1" value="1">
-            <label for="${uid}_l1" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l1" class="level-opt l1" value="1" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l1" class="level-btn" style="${canEdit?'':'cursor:not-allowed;opacity:.65'}">
               <span class="lv-num" style="color:#c62828">1</span>
-              <span class="lv-label">${row.l1.label}</span>
-              <span class="lv-desc">${row.l1.desc}</span>
+              <span class="lv-lbl">${row.l1.lbl}</span>
+              <span class="lv-dsc">${row.l1.dsc}</span>
             </label>
-            <input type="radio" name="${uid}" id="${uid}_l2" class="level-opt l2" value="2">
-            <label for="${uid}_l2" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l2" class="level-opt l2" value="2" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l2" class="level-btn" style="${canEdit?'':'cursor:not-allowed;opacity:.65'}">
               <span class="lv-num" style="color:#e65100">2</span>
-              <span class="lv-label">${row.l2.label}</span>
-              <span class="lv-desc">${row.l2.desc}</span>
+              <span class="lv-lbl">${row.l2.lbl}</span>
+              <span class="lv-dsc">${row.l2.dsc}</span>
             </label>
-            <input type="radio" name="${uid}" id="${uid}_l3" class="level-opt l3" value="3">
-            <label for="${uid}_l3" class="level-btn">
+            <input type="radio" name="${uid}" id="${uid}_l3" class="level-opt l3" value="3" ${canEdit?'':'disabled'}>
+            <label for="${uid}_l3" class="level-btn" style="${canEdit?'':'cursor:not-allowed;opacity:.65'}">
               <span class="lv-num" style="color:#2e7d32">3</span>
-              <span class="lv-label">${row.l3.label}</span>
-              <span class="lv-desc">${row.l3.desc}</span>
+              <span class="lv-lbl">${row.l3.lbl}</span>
+              <span class="lv-dsc">${row.l3.dsc}</span>
             </label>
           </div>
         </td>
-        <td class="td-score" id="score_${uid}">
+        <td class="td-score" id="sc_${uid}">
           <span class="score-val">–</span>
           <span class="score-sub">/ ${row.weight}</span>
         </td>
         <td class="td-note">
-          <textarea class="note-input" placeholder="หมายเหตุ..."></textarea>
+          <textarea class="note-input" placeholder="หมายเหตุ..." ${canEdit?'':'disabled'}></textarea>
         </td>
       `;
       tbody.appendChild(tr);
-
-      // Score update on change
-      tr.querySelectorAll(`input[name="${uid}"]`).forEach(inp => {
-        inp.addEventListener('change', () => updateScore(uid, row.weight));
-      });
+      if(canEdit){
+        tr.querySelectorAll(`input[name="${uid}"]`).forEach(i=>i.addEventListener('change',()=>updateScore(uid,row.weight)));
+      }
     });
   });
 
-  // Total row
-  const totalTr = document.createElement('tr');
-  totalTr.className = 'total-row total-section';
-  totalTr.innerHTML = `
-    <td colspan="3" style="text-align:right">คะแนนรวมทั้งหมด (Total Score)</td>
-    <td class="td-weight">100%</td>
+  // total row
+  const ttr=document.createElement('tr');
+  ttr.className='total-row';
+  ttr.innerHTML=`
+    <td colspan="3" style="text-align:right;font-size:13px">คะแนนรวม (Total Score)</td>
+    <td class="td-wt">100%</td>
     <td colspan="3"></td>
-    <td class="td-score"><span class="score-val total-score" id="total-score">0.00</span><span class="score-sub">/ 100</span></td>
+    <td class="td-score" style="background:#e8f5e9">
+      <span class="total-score" id="grand-total">0.00</span>
+      <span class="score-sub">/ 100</span>
+    </td>
     <td><span id="result-badge"></span></td>
   `;
-  tbody.appendChild(totalTr);
+  tbody.appendChild(ttr);
 }
 
-function updateScore(uid, weight) {
-  const selected = document.querySelector(`input[name="${uid}"]:checked`);
-  const scoreCell = document.getElementById(`score_${uid}`);
-  if (selected) {
-    const lv = parseInt(selected.value);
-    const normalized = ((lv / 3) * weight).toFixed(2);
-    scoreCell.querySelector('.score-val').textContent = normalized;
-    scoreCell.style.background = lv === 1 ? '#fff5f5' : lv === 2 ? '#fffde7' : '#e8f5e9';
-    scoreCell.querySelector('.score-val').style.color = lv === 1 ? '#c62828' : lv === 2 ? '#e65100' : '#2e7d32';
+function updateScore(uid,weight){
+  const sel=document.querySelector(`input[name="${uid}"]:checked`);
+  const cell=document.getElementById(`sc_${uid}`);
+  if(sel){
+    const lv=parseInt(sel.value);
+    const sc=((lv/3)*weight).toFixed(2);
+    cell.querySelector('.score-val').textContent=sc;
+    cell.style.background=lv===1?'#fff5f5':lv===2?'#fffde7':'#e8f5e9';
+    cell.querySelector('.score-val').style.color=lv===1?'#c62828':lv===2?'#e65100':'#2e7d32';
   }
   calcTotal();
 }
 
-function calcTotal() {
-  let total = 0;
-  let answered = 0;
-  SECTIONS.forEach(sec => {
-    sec.rows.forEach(row => {
-      const uid = `q${row.no}`;
-      const sel = document.querySelector(`input[name="${uid}"]:checked`);
-      if (sel) {
-        const lv = parseInt(sel.value);
-        total += (lv / 3) * row.weight;
-        answered++;
-      }
+function calcTotal(){
+  let total=0;
+  SECTIONS.forEach(sec=>{
+    sec.rows.forEach(row=>{
+      const uid=`q${row.no}`;
+      const sel=document.querySelector(`input[name="${uid}"]:checked`);
+      if(sel) total+=(parseInt(sel.value)/3)*row.weight;
     });
   });
-  const allRows = SECTIONS.reduce((a, s) => a + s.rows.length, 0);
-  document.getElementById('total-score').textContent = total.toFixed(2);
-
-  // Result badge
-  const rb = document.getElementById('result-badge');
-  if (answered < allRows) {
-    rb.innerHTML = '';
-  } else {
-    let badgeClass = total >= 70 ? 'badge-pass' : total >= 50 ? 'badge-cond' : 'badge-fail';
-    let badgeText = total >= 70 ? '✓ ผ่าน (Approved)' : total >= 50 ? '~ ผ่านมีเงื่อนไข' : '✗ ไม่ผ่าน';
-    rb.innerHTML = `<span class="result-badge ${badgeClass}">${badgeText}</span>`;
-  }
-  return { total: total.toFixed(2), answered, allRows };
+  const t=parseFloat(total.toFixed(2));
+  document.getElementById('grand-total').textContent=t.toFixed(2);
+  const rb=document.getElementById('result-badge');
+  const allRows=SECTIONS.reduce((a,s)=>a+s.rows.length,0);
+  let answered=0;
+  SECTIONS.forEach(sec=>sec.rows.forEach(row=>{
+    if(document.querySelector(`input[name="q${row.no}"]:checked`)) answered++;
+  }));
+  if(answered===allRows){
+    const cls=t>=70?'badge-pass':t>=50?'badge-cond':'badge-fail';
+    const txt=t>=70?'✓ ผ่าน':t>=50?'~ ผ่านมีเงื่อนไข':'✗ ไม่ผ่าน';
+    rb.innerHTML=`<span class="result-badge ${cls}">${txt}</span>`;
+  } else rb.innerHTML='';
+  return t;
 }
 
-function resetForm() {
-  if (!confirm('ต้องการรีเซ็ตข้อมูลทั้งหมดหรือไม่?')) return;
-  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
-  document.querySelectorAll('.note-input').forEach(t => t.value = '');
-  document.querySelectorAll('.td-score .score-val').forEach(s => {
-    if (!s.classList.contains('total-score')) { s.textContent = '–'; s.style.color = ''; }
+function resetForm(){
+  if(!confirm('รีเซ็ตข้อมูลทั้งหมด?')) return;
+  document.querySelectorAll('input[type="radio"]').forEach(r=>r.checked=false);
+  document.querySelectorAll('.note-input').forEach(t=>t.value='');
+  document.querySelectorAll('.td-score').forEach(td=>{
+    td.style.background='';
+    const sv=td.querySelector('.score-val');
+    if(sv&&sv.id!=='grand-total'){sv.textContent='–';sv.style.color='';}
   });
-  document.querySelectorAll('.td-score').forEach(td => { td.style.background = ''; });
-  document.getElementById('total-score').textContent = '0.00';
-  document.getElementById('result-badge').innerHTML = '';
+  document.getElementById('grand-total').textContent='0.00';
+  document.getElementById('result-badge').innerHTML='';
 }
 
-function submitForm() {
-  const allRows = SECTIONS.reduce((a, s) => a + s.rows.length, 0);
-  let missing = [];
-  SECTIONS.forEach(sec => {
-    sec.rows.forEach(row => {
-      const uid = `q${row.no}`;
-      if (!document.querySelector(`input[name="${uid}"]:checked`)) {
-        missing.push(row.topic);
-      }
+function submitForm(){
+  // GCP: only need to fill their editable sections
+  const missing=[];
+  SECTIONS.forEach(sec=>{
+    const mustFill = !IS_GCP || sec.gcpEditable;
+    if(!mustFill) return;
+    sec.rows.forEach(row=>{
+      if(!document.querySelector(`input[name="q${row.no}"]:checked`))
+        missing.push(`${row.no} ${row.topic}`);
     });
   });
-  if (missing.length > 0) {
-    alert(`กรุณาให้คะแนนในหัวข้อที่ยังไม่ได้เลือก:\n• ${missing.join('\n• ')}`);
+  if(missing.length){
+    alert(`กรุณาเลือกระดับในหัวข้อที่ยังไม่ได้กรอก:\n• ${missing.join('\n• ')}`);
     return;
   }
-  const { total } = calcTotal();
-  const ref = document.getElementById('ref-no').value;
-  const badgeClass = parseFloat(total) >= 70 ? 'badge-pass' : parseFloat(total) >= 50 ? 'badge-cond' : 'badge-fail';
-  const badgeText = parseFloat(total) >= 70 ? '✓ ผ่าน (Approved)' : parseFloat(total) >= 50 ? '~ ผ่านมีเงื่อนไข' : '✗ ไม่ผ่าน (Rejected)';
-
-  document.getElementById('ov-ref').textContent = ref;
-  document.getElementById('ov-score').textContent = total + ' / 100';
-  document.getElementById('ov-result').innerHTML = `<span class="result-badge ${badgeClass}">${badgeText}</span>`;
+  const t=calcTotal();
+  const ref=document.getElementById('ref-no').textContent;
+  const cls=t>=70?'badge-pass':t>=50?'badge-cond':'badge-fail';
+  const txt=t>=70?'✓ ผ่าน (Approved)':t>=50?'~ ผ่านมีเงื่อนไข':'✗ ไม่ผ่าน (Rejected)';
+  document.getElementById('ov-ref').textContent=ref;
+  document.getElementById('ov-score').textContent=t.toFixed(2)+' / 100';
+  document.getElementById('ov-result').innerHTML=`<span class="result-badge ${cls}">${txt}</span>`;
   document.getElementById('overlay').classList.add('show');
 }
 
-// Init
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('ref-no').value = genRef();
-  document.getElementById('eval-date').value = new Date().toISOString().split('T')[0];
+/* ========== INIT ========== */
+document.addEventListener('DOMContentLoaded',()=>{
+  // Set header info
+  document.getElementById('ref-no').textContent=genRef();
+  const d=new Date();
+  document.getElementById('h-date').textContent=d.toLocaleDateString('th-TH',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('h-emp').textContent=EMP||'–';
+  document.getElementById('h-dept-job').textContent=(DEPT&&JOB)?`${DEPT} / ${JOB}`:DEPT||JOB||'–';
+  document.getElementById('sig-date1').value=d.toISOString().split('T')[0];
+  document.getElementById('tb-sub').textContent=`${EMP} | ${DEPT} | ${JOB}`;
+
+  // Role badge
+  if(IS_GCP){
+    document.getElementById('role-badge').textContent='GCP';
+    document.getElementById('role-badge').className='badge role-gcp';
+    document.getElementById('readonly-badge').style.display='';
+    document.getElementById('gcp-warn-legend').style.display='';
+  }
+
   buildTable();
 });
 </script>
