@@ -3,1302 +3,962 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Supplier Evaluation System</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>New Supplier Pre-Qualification Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --primary: #1a3a5c;
-    --primary-light: #2457a0;
-    --accent: #e8a020;
-    --accent-light: #f5c55a;
-    --bg: #f0f4f8;
-    --bg-card: #ffffff;
-    --bg-section: #f7f9fc;
-    --text-main: #1a2636;
-    --text-sub: #4a6080;
-    --text-muted: #8099b3;
-    --border: #d0dcea;
-    --border-focus: #2457a0;
-    --success: #1b7a4a;
-    --success-bg: #e6f5ed;
-    --danger: #c0392b;
-    --danger-bg: #fdecea;
-    --radius: 12px;
-    --radius-sm: 8px;
-    --shadow: 0 4px 24px rgba(26,58,92,0.10);
-    --shadow-hover: 0 8px 32px rgba(26,58,92,0.18);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Sarabun', sans-serif;
-    background: var(--bg);
-    color: var(--text-main);
-    min-height: 100vh;
-  }
+:root {
+  --green-dark: #1a6b3a;
+  --green-mid: #2d8a52;
+  --green-header: #217a46;
+  --green-row: #c8e6d4;
+  --green-row2: #e8f5ee;
+  --blue-section: #1565c0;
+  --blue-light: #e3eeff;
+  --teal-section: #0277bd;
+  --orange-section: #e65100;
+  --purple-section: #6a1b9a;
+  --amber-section: #f57c00;
+  --red-section: #c62828;
+  --gray-bg: #f5f5f5;
+  --gray-line: #d0d0d0;
+  --text-dark: #1a1a1a;
+  --text-mid: #424242;
+  --text-light: #757575;
+  --white: #ffffff;
+  --level1-bg: #ffcdd2;
+  --level1-text: #b71c1c;
+  --level1-sel: #ef5350;
+  --level2-bg: #fff9c4;
+  --level2-text: #e65100;
+  --level2-sel: #ffa726;
+  --level3-bg: #c8e6c9;
+  --level3-text: #1b5e20;
+  --level3-sel: #43a047;
+  --score-box: #e8f5e9;
+  --score-text: #2e7d32;
+  --shadow: 0 2px 12px rgba(0,0,0,0.10);
+  --radius: 2px;
+}
 
-  /* ===== HEADER ===== */
-  .site-header {
-    background: linear-gradient(135deg, var(--primary) 0%, #0d2240 100%);
-    padding: 0;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-  }
-  .header-inner {
-    display: flex; align-items: center; gap: 18px;
-    max-width: 1100px; margin: 0 auto;
-    padding: 14px 32px;
-  }
-  .logo-box {
-    width: 44px; height: 44px;
-    background: var(--accent);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .logo-box svg { width: 26px; height: 26px; fill: #fff; }
-  .header-title { font-family: 'Prompt', sans-serif; }
-  .header-title h1 { font-size: 18px; font-weight: 600; color: #fff; letter-spacing: 0.3px; }
-  .header-title p { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 1px; }
-  .header-badge {
-    margin-left: auto;
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: 12px; color: rgba(255,255,255,0.75);
-  }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ===== PAGES ===== */
-  .page { display: none; }
-  .page.active { display: block; }
+body {
+  font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
+  background: #e8e8e8;
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 24px 12px 60px;
+}
 
-  /* ===== HOME ===== */
-  .home-wrap {
-    max-width: 860px; margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-  .home-hero { text-align: center; margin-bottom: 52px; }
-  .home-hero h2 {
-    font-family: 'Prompt', sans-serif;
-    font-size: 30px; font-weight: 600;
-    color: var(--primary); margin-bottom: 10px;
-  }
-  .home-hero p { font-size: 16px; color: var(--text-sub); }
+/* ===== OUTER WRAPPER (paper) ===== */
+.paper {
+  max-width: 1120px;
+  margin: 0 auto;
+  background: var(--white);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  border: 1px solid #bbb;
+}
 
-  .portal-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-  @media(max-width:600px){ .portal-grid { grid-template-columns: 1fr; } }
+/* ===== TOP TITLE BAR ===== */
+.title-bar {
+  background: var(--green-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 14px 20px 12px;
+  border-bottom: 3px solid #145c30;
+}
+.title-bar h1 {
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  line-height: 1.4;
+}
+.title-bar h1 span {
+  font-weight: 400;
+  font-size: 15px;
+  opacity: 0.85;
+}
 
-  .portal-card {
-    background: var(--bg-card);
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    padding: 36px 28px 32px;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .portal-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 4px;
-  }
-  .portal-card.user-card::before { background: linear-gradient(90deg, var(--primary-light), #4a90d9); }
-  .portal-card.gcp-card::before { background: linear-gradient(90deg, var(--accent), #e07012); }
-  .portal-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-    border-color: transparent;
-  }
-  .portal-card .pc-icon {
-    width: 56px; height: 56px;
-    border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 18px;
-  }
-  .user-card .pc-icon { background: #e8f0fb; }
-  .gcp-card .pc-icon { background: #fff3e0; }
-  .pc-icon svg { width: 30px; height: 30px; }
-  .user-card .pc-icon svg { fill: var(--primary-light); }
-  .gcp-card .pc-icon svg { fill: #c07010; }
-  .portal-card h3 {
-    font-family: 'Prompt', sans-serif;
-    font-size: 18px; font-weight: 600; color: var(--text-main);
-    margin-bottom: 6px;
-  }
-  .portal-card p { font-size: 14px; color: var(--text-sub); line-height: 1.6; }
-  .sub-options { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
-  .sub-opt-btn {
-    display: flex; align-items: center; gap: 10px;
-    background: var(--bg-section);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px;
-    font-family: 'Sarabun', sans-serif;
-    font-size: 14px; color: var(--text-main);
-    cursor: pointer; transition: all 0.18s;
-    text-align: left;
-  }
-  .sub-opt-btn:hover { background: #e8f0fb; border-color: var(--primary-light); color: var(--primary); }
-  .sub-opt-btn .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--primary-light); flex-shrink: 0;
-  }
-  .gcp-card .sub-opt-btn .dot { background: var(--accent); }
-  .gcp-card .sub-opt-btn:hover { background: #fff3e0; border-color: var(--accent); color: #8a5000; }
+/* ===== COMPANY ROW ===== */
+.company-row {
+  background: var(--green-row2);
+  border-bottom: 1px solid var(--gray-line);
+  padding: 7px 16px;
+}
+.company-row p {
+  font-size: 12.5px;
+  color: var(--green-dark);
+  font-style: italic;
+  font-weight: 500;
+}
 
-  /* ===== FORM PAGES ===== */
-  .form-wrap {
-    max-width: 760px; margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
-  .page-breadcrumb {
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: var(--text-muted);
-    margin-bottom: 28px;
-  }
-  .page-breadcrumb button {
-    background: none; border: none; cursor: pointer;
-    font-size: 13px; color: var(--primary-light);
-    font-family: 'Sarabun', sans-serif; padding: 0;
-  }
-  .page-breadcrumb button:hover { text-decoration: underline; }
-  .page-breadcrumb span { font-size: 12px; }
+/* ===== HEADER FIELDS GRID ===== */
+.header-fields {
+  background: #fafafa;
+  border-bottom: 2px solid var(--green-dark);
+}
+.hf-row {
+  display: grid;
+  border-bottom: 1px solid var(--gray-line);
+}
+.hf-row.r1 { grid-template-columns: 1fr 200px 220px; }
+.hf-row.r2 { grid-template-columns: 1fr 200px 1fr; }
+.hf-cell {
+  padding: 0;
+  border-right: 1px solid var(--gray-line);
+  display: flex;
+  align-items: stretch;
+  min-height: 38px;
+}
+.hf-cell:last-child { border-right: none; }
+.hf-label {
+  background: var(--green-row);
+  color: var(--green-dark);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 10px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #a8d5b8;
+  min-width: fit-content;
+}
+.hf-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 7px 10px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: transparent;
+  width: 100%;
+}
+.hf-input:focus { background: #fffde7; }
+.hf-input::placeholder { color: #bbb; font-size: 12px; }
 
-  .section-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 28px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 12px rgba(26,58,92,0.05);
-  }
-  .section-card h3 {
-    font-family: 'Prompt', sans-serif;
-    font-size: 15px; font-weight: 600;
-    color: var(--primary); margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-  .section-card h3 .tag {
-    display: inline-block;
-    background: #e8f0fb; color: var(--primary-light);
-    font-size: 11px; font-weight: 500;
-    border-radius: 5px; padding: 2px 8px;
-    margin-left: 8px; vertical-align: middle;
-  }
+/* ===== TABLE ===== */
+.eval-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
 
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media(max-width:560px){ .form-row { grid-template-columns: 1fr; } }
-  .form-row.full { grid-template-columns: 1fr; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 4px; }
-  .form-group label { font-size: 13px; font-weight: 500; color: var(--text-sub); }
-  .form-group label .req { color: var(--danger); margin-left: 2px; }
-  .form-group input, .form-group select, .form-group textarea {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 13px;
-    font-size: 14px; font-family: 'Sarabun', sans-serif;
-    color: var(--text-main);
-    background: #fff;
-    transition: border-color 0.18s, box-shadow 0.18s;
-    outline: none;
-    width: 100%;
-  }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(36,87,160,0.12);
-  }
-  .form-group input:disabled, .form-group select:disabled {
-    background: var(--bg-section); color: var(--text-muted);
-    cursor: not-allowed;
-  }
-  .form-group textarea { resize: vertical; min-height: 80px; }
+/* Column header */
+.eval-table thead tr {
+  background: var(--green-dark);
+  color: white;
+}
+.eval-table thead th {
+  padding: 9px 8px;
+  font-weight: 600;
+  font-size: 12.5px;
+  border: 1px solid #155230;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+.eval-table thead th.left { text-align: left; padding-left: 12px; }
+.col-no { width: 44px; }
+.col-topic { width: 170px; }
+.col-detail { min-width: 200px; }
+.col-weight { width: 74px; }
+.col-level { width: 195px; }
+.col-score { width: 90px; }
+.col-note { width: 130px; }
 
-  .info-pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--bg-section);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 8px 12px;
-    font-size: 13px; color: var(--text-sub);
-    width: 100%;
-  }
-  .info-pill strong { color: var(--text-main); }
-  .info-pill .auto-badge {
-    margin-left: auto; font-size: 11px;
-    background: #dff0e4; color: var(--success);
-    border-radius: 4px; padding: 2px 7px;
-  }
+/* ===== SECTION ROWS ===== */
+.section-row td {
+  padding: 7px 12px;
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+  letter-spacing: 0.2px;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.section-blue   td { background: #1565c0; }
+.section-teal   td { background: #00838f; }
+.section-orange td { background: #bf5000; }
+.section-purple td { background: #6a1b9a; }
+.section-amber  td { background: #e65100; }
+.section-red    td { background: #c62828; }
+.section-indigo td { background: #283593; }
 
-  /* ===== EVALUATION QUESTIONS ===== */
-  .eval-section-title {
-    font-family: 'Prompt', sans-serif;
-    font-size: 14px; font-weight: 600;
-    color: var(--primary);
-    background: #e8f0fb;
-    padding: 10px 16px;
-    border-radius: var(--radius-sm);
-    margin-bottom: 14px;
-    border-left: 4px solid var(--primary-light);
-  }
-  .question-row {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    background: #fafbfd;
-  }
-  .question-row .q-text {
-    font-size: 14px; font-weight: 500; color: var(--text-main);
-    margin-bottom: 10px;
-  }
-  .question-row .q-num { color: var(--text-muted); margin-right: 6px; }
-  .score-group {
-    display: flex; gap: 8px; align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .score-option { display: none; }
-  .score-label {
-    display: flex; flex-direction: column; align-items: center;
-    gap: 4px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: all 0.16s;
-    min-width: 80px;
-    text-align: center;
-  }
-  .score-label:hover { border-color: var(--primary-light); background: #f0f5ff; }
-  .score-option:checked + .score-label {
-    border-color: var(--primary-light);
-    background: #e8f0fb;
-    color: var(--primary);
-  }
-  .score-num {
-    font-size: 20px; font-weight: 700; line-height: 1;
-  }
-  .score-num.s1 { color: var(--danger); }
-  .score-num.s2 { color: #e07000; }
-  .score-num.s3 { color: var(--success); }
-  .score-desc { font-size: 11px; color: var(--text-sub); line-height: 1.3; max-width: 90px; }
-  .score-option:checked + .score-label .score-desc { color: var(--primary); }
+/* ===== DATA ROWS ===== */
+.eval-table tbody tr.data-row {
+  transition: background 0.15s;
+}
+.eval-table tbody tr.data-row:hover { background: #f0faf4; }
+.eval-table tbody tr.data-row:nth-child(even) .bg-alt { background: #f8fffe; }
 
-  /* ===== SCORE DESCRIPTIONS ===== */
-  .score-desc-box {
-    background: #f7f9fc; border: 1px dashed var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 14px; margin-top: 8px;
-    font-size: 12px; color: var(--text-sub);
-    line-height: 1.7;
-  }
-  .score-desc-box span { font-weight: 600; color: var(--text-main); }
+.eval-table td {
+  border: 1px solid #d8d8d8;
+  vertical-align: middle;
+  padding: 8px 8px;
+}
+.td-no {
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-mid);
+  background: #f9f9f9;
+}
+.td-topic {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text-dark);
+  padding-left: 12px;
+  background: #fafafa;
+}
+.td-detail {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  line-height: 1.55;
+  padding: 8px 10px;
+}
+.td-weight {
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--green-dark);
+  background: var(--green-row2);
+}
 
-  /* ===== RADIO TYPE ===== */
-  .radio-group { display: flex; gap: 10px; }
-  .radio-opt { display: none; }
-  .radio-label {
-    display: flex; align-items: center; gap: 6px;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 9px 18px; cursor: pointer;
-    font-size: 14px; transition: all 0.16s;
-  }
-  .radio-label:hover { border-color: var(--primary-light); background: #f0f5ff; }
-  .radio-opt:checked + .radio-label {
-    border-color: var(--primary-light); background: #e8f0fb; color: var(--primary); font-weight: 500;
-  }
-  .radio-label .rdot {
-    width: 14px; height: 14px; border-radius: 50%;
-    border: 2px solid var(--border); background: #fff;
-    flex-shrink: 0; transition: all 0.16s;
-  }
-  .radio-opt:checked + .radio-label .rdot {
-    border-color: var(--primary-light);
-    background: var(--primary-light);
-    box-shadow: inset 0 0 0 3px #fff;
-  }
+/* ===== LEVEL SELECTOR ===== */
+.td-levels { padding: 5px 4px; }
+.level-group {
+  display: flex;
+  gap: 3px;
+}
+.level-opt { display: none; }
+.level-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px 4px 6px;
+  border: 1.5px solid #ccc;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.14s;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 10.5px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--text-mid);
+  background: #fff;
+  min-height: 52px;
+  position: relative;
+}
+.level-btn:hover { border-color: #888; background: #f5f5f5; transform: translateY(-1px); }
+.level-btn .lv-num {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 3px;
+  font-family: 'IBM Plex Mono', monospace;
+}
+.level-btn .lv-label { font-size: 10px; font-weight: 600; }
+.level-btn .lv-desc { font-size: 9.5px; color: #888; line-height: 1.3; margin-top: 2px; }
 
-  /* ===== SUBMIT BUTTON ===== */
-  .submit-row {
-    display: flex; justify-content: flex-end; gap: 12px;
-    margin-top: 8px; padding-top: 12px;
-  }
-  .btn-cancel {
-    border: 1px solid var(--border); background: #fff;
-    color: var(--text-sub); padding: 11px 26px;
-    border-radius: var(--radius-sm); font-size: 15px;
-    font-family: 'Sarabun', sans-serif; cursor: pointer;
-    transition: all 0.18s;
-  }
-  .btn-cancel:hover { background: var(--bg-section); }
-  .btn-submit {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: #fff; padding: 11px 32px;
-    border: none; border-radius: var(--radius-sm);
-    font-size: 15px; font-weight: 600;
-    font-family: 'Sarabun', sans-serif; cursor: pointer;
-    transition: all 0.18s;
-    box-shadow: 0 2px 10px rgba(36,87,160,0.25);
-  }
-  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(36,87,160,0.35); }
-  .btn-submit.gcp { background: linear-gradient(135deg, #c07010 0%, var(--accent) 100%); box-shadow: 0 2px 10px rgba(200,110,0,0.25); }
-  .btn-submit.gcp:hover { box-shadow: 0 4px 16px rgba(200,110,0,0.35); }
+/* Level 1 */
+.level-opt.l1:checked + .level-btn {
+  background: var(--level1-bg);
+  border-color: var(--level1-sel);
+  color: var(--level1-text);
+}
+.level-opt.l1:checked + .level-btn .lv-desc { color: #c62828; }
 
-  /* ===== SUCCESS PAGE ===== */
-  .success-wrap {
-    max-width: 540px; margin: 80px auto; padding: 0 24px;
-    text-align: center;
-  }
-  .success-icon {
-    width: 80px; height: 80px; border-radius: 50%;
-    background: var(--success-bg);
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px;
-  }
-  .success-icon svg { width: 42px; height: 42px; }
-  .success-wrap h2 {
-    font-family: 'Prompt', sans-serif;
-    font-size: 24px; font-weight: 600; color: var(--success);
-    margin-bottom: 10px;
-  }
-  .success-wrap p { font-size: 15px; color: var(--text-sub); margin-bottom: 6px; }
-  .ref-box {
-    display: inline-block;
-    background: var(--bg-section); border: 1px solid var(--border);
-    border-radius: var(--radius-sm); padding: 10px 22px;
-    font-size: 16px; font-weight: 600; color: var(--primary);
-    letter-spacing: 1px; margin: 16px 0 28px;
-  }
-  .btn-home {
-    background: var(--primary); color: #fff;
-    padding: 12px 32px; border: none;
-    border-radius: var(--radius-sm); font-size: 15px;
-    font-family: 'Sarabun', sans-serif; cursor: pointer;
-    font-weight: 500; transition: all 0.18s;
-  }
-  .btn-home:hover { background: var(--primary-light); }
+/* Level 2 */
+.level-opt.l2:checked + .level-btn {
+  background: var(--level2-bg);
+  border-color: var(--level2-sel);
+  color: var(--level2-text);
+}
+.level-opt.l2:checked + .level-btn .lv-desc { color: #bf360c; }
 
-  /* ===== LOGIN MINI CARD ===== */
-  .login-card {
-    max-width: 440px; margin: 0 auto 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 28px 28px;
-    box-shadow: var(--shadow);
-  }
-  .login-card h2 {
-    font-family: 'Prompt', sans-serif;
-    font-size: 18px; font-weight: 600; color: var(--primary);
-    margin-bottom: 4px;
-  }
-  .login-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
-  .btn-login {
-    width: 100%; padding: 11px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: #fff; border: none; border-radius: var(--radius-sm);
-    font-size: 15px; font-weight: 600; font-family: 'Sarabun', sans-serif;
-    cursor: pointer; transition: all 0.18s;
-    box-shadow: 0 2px 10px rgba(36,87,160,0.2);
-    margin-top: 8px;
-  }
-  .btn-login:hover { opacity: 0.92; }
-  .btn-login.gcp { background: linear-gradient(135deg, #c07010 0%, var(--accent) 100%); }
+/* Level 3 */
+.level-opt.l3:checked + .level-btn {
+  background: var(--level3-bg);
+  border-color: var(--level3-sel);
+  color: var(--level3-text);
+}
+.level-opt.l3:checked + .level-btn .lv-desc { color: #2e7d32; }
 
-  /* ===== TOP BAR ON FORM PAGES ===== */
-  .form-topbar {
-    background: var(--bg-card); border-bottom: 1px solid var(--border);
-    padding: 0;
-  }
-  .form-topbar-inner {
-    max-width: 760px; margin: 0 auto;
-    padding: 14px 24px; display: flex; align-items: center; gap: 14px;
-  }
-  .ftb-badge {
-    display: inline-block; font-size: 11px; font-weight: 600;
-    padding: 3px 10px; border-radius: 5px; text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .ftb-badge.user { background: #e8f0fb; color: var(--primary-light); }
-  .ftb-badge.gcp { background: #fff3e0; color: #c07010; }
-  .ftb-title { font-size: 15px; font-weight: 500; color: var(--text-main); }
-  .ftb-ref { margin-left: auto; font-size: 12px; color: var(--text-muted); }
+/* ===== SCORE CELL ===== */
+.td-score {
+  text-align: center;
+  background: #f0faf4;
+}
+.score-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--green-dark);
+  display: block;
+}
+.score-sub { font-size: 10px; color: #888; }
 
-  /* ===== STEP PROGRESS ===== */
-  .step-bar {
-    display: flex; align-items: center; gap: 0;
-    margin-bottom: 28px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 10px 20px; overflow-x: auto;
-  }
-  .step-item {
-    display: flex; align-items: center; gap: 6px;
-    flex-shrink: 0;
-  }
-  .step-dot {
-    width: 24px; height: 24px; border-radius: 50%;
-    background: var(--bg-section); border: 1.5px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 600; color: var(--text-muted);
-  }
-  .step-dot.done { background: var(--primary-light); border-color: var(--primary-light); color: #fff; }
-  .step-dot.active { background: #fff; border-color: var(--primary-light); color: var(--primary-light); box-shadow: 0 0 0 3px rgba(36,87,160,0.15); }
-  .step-lbl { font-size: 12px; color: var(--text-muted); }
-  .step-lbl.active { color: var(--primary); font-weight: 500; }
-  .step-sep { flex: 1; min-width: 12px; height: 1px; background: var(--border); margin: 0 6px; }
+/* ===== NOTE CELL ===== */
+.td-note { padding: 5px; }
+.note-input {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  padding: 5px 6px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 11.5px;
+  color: var(--text-dark);
+  background: #fff;
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s;
+  height: 52px;
+}
+.note-input:focus { border-color: var(--green-mid); background: #fffde7; }
 
-  /* section number pill */
-  .sec-pill {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--primary); color: #fff;
-    font-size: 11px; font-weight: 700; margin-right: 8px;
-    flex-shrink: 0;
-  }
-  .gcp-mode .sec-pill { background: var(--accent); }
+/* ===== TOTAL ROW ===== */
+.total-section {
+  border-top: 2px solid var(--green-dark);
+}
+.total-row td {
+  background: #e8f5e9;
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--green-dark);
+  padding: 10px 12px;
+  border: 1px solid #a5d6a7;
+}
+.total-row .total-score {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-align: center;
+}
+.result-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 8px;
+}
+.badge-pass { background: var(--level3-bg); color: var(--level3-text); border: 1px solid var(--level3-sel); }
+.badge-cond { background: var(--level2-bg); color: var(--level2-text); border: 1px solid var(--level2-sel); }
+.badge-fail { background: var(--level1-bg); color: var(--level1-text); border: 1px solid var(--level1-sel); }
+
+/* ===== SIGNATURE ROW ===== */
+.signature-area {
+  background: #fafafa;
+  border-top: 2px solid var(--green-dark);
+  padding: 0;
+}
+.sig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid var(--gray-line);
+}
+.sig-cell {
+  padding: 14px 16px;
+  border-right: 1px solid var(--gray-line);
+  text-align: center;
+}
+.sig-cell:last-child { border-right: none; }
+.sig-label {
+  font-size: 11.5px;
+  color: var(--text-mid);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.sig-line {
+  border-bottom: 1px solid var(--text-dark);
+  height: 36px;
+  margin: 0 20px 6px;
+}
+.sig-name-input {
+  border: none;
+  border-bottom: 1px dashed #bbb;
+  outline: none;
+  text-align: center;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 12px;
+  color: var(--text-dark);
+  width: 100%;
+  padding: 3px;
+  background: transparent;
+}
+.sig-name-input:focus { background: #fffde7; }
+.sig-date {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ===== SUBMIT BTN ===== */
+.form-footer {
+  background: var(--green-dark);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+.btn-reset {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.85);
+  padding: 9px 22px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.btn-reset:hover { background: rgba(255,255,255,0.1); }
+.btn-submit {
+  background: var(--white);
+  border: none;
+  color: var(--green-dark);
+  padding: 10px 30px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+.btn-submit:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.22); }
+
+/* ===== LEGEND ===== */
+.legend-bar {
+  background: #f5f5f5;
+  border-bottom: 1px solid var(--gray-line);
+  padding: 7px 16px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.legend-bar span { font-size: 11.5px; color: var(--text-mid); font-weight: 600; }
+.legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+}
+.chip-dot {
+  width: 12px; height: 12px; border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+/* SUCCESS OVERLAY */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+.overlay.show { display: flex; }
+.overlay-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 40px 48px;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  max-width: 420px;
+}
+.ov-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--score-box);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.ov-icon svg { width: 36px; height: 36px; }
+.overlay-card h2 {
+  font-size: 20px; font-weight: 700; color: var(--green-dark);
+  margin-bottom: 8px;
+}
+.overlay-card p { font-size: 14px; color: var(--text-mid); margin-bottom: 6px; }
+.ov-ref {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 16px; font-weight: 700;
+  color: var(--green-dark);
+  background: var(--green-row2);
+  border: 1px solid #a5d6a7;
+  border-radius: 3px;
+  padding: 8px 20px;
+  display: inline-block;
+  margin: 10px 0 20px;
+}
+.btn-ov {
+  background: var(--green-dark);
+  color: #fff; border: none;
+  padding: 10px 28px;
+  border-radius: 3px;
+  font-family: 'IBM Plex Sans Thai', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer;
+}
+
+/* scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #eee; }
+::-webkit-scrollbar-thumb { background: #aaa; border-radius: 3px; }
 </style>
 </head>
 <body>
 
-<!-- ============================
-     SITE HEADER
-     ============================ -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="logo-box">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-    </div>
-    <div class="header-title">
-      <h1>Supplier Evaluation System</h1>
-      <p>ระบบประเมินผล Supplier & Buyer</p>
-    </div>
-    <div class="header-badge">ระบบภายใน · Internal</div>
+<div class="paper">
+
+  <!-- ===== TITLE ===== -->
+  <div class="title-bar">
+    <h1>แบบประเมินและคัดเลือกผู้ขาย/ผู้ให้บริการรายใหม่ &nbsp;<span>(New Supplier Pre-Qualification Form)</span></h1>
   </div>
-</header>
-
-<!-- ============================
-     PAGE: HOME
-     ============================ -->
-<div class="page active" id="page-home">
-  <div class="home-wrap">
-    <div class="home-hero">
-      <h2>เลือกประเภทผู้ใช้งาน</h2>
-      <p>กรุณาเลือกบทบาทและประเภทการประเมินที่ต้องการดำเนินการ</p>
-    </div>
-    <div class="portal-grid">
-      <!-- USER CARD -->
-      <div class="portal-card user-card">
-        <div class="pc-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <h3>สำหรับ User</h3>
-        <p>ผู้ใช้งานทั่วไป ประเมิน Supplier หรือรับการประเมินจาก Supplier</p>
-        <div class="sub-options">
-          <button class="sub-opt-btn" onclick="gotoLogin('user-supplier')">
-            <span class="dot"></span>
-            <span>User ประเมิน Supplier</span>
-          </button>
-          <button class="sub-opt-btn" onclick="gotoLogin('supplier-buyer')">
-            <span class="dot"></span>
-            <span>Supplier ประเมิน Buyer</span>
-          </button>
-        </div>
-      </div>
-      <!-- GCP CARD -->
-      <div class="portal-card gcp-card">
-        <div class="pc-icon">
-          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        </div>
-        <h3>สำหรับ GCP</h3>
-        <p>เจ้าหน้าที่ GCP ดำเนินการประเมิน Supplier ตามเกณฑ์ของหน่วยงาน</p>
-        <div class="sub-options">
-          <button class="sub-opt-btn" onclick="gotoLogin('gcp-supplier')">
-            <span class="dot"></span>
-            <span>GCP ประเมิน Supplier</span>
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="company-row">
+    <p>บริษัทในกลุ่ม : Consumer / Packaging / Retail / Manufacturer</p>
   </div>
-</div>
 
-<!-- ============================
-     PAGE: LOGIN
-     ============================ -->
-<div class="page" id="page-login">
-  <div class="form-wrap">
-    <div class="page-breadcrumb">
-      <button onclick="goHome()">หน้าหลัก</button>
-      <span>›</span>
-      <span id="login-breadcrumb">เข้าสู่ระบบ</span>
-    </div>
-    <div class="login-card">
-      <h2 id="login-title">เข้าสู่ระบบ</h2>
-      <p id="login-subtitle">กรุณากรอกรหัสพนักงานเพื่อดำเนินการต่อ</p>
-
-      <div class="form-group">
-        <label>รหัสพนักงาน <span class="req">*</span></label>
-        <input type="text" id="login-empcode" placeholder="เช่น EMP00123" maxlength="10">
+  <!-- ===== HEADER FIELDS ===== -->
+  <div class="header-fields">
+    <div class="hf-row r1">
+      <div class="hf-cell">
+        <div class="hf-label">ชื่อผู้ขาย/ผู้ให้บริการ (Supplier Name) :</div>
+        <input class="hf-input" type="text" placeholder="กรอกชื่อบริษัท / ผู้ให้บริการ">
       </div>
-
-      <!-- Pre/Post selector - show for user-supplier and gcp-supplier -->
-      <div id="login-prepost-wrap" class="form-group" style="display:none">
-        <label>ประเภทการประเมิน <span class="req">*</span></label>
-        <div class="radio-group">
-          <input type="radio" name="prepost" id="opt-pre" class="radio-opt" value="Pre">
-          <label for="opt-pre" class="radio-label">
-            <span class="rdot"></span> Pre-Evaluation
-          </label>
-          <input type="radio" name="prepost" id="opt-post" class="radio-opt" value="Post">
-          <label for="opt-post" class="radio-label">
-            <span class="rdot"></span> Post-Evaluation
-          </label>
-        </div>
-      </div>
-
-      <button class="btn-login" id="btn-login-go" onclick="doLogin()">เข้าสู่ระบบ</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================
-     PAGE: USER EVAL SUPPLIER
-     ============================ -->
-<div class="page" id="page-user-supplier">
-  <div class="form-topbar">
-    <div class="form-topbar-inner">
-      <span class="ftb-badge user">User</span>
-      <span class="ftb-title">ประเมิน Supplier</span>
-      <span class="ftb-ref" id="us-ref-display"></span>
-    </div>
-  </div>
-  <div class="form-wrap">
-    <div class="page-breadcrumb">
-      <button onclick="goHome()">หน้าหลัก</button>
-      <span>›</span>
-      <span>User ประเมิน Supplier</span>
-    </div>
-
-    <!-- Info Card -->
-    <div class="section-card">
-      <h3>ข้อมูลทั่วไป <span class="tag">กรอกตามลำดับ</span></h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>รหัสพนักงาน</label>
-          <div class="info-pill"><strong id="us-empcode"></strong></div>
-        </div>
-        <div class="form-group">
-          <label>ประเภทการประเมิน</label>
-          <div class="info-pill"><strong id="us-prepost"></strong></div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>หน่วยงาน <span class="req">*</span></label>
-          <select id="us-dept" onchange="updateUSJob()">
-            <option value="">-- เลือกหน่วยงาน --</option>
-            <option>ฝ่ายจัดซื้อ</option>
-            <option>ฝ่ายการเงิน</option>
-            <option>ฝ่ายวิศวกรรม</option>
-            <option>ฝ่ายผลิต</option>
-            <option>ฝ่ายคลังสินค้า</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ชื่องาน <span class="req">*</span></label>
-          <select id="us-job" onchange="updateUSSupplier()">
-            <option value="">-- เลือกชื่องาน --</option>
-          </select>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>ชื่อ Supplier <span class="req">*</span></label>
-          <select id="us-supplier" onchange="updateUSType()">
-            <option value="">-- เลือก Supplier --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ประเภทสินค้า / บริการ</label>
-          <div class="info-pill" id="us-type-pill">
-            <span id="us-type-val">-</span>
-            <span class="auto-badge">อัตโนมัติ</span>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>เลขที่อ้างอิง</label>
-        <div class="info-pill">
-          <strong id="us-refno">EVL-</strong>
-          <span class="auto-badge">Auto</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Evaluation Questions - User/Supplier -->
-    <div class="section-card">
-      <h3>หัวข้อประเมิน</h3>
-      <div id="us-eval-body">
-        <!-- Section 1 -->
-        <div class="eval-section-title"><span class="sec-pill">1</span>คุณภาพสินค้า / บริการ (Quality)</div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">1.1</span>สินค้าหรือบริการที่ได้รับตรงตามข้อกำหนดและมาตรฐาน</div>
-          <div class="score-group">
-            <input type="radio" name="q1" id="q1s1" class="score-option" value="1">
-            <label for="q1s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ต่ำกว่ามาตรฐาน</span></label>
-            <input type="radio" name="q1" id="q1s2" class="score-option" value="2">
-            <label for="q1s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ผ่านมาตรฐาน</span></label>
-            <input type="radio" name="q1" id="q1s3" class="score-option" value="3">
-            <label for="q1s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">เกินมาตรฐาน</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = สินค้า/บริการมีข้อบกพร่องชัดเจน · <span>2</span> = ตรงตามข้อกำหนดทั่วไป · <span>3</span> = ดีกว่าข้อกำหนด มีมาตรฐานสูง</div>
-        </div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">1.2</span>ความสม่ำเสมอของคุณภาพในการส่งมอบแต่ละครั้ง</div>
-          <div class="score-group">
-            <input type="radio" name="q2" id="q2s1" class="score-option" value="1">
-            <label for="q2s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่สม่ำเสมอ</span></label>
-            <input type="radio" name="q2" id="q2s2" class="score-option" value="2">
-            <label for="q2s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">สม่ำเสมอพอควร</span></label>
-            <input type="radio" name="q2" id="q2s3" class="score-option" value="3">
-            <label for="q2s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">สม่ำเสมอมาก</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = คุณภาพแตกต่างมากแต่ละครั้ง · <span>2</span> = คุณภาพใกล้เคียงกัน · <span>3</span> = คุณภาพคงเส้นคงวา ไม่มีข้อบกพร่อง</div>
-        </div>
-
-        <!-- Section 2 -->
-        <div class="eval-section-title" style="margin-top:20px"><span class="sec-pill">2</span>การส่งมอบ (Delivery)</div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">2.1</span>ความตรงต่อเวลาในการส่งมอบสินค้า/บริการ</div>
-          <div class="score-group">
-            <input type="radio" name="q3" id="q3s1" class="score-option" value="1">
-            <label for="q3s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ส่งล่าช้าบ่อยครั้ง</span></label>
-            <input type="radio" name="q3" id="q3s2" class="score-option" value="2">
-            <label for="q3s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ล่าช้าเล็กน้อย</span></label>
-            <input type="radio" name="q3" id="q3s3" class="score-option" value="3">
-            <label for="q3s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ตรงเวลาทุกครั้ง</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = ส่งล่าช้า >3 ครั้ง/ไตรมาส · <span>2</span> = ล่าช้า 1-2 ครั้ง · <span>3</span> = ส่งตรงเวลาหรือก่อนกำหนด</div>
-        </div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">2.2</span>ปริมาณสินค้า/บริการที่ส่งมอบตรงตามที่สั่ง</div>
-          <div class="score-group">
-            <input type="radio" name="q4" id="q4s1" class="score-option" value="1">
-            <label for="q4s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ผิดพลาดบ่อย</span></label>
-            <input type="radio" name="q4" id="q4s2" class="score-option" value="2">
-            <label for="q4s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ผิดพลาดบางครั้ง</span></label>
-            <input type="radio" name="q4" id="q4s3" class="score-option" value="3">
-            <label for="q4s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ถูกต้องทุกครั้ง</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = ปริมาณผิดพลาด >20% · <span>2</span> = ผิดพลาดน้อยกว่า 10% · <span>3</span> = ปริมาณถูกต้อง 100%</div>
-        </div>
-
-        <!-- Section 3 -->
-        <div class="eval-section-title" style="margin-top:20px"><span class="sec-pill">3</span>ราคา / ความคุ้มค่า (Cost)</div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">3.1</span>ราคาสินค้า/บริการมีความสมเหตุสมผลและแข่งขันได้</div>
-          <div class="score-group">
-            <input type="radio" name="q5" id="q5s1" class="score-option" value="1">
-            <label for="q5s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">แพงเกินไป</span></label>
-            <input type="radio" name="q5" id="q5s2" class="score-option" value="2">
-            <label for="q5s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ราคาพอเหมาะ</span></label>
-            <input type="radio" name="q5" id="q5s3" class="score-option" value="3">
-            <label for="q5s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">คุ้มค่ามาก</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = ราคาสูงกว่าตลาด >15% · <span>2</span> = ราคาใกล้เคียงตลาด · <span>3</span> = ราคาต่ำกว่าตลาด มีโปรโมชัน</div>
-        </div>
-
-        <!-- Section 4 -->
-        <div class="eval-section-title" style="margin-top:20px"><span class="sec-pill">4</span>การบริการและการสื่อสาร (Service)</div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">4.1</span>การตอบสนองและสื่อสารเมื่อมีปัญหาหรือข้อร้องเรียน</div>
-          <div class="score-group">
-            <input type="radio" name="q6" id="q6s1" class="score-option" value="1">
-            <label for="q6s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ตอบสนองช้า</span></label>
-            <input type="radio" name="q6" id="q6s2" class="score-option" value="2">
-            <label for="q6s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ตอบสนองพอควร</span></label>
-            <input type="radio" name="q6" id="q6s3" class="score-option" value="3">
-            <label for="q6s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ตอบสนองรวดเร็ว</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = ใช้เวลา >3 วันทำการ · <span>2</span> = ตอบภายใน 1-2 วัน · <span>3</span> = ตอบภายในวันเดียวกัน</div>
-        </div>
-        <div class="question-row">
-          <div class="q-text"><span class="q-num">4.2</span>ความสามารถในการแก้ไขปัญหาหรือข้อบกพร่อง</div>
-          <div class="score-group">
-            <input type="radio" name="q7" id="q7s1" class="score-option" value="1">
-            <label for="q7s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">แก้ไขล่าช้า</span></label>
-            <input type="radio" name="q7" id="q7s2" class="score-option" value="2">
-            <label for="q7s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">แก้ไขได้บางส่วน</span></label>
-            <input type="radio" name="q7" id="q7s3" class="score-option" value="3">
-            <label for="q7s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">แก้ไขได้ดีเยี่ยม</span></label>
-          </div>
-          <div class="score-desc-box"><span>1</span> = ปัญหาไม่ได้รับการแก้ไข · <span>2</span> = แก้ไขบางส่วนหรือล่าช้า · <span>3</span> = แก้ไขได้ครบถ้วน รวดเร็ว</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Remarks -->
-    <div class="section-card">
-      <h3>หมายเหตุ / ข้อเสนอแนะเพิ่มเติม</h3>
-      <div class="form-group">
-        <label>หมายเหตุ</label>
-        <textarea id="us-remark" placeholder="กรุณาระบุข้อมูลเพิ่มเติม (ถ้ามี)..."></textarea>
-      </div>
-    </div>
-
-    <div class="submit-row">
-      <button class="btn-cancel" onclick="goHome()">ยกเลิก</button>
-      <button class="btn-submit" onclick="doSubmit('user-supplier')">ส่งแบบประเมิน</button>
-    </div>
-  </div>
-</div>
-
-<!-- ============================
-     PAGE: SUPPLIER EVAL BUYER
-     ============================ -->
-<div class="page" id="page-supplier-buyer">
-  <div class="form-topbar">
-    <div class="form-topbar-inner">
-      <span class="ftb-badge user">Supplier</span>
-      <span class="ftb-title">ประเมิน Buyer</span>
-      <span class="ftb-ref" id="sb-ref-display"></span>
-    </div>
-  </div>
-  <div class="form-wrap">
-    <div class="page-breadcrumb">
-      <button onclick="goHome()">หน้าหลัก</button>
-      <span>›</span>
-      <span>Supplier ประเมิน Buyer</span>
-    </div>
-
-    <div class="login-card">
-      <h2>ข้อมูลผู้ประเมิน</h2>
-      <p>Supplier กรอกรหัสพนักงานและเลือกงานที่ต้องการประเมิน Buyer</p>
-      <div class="form-group">
-        <label>รหัสพนักงาน</label>
-        <div class="info-pill"><strong id="sb-empcode"></strong></div>
-      </div>
-      <div class="form-group" style="margin-top:14px">
-        <label>เลือกงานที่ต้องการประเมิน Buyer <span class="req">*</span></label>
-        <select id="sb-job">
-          <option value="">-- เลือกงาน --</option>
-          <option>PO-2024-001 : งานก่อสร้างอาคาร A</option>
-          <option>PO-2024-002 : จัดซื้ออุปกรณ์ IT</option>
-          <option>PO-2024-003 : บริการทำความสะอาด</option>
-          <option>PO-2024-004 : จัดซื้อวัสดุสำนักงาน</option>
-          <option>PO-2024-005 : บริการรักษาความปลอดภัย</option>
+      <div class="hf-cell">
+        <div class="hf-label">ประเภท :</div>
+        <select class="hf-input" style="cursor:pointer">
+          <option value="">-- เลือก --</option>
+          <option>สินค้า</option>
+          <option>บริการ</option>
+          <option>สินค้าและบริการ</option>
         </select>
       </div>
-    </div>
-
-    <div class="section-card">
-      <h3>หัวข้อประเมิน Buyer</h3>
-      <div class="eval-section-title"><span class="sec-pill">1</span>กระบวนการจัดซื้อและการสื่อสาร</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">1.1</span>ความชัดเจนของข้อกำหนดและเงื่อนไขการจัดซื้อ</div>
-        <div class="score-group">
-          <input type="radio" name="bq1" id="bq1s1" class="score-option" value="1">
-          <label for="bq1s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่ชัดเจน</span></label>
-          <input type="radio" name="bq1" id="bq1s2" class="score-option" value="2">
-          <label for="bq1s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">พอเข้าใจได้</span></label>
-          <input type="radio" name="bq1" id="bq1s3" class="score-option" value="3">
-          <label for="bq1s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ชัดเจนมาก</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ข้อกำหนดขาดรายละเอียด ต้องสอบถามเพิ่มมาก · <span>2</span> = ข้อกำหนดพอเข้าใจ · <span>3</span> = ครบถ้วน ชัดเจน ไม่ต้องสอบถามเพิ่ม</div>
-      </div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">1.2</span>ความรวดเร็วในการตอบคำถามและให้ข้อมูล</div>
-        <div class="score-group">
-          <input type="radio" name="bq2" id="bq2s1" class="score-option" value="1">
-          <label for="bq2s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ช้ามาก</span></label>
-          <input type="radio" name="bq2" id="bq2s2" class="score-option" value="2">
-          <label for="bq2s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">พอควร</span></label>
-          <input type="radio" name="bq2" id="bq2s3" class="score-option" value="3">
-          <label for="bq2s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">รวดเร็วมาก</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ตอบช้ากว่า 3 วัน · <span>2</span> = ตอบภายใน 1-2 วัน · <span>3</span> = ตอบภายในวันเดียวกัน</div>
-      </div>
-
-      <div class="eval-section-title" style="margin-top:20px"><span class="sec-pill">2</span>การชำระเงินและเอกสาร</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">2.1</span>ความตรงต่อเวลาในการชำระเงินตามสัญญา</div>
-        <div class="score-group">
-          <input type="radio" name="bq3" id="bq3s1" class="score-option" value="1">
-          <label for="bq3s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ล่าช้าบ่อย</span></label>
-          <input type="radio" name="bq3" id="bq3s2" class="score-option" value="2">
-          <label for="bq3s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">บางครั้งล่าช้า</span></label>
-          <input type="radio" name="bq3" id="bq3s3" class="score-option" value="3">
-          <label for="bq3s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ตรงกำหนดเสมอ</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ชำระล่าช้า >15 วัน · <span>2</span> = ล่าช้า 1-7 วัน · <span>3</span> = ชำระตรงตามกำหนด</div>
-      </div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">2.2</span>ความถูกต้องของเอกสาร PO และสัญญา</div>
-        <div class="score-group">
-          <input type="radio" name="bq4" id="bq4s1" class="score-option" value="1">
-          <label for="bq4s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ผิดพลาดบ่อย</span></label>
-          <input type="radio" name="bq4" id="bq4s2" class="score-option" value="2">
-          <label for="bq4s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ผิดพลาดเล็กน้อย</span></label>
-          <input type="radio" name="bq4" id="bq4s3" class="score-option" value="3">
-          <label for="bq4s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ถูกต้องครบถ้วน</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = เอกสารผิดพลาดหลายจุดต้องแก้ซ้ำ · <span>2</span> = มีข้อผิดพลาดเล็กน้อย · <span>3</span> = เอกสารถูกต้อง ครบถ้วน</div>
-      </div>
-
-      <div class="eval-section-title" style="margin-top:20px"><span class="sec-pill">3</span>ความเป็นธรรมและความโปร่งใส</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">3.1</span>กระบวนการคัดเลือกและตัดสินใจมีความโปร่งใส</div>
-        <div class="score-group">
-          <input type="radio" name="bq5" id="bq5s1" class="score-option" value="1">
-          <label for="bq5s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่โปร่งใส</span></label>
-          <input type="radio" name="bq5" id="bq5s2" class="score-option" value="2">
-          <label for="bq5s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">พอเข้าใจได้</span></label>
-          <input type="radio" name="bq5" id="bq5s3" class="score-option" value="3">
-          <label for="bq5s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">โปร่งใสมาก</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ไม่มีการแจ้งเหตุผลชัดเจน · <span>2</span> = มีการแจ้งผลแต่ไม่ละเอียด · <span>3</span> = มีการสื่อสารครบถ้วน ชัดเจน</div>
+      <div class="hf-cell">
+        <div class="hf-label">เลขที่อ้างอิง (Ref. No.) :</div>
+        <input class="hf-input" id="ref-no" type="text" placeholder="รันอัตโนมัติ" readonly style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#1a6b3a">
       </div>
     </div>
-
-    <div class="section-card">
-      <h3>หมายเหตุ / ข้อเสนอแนะ</h3>
-      <div class="form-group">
-        <textarea id="sb-remark" placeholder="กรุณาระบุข้อมูลเพิ่มเติม (ถ้ามี)..."></textarea>
+    <div class="hf-row r2">
+      <div class="hf-cell">
+        <div class="hf-label">ที่อยู่/สถานที่ผลิต :</div>
+        <input class="hf-input" type="text" placeholder="กรอกที่อยู่">
       </div>
-    </div>
-    <div class="submit-row">
-      <button class="btn-cancel" onclick="goHome()">ยกเลิก</button>
-      <button class="btn-submit" onclick="doSubmit('supplier-buyer')">ส่งแบบประเมิน</button>
+      <div class="hf-cell">
+        <div class="hf-label">วันที่ประเมิน :</div>
+        <input class="hf-input" type="date" id="eval-date">
+      </div>
+      <div class="hf-cell">
+        <div class="hf-label">ผู้ประเมิน / แผนก :</div>
+        <input class="hf-input" type="text" placeholder="ชื่อผู้ประเมิน / แผนก">
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ============================
-     PAGE: GCP EVAL SUPPLIER
-     ============================ -->
-<div class="page" id="page-gcp-supplier">
-  <div class="form-topbar">
-    <div class="form-topbar-inner">
-      <span class="ftb-badge gcp">GCP</span>
-      <span class="ftb-title">ประเมิน Supplier</span>
-      <span class="ftb-ref" id="gcp-ref-display"></span>
+  <!-- ===== LEGEND ===== -->
+  <div class="legend-bar">
+    <span>เกณฑ์การให้คะแนน :</span>
+    <div class="legend-chip">
+      <div class="chip-dot" style="background:#ffcdd2;border-color:#ef9a9a"></div>
+      <span style="color:#b71c1c"><b>ระดับ 1</b> = ไม่ผ่าน</span>
+    </div>
+    <div class="legend-chip">
+      <div class="chip-dot" style="background:#fff9c4;border-color:#ffcc02"></div>
+      <span style="color:#e65100"><b>ระดับ 2</b> = พอใช้</span>
+    </div>
+    <div class="legend-chip">
+      <div class="chip-dot" style="background:#c8e6c9;border-color:#81c784"></div>
+      <span style="color:#1b5e20"><b>ระดับ 3</b> = ดีมาก</span>
+    </div>
+    <span style="margin-left:auto;font-size:11px;color:#999">* คลิกเลือกระดับในแต่ละหัวข้อ</span>
+  </div>
+
+  <!-- ===== TABLE ===== -->
+  <div style="overflow-x:auto">
+  <table class="eval-table">
+    <thead>
+      <tr>
+        <th class="col-no">ลำดับ</th>
+        <th class="col-topic left">หัวข้อการประเมิน</th>
+        <th class="col-detail left">รายละเอียด / เกณฑ์การให้คะแนน</th>
+        <th class="col-weight">น้ำหนัก<br>(Weight %)</th>
+        <th class="col-level" colspan="3">ระดับ 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ระดับ 3</th>
+        <th class="col-score">คะแนน<br>(Score)</th>
+        <th class="col-note">หมายเหตุ / หลักฐาน</th>
+      </tr>
+    </thead>
+    <tbody id="eval-tbody">
+
+      <!-- SECTION 1 -->
+      <tr class="section-row section-blue">
+        <td colspan="9">&#9654;&nbsp; คุณภาพสินค้า / บริการ (Quality of Goods/Services)</td>
+      </tr>
+
+      <!-- Row data template will be generated by JS -->
+
+    </tbody>
+  </table>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="signature-area">
+    <div class="sig-grid">
+      <div class="sig-cell">
+        <div class="sig-label">ผู้ประเมิน (Evaluator)</div>
+        <div class="sig-line"></div>
+        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+      </div>
+      <div class="sig-cell">
+        <div class="sig-label">ผู้จัดการ / หัวหน้าแผนก (Manager)</div>
+        <div class="sig-line"></div>
+        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+      </div>
+      <div class="sig-cell">
+        <div class="sig-label">ผู้อนุมัติ (Approved by)</div>
+        <div class="sig-line"></div>
+        <input class="sig-name-input" type="text" placeholder="ชื่อ - นามสกุล">
+        <div class="sig-date">วันที่ : <input type="date" style="border:none;border-bottom:1px dashed #bbb;outline:none;font-size:11px;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif"></div>
+      </div>
     </div>
   </div>
-  <div class="form-wrap">
-    <div class="page-breadcrumb">
-      <button onclick="goHome()">หน้าหลัก</button>
-      <span>›</span>
-      <span>GCP ประเมิน Supplier</span>
-    </div>
 
-    <div class="section-card">
-      <h3>ข้อมูลทั่วไป <span class="tag" style="background:#fff3e0;color:#c07010">GCP</span></h3>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>รหัสพนักงาน GCP</label>
-          <div class="info-pill"><strong id="gcp-empcode"></strong></div>
-        </div>
-        <div class="form-group">
-          <label>ประเภทการประเมิน</label>
-          <div class="info-pill"><strong id="gcp-prepost"></strong></div>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>หน่วยงาน <span class="req">*</span></label>
-          <select id="gcp-dept" onchange="updateGCPJob()">
-            <option value="">-- เลือกหน่วยงาน --</option>
-            <option>ฝ่ายจัดซื้อ</option>
-            <option>ฝ่ายการเงิน</option>
-            <option>ฝ่ายวิศวกรรม</option>
-            <option>ฝ่ายผลิต</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ชื่องาน <span class="req">*</span></label>
-          <select id="gcp-job" onchange="updateGCPSupplier()">
-            <option value="">-- เลือกชื่องาน --</option>
-          </select>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
-        <div class="form-group">
-          <label>ชื่อ Supplier <span class="req">*</span></label>
-          <select id="gcp-supplier" onchange="updateGCPType()">
-            <option value="">-- เลือก Supplier --</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>ประเภทสินค้า / บริการ</label>
-          <div class="info-pill" id="gcp-type-pill">
-            <span id="gcp-type-val">-</span>
-            <span class="auto-badge">อัตโนมัติ</span>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>เลขที่อ้างอิง</label>
-        <div class="info-pill">
-          <strong id="gcp-refno">GCP-</strong>
-          <span class="auto-badge">Auto</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- GCP Evaluation Questions - different criteria -->
-    <div class="section-card">
-      <h3>หัวข้อประเมิน <span class="tag" style="background:#fff3e0;color:#c07010">เกณฑ์ GCP</span></h3>
-
-      <div class="eval-section-title" style="border-left-color:#c07010;background:#fff3e0"><span class="sec-pill" style="background:var(--accent)">1</span>ระบบบริหารคุณภาพ (Quality Management System)</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">1.1</span>มีระบบควบคุมคุณภาพและเอกสารประกอบอย่างครบถ้วน</div>
-        <div class="score-group">
-          <input type="radio" name="gq1" id="gq1s1" class="score-option" value="1">
-          <label for="gq1s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่มีระบบ</span></label>
-          <input type="radio" name="gq1" id="gq1s2" class="score-option" value="2">
-          <label for="gq1s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">มีบางส่วน</span></label>
-          <input type="radio" name="gq1" id="gq1s3" class="score-option" value="3">
-          <label for="gq1s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ครบถ้วนสมบูรณ์</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ไม่มีเอกสาร/ระบบ QC · <span>2</span> = มีบางส่วนแต่ไม่สมบูรณ์ · <span>3</span> = มีระบบ ISO หรือเทียบเท่า</div>
-      </div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">1.2</span>การทดสอบและการรับรองผลิตภัณฑ์ตามมาตรฐานสากล</div>
-        <div class="score-group">
-          <input type="radio" name="gq2" id="gq2s1" class="score-option" value="1">
-          <label for="gq2s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่มีการรับรอง</span></label>
-          <input type="radio" name="gq2" id="gq2s2" class="score-option" value="2">
-          <label for="gq2s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">รับรองบางส่วน</span></label>
-          <input type="radio" name="gq2" id="gq2s3" class="score-option" value="3">
-          <label for="gq2s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ผ่านมาตรฐานสากล</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ไม่มี Certification · <span>2</span> = มี Cert บางส่วน · <span>3</span> = ผ่าน ISO/TUV/CE ครบถ้วน</div>
-      </div>
-
-      <div class="eval-section-title" style="margin-top:20px;border-left-color:#c07010;background:#fff3e0"><span class="sec-pill" style="background:var(--accent)">2</span>ความสามารถในการผลิตและกำลังการผลิต (Capacity)</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">2.1</span>กำลังการผลิตและความยืดหยุ่นในการรองรับปริมาณสั่ง</div>
-        <div class="score-group">
-          <input type="radio" name="gq3" id="gq3s1" class="score-option" value="1">
-          <label for="gq3s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่เพียงพอ</span></label>
-          <input type="radio" name="gq3" id="gq3s2" class="score-option" value="2">
-          <label for="gq3s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">พอเพียง</span></label>
-          <input type="radio" name="gq3" id="gq3s3" class="score-option" value="3">
-          <label for="gq3s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">มากกว่าพอเพียง</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = Capacity <70% ของที่ต้องการ · <span>2</span> = Capacity 70-100% · <span>3</span> = มี Capacity สำรอง >20%</div>
-      </div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">2.2</span>เทคโนโลยีและเครื่องจักรที่ใช้มีความทันสมัย</div>
-        <div class="score-group">
-          <input type="radio" name="gq4" id="gq4s1" class="score-option" value="1">
-          <label for="gq4s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ล้าสมัย</span></label>
-          <input type="radio" name="gq4" id="gq4s2" class="score-option" value="2">
-          <label for="gq4s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ทันสมัยพอควร</span></label>
-          <input type="radio" name="gq4" id="gq4s3" class="score-option" value="3">
-          <label for="gq4s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ทันสมัยมาก</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = เครื่องจักร >15 ปี ไม่ได้อัพเกรด · <span>2</span> = อัพเกรดบ้าง · <span>3</span> = เทคโนโลยีล่าสุด อัตโนมัติ</div>
-      </div>
-
-      <div class="eval-section-title" style="margin-top:20px;border-left-color:#c07010;background:#fff3e0"><span class="sec-pill" style="background:var(--accent)">3</span>สถานะทางการเงินและความมั่นคง (Financial)</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">3.1</span>ความมั่นคงทางการเงินและสภาพคล่องขององค์กร</div>
-        <div class="score-group">
-          <input type="radio" name="gq5" id="gq5s1" class="score-option" value="1">
-          <label for="gq5s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">มีความเสี่ยง</span></label>
-          <input type="radio" name="gq5" id="gq5s2" class="score-option" value="2">
-          <label for="gq5s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">มั่นคงพอควร</span></label>
-          <input type="radio" name="gq5" id="gq5s3" class="score-option" value="3">
-          <label for="gq5s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">มั่นคงมาก</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = มีปัญหาสภาพคล่อง/หนี้สูง · <span>2</span> = สถานะปานกลาง · <span>3</span> = สถานะทางการเงินดีเยี่ยม</div>
-      </div>
-
-      <div class="eval-section-title" style="margin-top:20px;border-left-color:#c07010;background:#fff3e0"><span class="sec-pill" style="background:var(--accent)">4</span>ความรับผิดชอบต่อสังคมและสิ่งแวดล้อม (CSR/ESG)</div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">4.1</span>นโยบายและการปฏิบัติด้านสิ่งแวดล้อม</div>
-        <div class="score-group">
-          <input type="radio" name="gq6" id="gq6s1" class="score-option" value="1">
-          <label for="gq6s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่มีนโยบาย</span></label>
-          <input type="radio" name="gq6" id="gq6s2" class="score-option" value="2">
-          <label for="gq6s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">มีบางส่วน</span></label>
-          <input type="radio" name="gq6" id="gq6s3" class="score-option" value="3">
-          <label for="gq6s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ปฏิบัติครบถ้วน</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = ไม่มีนโยบาย ESG · <span>2</span> = มีนโยบายแต่ไม่มีการปฏิบัติจริง · <span>3</span> = มีนโยบายและหลักฐานการปฏิบัติ</div>
-      </div>
-      <div class="question-row">
-        <div class="q-text"><span class="q-num">4.2</span>การปฏิบัติตามกฎหมายแรงงานและสิทธิมนุษยชน</div>
-        <div class="score-group">
-          <input type="radio" name="gq7" id="gq7s1" class="score-option" value="1">
-          <label for="gq7s1" class="score-label"><span class="score-num s1">1</span><span class="score-desc">ไม่ปฏิบัติ</span></label>
-          <input type="radio" name="gq7" id="gq7s2" class="score-option" value="2">
-          <label for="gq7s2" class="score-label"><span class="score-num s2">2</span><span class="score-desc">ปฏิบัติบางส่วน</span></label>
-          <input type="radio" name="gq7" id="gq7s3" class="score-option" value="3">
-          <label for="gq7s3" class="score-label"><span class="score-num s3">3</span><span class="score-desc">ปฏิบัติครบถ้วน</span></label>
-        </div>
-        <div class="score-desc-box"><span>1</span> = มีประวัติละเมิดกฎหมายแรงงาน · <span>2</span> = ปฏิบัติขั้นพื้นฐาน · <span>3</span> = ปฏิบัติครบ มีการตรวจสอบ</div>
-      </div>
-    </div>
-
-    <div class="section-card">
-      <h3>หมายเหตุ / ข้อเสนอแนะ (GCP)</h3>
-      <div class="form-group">
-        <textarea id="gcp-remark" placeholder="บันทึกเพิ่มเติมจากเจ้าหน้าที่ GCP..."></textarea>
-      </div>
-    </div>
-    <div class="submit-row">
-      <button class="btn-cancel" onclick="goHome()">ยกเลิก</button>
-      <button class="btn-submit gcp" onclick="doSubmit('gcp-supplier')">ส่งแบบประเมิน GCP</button>
-    </div>
+  <!-- FOOTER -->
+  <div class="form-footer">
+    <button class="btn-reset" onclick="resetForm()">&#8635; รีเซ็ตฟอร์ม</button>
+    <button class="btn-submit" onclick="submitForm()">&#10003; ส่งแบบประเมิน</button>
   </div>
-</div>
 
-<!-- ============================
-     PAGE: SUCCESS
-     ============================ -->
-<div class="page" id="page-success">
-  <div class="success-wrap">
-    <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#1b7a4a" stroke-width="2.5" stroke-linecap="round">
-        <circle cx="12" cy="12" r="10"/>
-        <polyline points="7,12 10,15 17,9"/>
+</div><!-- /paper -->
+
+<!-- SUCCESS OVERLAY -->
+<div class="overlay" id="overlay">
+  <div class="overlay-card">
+    <div class="ov-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="7,12 10,15 17,9"/>
       </svg>
     </div>
     <h2>ส่งแบบประเมินเรียบร้อย!</h2>
-    <p>ระบบได้รับข้อมูลการประเมินของคุณแล้ว</p>
-    <p style="font-size:13px;color:var(--text-muted)">เลขที่อ้างอิงของคุณ</p>
-    <div class="ref-box" id="success-ref">-</div>
+    <p>ระบบได้รับข้อมูลการประเมินแล้ว</p>
+    <p style="font-size:12px;color:#999">เลขที่อ้างอิง</p>
+    <div class="ov-ref" id="ov-ref">-</div>
     <br>
-    <button class="btn-home" onclick="goHome()">กลับหน้าหลัก</button>
+    <p style="font-size:13px">คะแนนรวม : <b id="ov-score" style="color:#1a6b3a;font-size:18px"></b></p>
+    <p style="font-size:13px;margin-bottom:20px">ผลการประเมิน : <span id="ov-result"></span></p>
+    <button class="btn-ov" onclick="document.getElementById('overlay').classList.remove('show')">ปิด</button>
   </div>
 </div>
 
 <script>
-// ===================== DATA =====================
-const DEPT_JOB_MAP = {
-  'ฝ่ายจัดซื้อ': ['JB-001 งานจัดซื้อวัสดุสำนักงาน', 'JB-002 งานจัดซื้ออุปกรณ์ IT', 'JB-003 งานจัดซื้อวัตถุดิบ'],
-  'ฝ่ายการเงิน': ['JB-010 งานตรวจสอบบัญชี', 'JB-011 งานจัดทำงบการเงิน'],
-  'ฝ่ายวิศวกรรม': ['JB-020 งานก่อสร้างอาคาร A', 'JB-021 งานซ่อมบำรุงเครื่องจักร', 'JB-022 งานออกแบบระบบไฟฟ้า'],
-  'ฝ่ายผลิต': ['JB-030 งานบรรจุภัณฑ์', 'JB-031 งานแปรรูปผลิตภัณฑ์'],
-  'ฝ่ายคลังสินค้า': ['JB-040 งานขนส่งสินค้า', 'JB-041 งานบริหารคลัง'],
-};
-const JOB_SUPPLIER_MAP = {
-  'JB-001 งานจัดซื้อวัสดุสำนักงาน': ['บ.ออฟฟิศเมท จำกัด', 'บ.โอโซน ซัพพลาย จำกัด'],
-  'JB-002 งานจัดซื้ออุปกรณ์ IT': ['บ.ไอทีซิตี้ จำกัด', 'บ.เจไอบี คอมพิวเตอร์ จำกัด'],
-  'JB-003 งานจัดซื้อวัตถุดิบ': ['บ.ไทยพาณิชย์วัตถุดิบ จำกัด', 'บ.สยามแร่ธาตุ จำกัด'],
-  'JB-010 งานตรวจสอบบัญชี': ['บ.ดีลอยท์ ไทย จำกัด', 'บ.พีดับเบิ้ลยูซี ประเทศไทย จำกัด'],
-  'JB-011 งานจัดทำงบการเงิน': ['บ.แกรนท์ ธอนตัน จำกัด'],
-  'JB-020 งานก่อสร้างอาคาร A': ['บ.ช.การช่าง จำกัด', 'บ.ไทยวิจิตรก่อสร้าง จำกัด'],
-  'JB-021 งานซ่อมบำรุงเครื่องจักร': ['บ.เทคโนพาร์ท จำกัด', 'บ.ไซเบอร์ เมคานิค จำกัด'],
-  'JB-022 งานออกแบบระบบไฟฟ้า': ['บ.ไทยอิเล็กทริก จำกัด'],
-  'JB-030 งานบรรจุภัณฑ์': ['บ.ไทยแพคเกจจิ้ง จำกัด', 'บ.สยามแพ็ค จำกัด'],
-  'JB-031 งานแปรรูปผลิตภัณฑ์': ['บ.โปรเซส พลัส จำกัด'],
-  'JB-040 งานขนส่งสินค้า': ['บ.เคอรี่ โลจิสติกส์ จำกัด', 'บ.เจแอนด์ที เอ็กซ์เพรส จำกัด'],
-  'JB-041 งานบริหารคลัง': ['บ.ดีเอชแอล ซัพพลายเชน จำกัด'],
-};
-const SUPPLIER_TYPE_MAP = {
-  'บ.ออฟฟิศเมท จำกัด': 'เครื่องเขียน / วัสดุสำนักงาน',
-  'บ.โอโซน ซัพพลาย จำกัด': 'วัสดุสิ้นเปลือง',
-  'บ.ไอทีซิตี้ จำกัด': 'อุปกรณ์คอมพิวเตอร์',
-  'บ.เจไอบี คอมพิวเตอร์ จำกัด': 'อุปกรณ์คอมพิวเตอร์',
-  'บ.ไทยพาณิชย์วัตถุดิบ จำกัด': 'วัตถุดิบการผลิต',
-  'บ.สยามแร่ธาตุ จำกัด': 'แร่ธาตุ / เคมีภัณฑ์',
-  'บ.ดีลอยท์ ไทย จำกัด': 'บริการตรวจสอบบัญชี',
-  'บ.พีดับเบิ้ลยูซี ประเทศไทย จำกัด': 'บริการตรวจสอบบัญชี',
-  'บ.แกรนท์ ธอนตัน จำกัด': 'บริการสอบบัญชี',
-  'บ.ช.การช่าง จำกัด': 'งานก่อสร้าง',
-  'บ.ไทยวิจิตรก่อสร้าง จำกัด': 'งานก่อสร้าง',
-  'บ.เทคโนพาร์ท จำกัด': 'อะไหล่และซ่อมบำรุง',
-  'บ.ไซเบอร์ เมคานิค จำกัด': 'บริการซ่อมบำรุง',
-  'บ.ไทยอิเล็กทริก จำกัด': 'งานระบบไฟฟ้า',
-  'บ.ไทยแพคเกจจิ้ง จำกัด': 'บรรจุภัณฑ์',
-  'บ.สยามแพ็ค จำกัด': 'บรรจุภัณฑ์',
-  'บ.โปรเซส พลัส จำกัด': 'บริการแปรรูป',
-  'บ.เคอรี่ โลจิสติกส์ จำกัด': 'ขนส่งและโลจิสติกส์',
-  'บ.เจแอนด์ที เอ็กซ์เพรส จำกัด': 'ขนส่งด่วน',
-  'บ.ดีเอชแอล ซัพพลายเชน จำกัด': 'โลจิสติกส์ครบวงจร',
-};
+// ==================== DATA ====================
+const SECTIONS = [
+  {
+    id: 'quality',
+    label: 'คุณภาพสินค้า / บริการ (Quality of Goods/Services)',
+    color: 'section-blue',
+    rows: [
+      {
+        no: 1,
+        topic: 'คุณภาพสินค้า/บริการ',
+        detail: 'ระดับคุณภาพของสินค้าหรือบริการที่จะส่งมอบ',
+        weight: 20,
+        l1: { label: 'ไม่ผ่าน', desc: 'คุณภาพไม่ตรงตามที่กำหนด / ตัวอย่างไม่ผ่าน' },
+        l2: { label: 'พอใช้', desc: 'คุณภาพตรงตามสเปคบางส่วน มีข้อแนะนำ' },
+        l3: { label: 'ดีมาก', desc: 'คุณภาพตรงตามสเปคครบส่วน ตัวอย่างผ่านทุกรายการ' },
+      },
+    ]
+  },
+  {
+    id: 'pricing',
+    label: 'ราคา (Pricing)',
+    color: 'section-teal',
+    rows: [
+      {
+        no: 2,
+        topic: 'ความสามารถด้านราคา',
+        detail: 'ราคาเปรียบเทียบกับตลาด / คู่แข่ง',
+        weight: 15,
+        l1: { label: 'ไม่ผ่าน', desc: 'ราคาสูงกว่าตลาดมากกว่า 10%' },
+        l2: { label: 'พอใช้', desc: 'ราคาอยู่ในระดับตลาด ±10%' },
+        l3: { label: 'ดีมาก', desc: 'ราคาต่ำกว่าตลาด หรือแข่งขันได้ชัดเจน' },
+      },
+    ]
+  },
+  {
+    id: 'delivery',
+    label: 'ความสามารถด้านการจัดส่ง (Delivery Capability)',
+    color: 'section-orange',
+    rows: [
+      {
+        no: 3,
+        topic: 'ความสามารถจัดส่งตามกำหนด',
+        detail: 'การส่งมอบตรงเวลา / Lead time ที่ระบุ',
+        weight: 15,
+        l1: { label: 'ไม่ผ่าน', desc: 'Lead time ยาว ไม่มีแผนสำรอง' },
+        l2: { label: 'พอใช้', desc: 'Lead time พอรับได้ มีแผนสำรองบางส่วน' },
+        l3: { label: 'ดีมาก', desc: 'Lead time สั้น มีแผนสำรองชัดเจน ส่งได้ตรงเวลา 100%' },
+      },
+    ]
+  },
+  {
+    id: 'payment',
+    label: 'เงื่อนไขการชำระเงิน (Payment Term)',
+    color: 'section-purple',
+    rows: [
+      {
+        no: 4,
+        topic: 'เงื่อนไขการชำระเงิน',
+        detail: 'ระยะเวลาที่ให้เครดิตการชำระ',
+        weight: 10,
+        l1: { label: 'ไม่ผ่าน', desc: 'Credit term < 30 วัน' },
+        l2: { label: 'พอใช้', desc: 'Credit term 30–59 วัน' },
+        l3: { label: 'ดีมาก', desc: 'Credit term ≥ 60 วัน' },
+      },
+    ]
+  },
+  {
+    id: 'prequalify',
+    label: 'Pre-Qualification (คุณสมบัติเบื้องต้น)',
+    color: 'section-amber',
+    rows: [
+      {
+        no: 5,
+        topic: 'ความมั่นคงทางธุรกิจ',
+        detail: 'ประวัติและความมั่นคงทางการเงิน / อายุกิจการ',
+        weight: 10,
+        l1: { label: 'ไม่ผ่าน', desc: 'กิจการใหม่ < 1 ปี หรือมีปัญหาด้านการเงิน' },
+        l2: { label: 'พอใช้', desc: 'อายุกิจการ 1–3 ปี สถานะปานกลาง' },
+        l3: { label: 'ดีมาก', desc: 'อายุกิจการ > 3 ปี สถานะทางการเงินดี' },
+      },
+      {
+        no: 6,
+        topic: 'การรับรองมาตรฐาน',
+        detail: 'ใบรับรอง ISO / มาตรฐานที่เกี่ยวข้อง',
+        weight: 10,
+        l1: { label: 'ไม่ผ่าน', desc: 'ไม่มีใบรับรองใดๆ' },
+        l2: { label: 'พอใช้', desc: 'มีใบรับรองบางส่วน อยู่ระหว่างขอ' },
+        l3: { label: 'ดีมาก', desc: 'ผ่าน ISO หรือมาตรฐานสากลครบ' },
+      },
+    ]
+  },
+  {
+    id: 'service',
+    label: 'การบริการหลังการขาย (After-Sales Service)',
+    color: 'section-red',
+    rows: [
+      {
+        no: 7,
+        topic: 'การตอบสนองและแก้ปัญหา',
+        detail: 'ความรวดเร็วในการแก้ไขปัญหา / ข้อร้องเรียน',
+        weight: 10,
+        l1: { label: 'ไม่ผ่าน', desc: 'แก้ปัญหาช้า > 3 วันทำการ' },
+        l2: { label: 'พอใช้', desc: 'แก้ปัญหาได้ภายใน 1–2 วัน' },
+        l3: { label: 'ดีมาก', desc: 'แก้ปัญหาภายในวันเดียวกัน มี SLA ชัดเจน' },
+      },
+    ]
+  },
+  {
+    id: 'esg',
+    label: 'ความรับผิดชอบต่อสังคมและสิ่งแวดล้อม (CSR / ESG)',
+    color: 'section-indigo',
+    rows: [
+      {
+        no: 8,
+        topic: 'นโยบาย ESG',
+        detail: 'การปฏิบัติตามนโยบายสิ่งแวดล้อม / สังคม / ธรรมาภิบาล',
+        weight: 10,
+        l1: { label: 'ไม่ผ่าน', desc: 'ไม่มีนโยบาย ESG ใดๆ' },
+        l2: { label: 'พอใช้', desc: 'มีนโยบายแต่ยังไม่มีการปฏิบัติจริง' },
+        l3: { label: 'ดีมาก', desc: 'มีนโยบายและหลักฐานการปฏิบัติชัดเจน' },
+      },
+    ]
+  },
+];
 
-let refCounter = 1000;
-let currentMode = '';
-let currentEmpCode = '';
-let currentPrePost = '';
-
-function genRef(prefix) {
-  refCounter++;
+// Generate reference number
+function genRef() {
   const d = new Date();
   const yr = d.getFullYear();
   const mo = String(d.getMonth()+1).padStart(2,'0');
-  return `${prefix}-${yr}${mo}-${String(refCounter).padStart(4,'0')}`;
+  const rnd = String(Math.floor(Math.random()*9000)+1000);
+  return `SPQ-${yr}${mo}-${rnd}`;
 }
 
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
+// Build table
+function buildTable() {
+  const tbody = document.getElementById('eval-tbody');
+  tbody.innerHTML = '';
+  let rowIdx = 0;
+  SECTIONS.forEach(sec => {
+    // Section header
+    const secTr = document.createElement('tr');
+    secTr.className = `section-row ${sec.color}`;
+    secTr.innerHTML = `<td colspan="9">&#9654;&nbsp; ${sec.label}</td>`;
+    tbody.appendChild(secTr);
 
-function goHome() { showPage('page-home'); }
+    // Data rows
+    sec.rows.forEach(row => {
+      rowIdx++;
+      const uid = `q${row.no}`;
+      const tr = document.createElement('tr');
+      tr.className = 'data-row';
+      tr.dataset.uid = uid;
+      tr.dataset.weight = row.weight;
+      tr.innerHTML = `
+        <td class="td-no">${row.no}</td>
+        <td class="td-topic">${row.topic}</td>
+        <td class="td-detail">${row.detail}</td>
+        <td class="td-weight">${row.weight}%</td>
+        <td class="td-levels" colspan="3">
+          <div class="level-group">
+            <input type="radio" name="${uid}" id="${uid}_l1" class="level-opt l1" value="1">
+            <label for="${uid}_l1" class="level-btn">
+              <span class="lv-num" style="color:#c62828">1</span>
+              <span class="lv-label">${row.l1.label}</span>
+              <span class="lv-desc">${row.l1.desc}</span>
+            </label>
+            <input type="radio" name="${uid}" id="${uid}_l2" class="level-opt l2" value="2">
+            <label for="${uid}_l2" class="level-btn">
+              <span class="lv-num" style="color:#e65100">2</span>
+              <span class="lv-label">${row.l2.label}</span>
+              <span class="lv-desc">${row.l2.desc}</span>
+            </label>
+            <input type="radio" name="${uid}" id="${uid}_l3" class="level-opt l3" value="3">
+            <label for="${uid}_l3" class="level-btn">
+              <span class="lv-num" style="color:#2e7d32">3</span>
+              <span class="lv-label">${row.l3.label}</span>
+              <span class="lv-desc">${row.l3.desc}</span>
+            </label>
+          </div>
+        </td>
+        <td class="td-score" id="score_${uid}">
+          <span class="score-val">–</span>
+          <span class="score-sub">/ ${row.weight}</span>
+        </td>
+        <td class="td-note">
+          <textarea class="note-input" placeholder="หมายเหตุ..."></textarea>
+        </td>
+      `;
+      tbody.appendChild(tr);
 
-function gotoLogin(mode) {
-  currentMode = mode;
-  const labels = {
-    'user-supplier': ['User ประเมิน Supplier', 'เจ้าหน้าที่ประเมิน Supplier', false],
-    'supplier-buyer': ['Supplier ประเมิน Buyer', 'Supplier ประเมินประสิทธิภาพ Buyer', false],
-    'gcp-supplier': ['GCP ประเมิน Supplier', 'เจ้าหน้าที่ GCP ประเมิน Supplier', true],
-  };
-  const [bc, subtitle, showPP] = labels[mode];
-  document.getElementById('login-breadcrumb').textContent = bc;
-  document.getElementById('login-title').textContent = 'เข้าสู่ระบบ';
-  document.getElementById('login-subtitle').textContent = subtitle;
-  document.getElementById('login-prepost-wrap').style.display = (showPP || mode==='user-supplier') ? '' : 'none';
-  document.getElementById('login-empcode').value = '';
-  document.querySelectorAll('input[name="prepost"]').forEach(r => r.checked = false);
-  const btn = document.getElementById('btn-login-go');
-  btn.className = 'btn-login' + (mode==='gcp-supplier' ? ' gcp' : '');
-  showPage('page-login');
-}
-
-function doLogin() {
-  const emp = document.getElementById('login-empcode').value.trim();
-  if (!emp) { alert('กรุณากรอกรหัสพนักงาน'); return; }
-  const needPP = (currentMode === 'user-supplier' || currentMode === 'gcp-supplier');
-  let pp = '';
-  if (needPP) {
-    const sel = document.querySelector('input[name="prepost"]:checked');
-    if (!sel) { alert('กรุณาเลือกประเภทการประเมิน'); return; }
-    pp = sel.value;
-  }
-  currentEmpCode = emp;
-  currentPrePost = pp;
-
-  if (currentMode === 'user-supplier') {
-    document.getElementById('us-empcode').textContent = emp;
-    document.getElementById('us-prepost').textContent = pp + '-Evaluation';
-    const ref = genRef('EVL');
-    document.getElementById('us-refno').textContent = ref;
-    document.getElementById('us-ref-display').textContent = ref;
-    resetUSDropdowns();
-    showPage('page-user-supplier');
-  } else if (currentMode === 'supplier-buyer') {
-    document.getElementById('sb-empcode').textContent = emp;
-    document.getElementById('sb-ref-display').textContent = genRef('SBE');
-    showPage('page-supplier-buyer');
-  } else if (currentMode === 'gcp-supplier') {
-    document.getElementById('gcp-empcode').textContent = emp;
-    document.getElementById('gcp-prepost').textContent = pp + '-Evaluation';
-    const ref = genRef('GCP');
-    document.getElementById('gcp-refno').textContent = ref;
-    document.getElementById('gcp-ref-display').textContent = ref;
-    resetGCPDropdowns();
-    showPage('page-gcp-supplier');
-  }
-}
-
-function resetUSDropdowns() {
-  document.getElementById('us-dept').value = '';
-  const jobSel = document.getElementById('us-job');
-  jobSel.innerHTML = '<option value="">-- เลือกชื่องาน --</option>';
-  const suppSel = document.getElementById('us-supplier');
-  suppSel.innerHTML = '<option value="">-- เลือก Supplier --</option>';
-  document.getElementById('us-type-val').textContent = '-';
-}
-function resetGCPDropdowns() {
-  document.getElementById('gcp-dept').value = '';
-  const jobSel = document.getElementById('gcp-job');
-  jobSel.innerHTML = '<option value="">-- เลือกชื่องาน --</option>';
-  const suppSel = document.getElementById('gcp-supplier');
-  suppSel.innerHTML = '<option value="">-- เลือก Supplier --</option>';
-  document.getElementById('gcp-type-val').textContent = '-';
-}
-
-function populateSelect(sel, items) {
-  sel.innerHTML = '<option value="">-- เลือก --</option>';
-  items.forEach(i => {
-    const o = document.createElement('option'); o.value = i; o.textContent = i; sel.appendChild(o);
+      // Score update on change
+      tr.querySelectorAll(`input[name="${uid}"]`).forEach(inp => {
+        inp.addEventListener('change', () => updateScore(uid, row.weight));
+      });
+    });
   });
+
+  // Total row
+  const totalTr = document.createElement('tr');
+  totalTr.className = 'total-row total-section';
+  totalTr.innerHTML = `
+    <td colspan="3" style="text-align:right">คะแนนรวมทั้งหมด (Total Score)</td>
+    <td class="td-weight">100%</td>
+    <td colspan="3"></td>
+    <td class="td-score"><span class="score-val total-score" id="total-score">0.00</span><span class="score-sub">/ 100</span></td>
+    <td><span id="result-badge"></span></td>
+  `;
+  tbody.appendChild(totalTr);
 }
 
-function updateUSJob() {
-  const dept = document.getElementById('us-dept').value;
-  const jobs = DEPT_JOB_MAP[dept] || [];
-  const jobSel = document.getElementById('us-job');
-  populateSelect(jobSel, jobs);
-  document.getElementById('us-supplier').innerHTML = '<option value="">-- เลือก Supplier --</option>';
-  document.getElementById('us-type-val').textContent = '-';
-}
-function updateUSSupplier() {
-  const job = document.getElementById('us-job').value;
-  const suppliers = JOB_SUPPLIER_MAP[job] || [];
-  populateSelect(document.getElementById('us-supplier'), suppliers);
-  document.getElementById('us-type-val').textContent = '-';
-}
-function updateUSType() {
-  const sup = document.getElementById('us-supplier').value;
-  document.getElementById('us-type-val').textContent = SUPPLIER_TYPE_MAP[sup] || '-';
-}
-
-function updateGCPJob() {
-  const dept = document.getElementById('gcp-dept').value;
-  const jobs = DEPT_JOB_MAP[dept] || [];
-  populateSelect(document.getElementById('gcp-job'), jobs);
-  document.getElementById('gcp-supplier').innerHTML = '<option value="">-- เลือก Supplier --</option>';
-  document.getElementById('gcp-type-val').textContent = '-';
-}
-function updateGCPSupplier() {
-  const job = document.getElementById('gcp-job').value;
-  const suppliers = JOB_SUPPLIER_MAP[job] || [];
-  populateSelect(document.getElementById('gcp-supplier'), suppliers);
-  document.getElementById('gcp-type-val').textContent = '-';
-}
-function updateGCPType() {
-  const sup = document.getElementById('gcp-supplier').value;
-  document.getElementById('gcp-type-val').textContent = SUPPLIER_TYPE_MAP[sup] || '-';
-}
-
-function doSubmit(mode) {
-  if (mode === 'user-supplier') {
-    if (!document.getElementById('us-dept').value) { alert('กรุณาเลือกหน่วยงาน'); return; }
-    if (!document.getElementById('us-job').value) { alert('กรุณาเลือกชื่องาน'); return; }
-    if (!document.getElementById('us-supplier').value) { alert('กรุณาเลือก Supplier'); return; }
-    const qs = ['q1','q2','q3','q4','q5','q6','q7'];
-    for (const q of qs) {
-      if (!document.querySelector(`input[name="${q}"]:checked`)) {
-        alert('กรุณาให้คะแนนในทุกข้อ'); return;
-      }
-    }
-    document.getElementById('success-ref').textContent = document.getElementById('us-refno').textContent;
-  } else if (mode === 'supplier-buyer') {
-    if (!document.getElementById('sb-job').value) { alert('กรุณาเลือกงานที่ต้องการประเมิน'); return; }
-    const qs = ['bq1','bq2','bq3','bq4','bq5'];
-    for (const q of qs) {
-      if (!document.querySelector(`input[name="${q}"]:checked`)) {
-        alert('กรุณาให้คะแนนในทุกข้อ'); return;
-      }
-    }
-    document.getElementById('success-ref').textContent = document.getElementById('sb-ref-display').textContent;
-  } else if (mode === 'gcp-supplier') {
-    if (!document.getElementById('gcp-dept').value) { alert('กรุณาเลือกหน่วยงาน'); return; }
-    if (!document.getElementById('gcp-job').value) { alert('กรุณาเลือกชื่องาน'); return; }
-    if (!document.getElementById('gcp-supplier').value) { alert('กรุณาเลือก Supplier'); return; }
-    const qs = ['gq1','gq2','gq3','gq4','gq5','gq6','gq7'];
-    for (const q of qs) {
-      if (!document.querySelector(`input[name="${q}"]:checked`)) {
-        alert('กรุณาให้คะแนนในทุกข้อ'); return;
-      }
-    }
-    document.getElementById('success-ref').textContent = document.getElementById('gcp-refno').textContent;
+function updateScore(uid, weight) {
+  const selected = document.querySelector(`input[name="${uid}"]:checked`);
+  const scoreCell = document.getElementById(`score_${uid}`);
+  if (selected) {
+    const lv = parseInt(selected.value);
+    const normalized = ((lv / 3) * weight).toFixed(2);
+    scoreCell.querySelector('.score-val').textContent = normalized;
+    scoreCell.style.background = lv === 1 ? '#fff5f5' : lv === 2 ? '#fffde7' : '#e8f5e9';
+    scoreCell.querySelector('.score-val').style.color = lv === 1 ? '#c62828' : lv === 2 ? '#e65100' : '#2e7d32';
   }
-  showPage('page-success');
+  calcTotal();
 }
+
+function calcTotal() {
+  let total = 0;
+  let answered = 0;
+  SECTIONS.forEach(sec => {
+    sec.rows.forEach(row => {
+      const uid = `q${row.no}`;
+      const sel = document.querySelector(`input[name="${uid}"]:checked`);
+      if (sel) {
+        const lv = parseInt(sel.value);
+        total += (lv / 3) * row.weight;
+        answered++;
+      }
+    });
+  });
+  const allRows = SECTIONS.reduce((a, s) => a + s.rows.length, 0);
+  document.getElementById('total-score').textContent = total.toFixed(2);
+
+  // Result badge
+  const rb = document.getElementById('result-badge');
+  if (answered < allRows) {
+    rb.innerHTML = '';
+  } else {
+    let badgeClass = total >= 70 ? 'badge-pass' : total >= 50 ? 'badge-cond' : 'badge-fail';
+    let badgeText = total >= 70 ? '✓ ผ่าน (Approved)' : total >= 50 ? '~ ผ่านมีเงื่อนไข' : '✗ ไม่ผ่าน';
+    rb.innerHTML = `<span class="result-badge ${badgeClass}">${badgeText}</span>`;
+  }
+  return { total: total.toFixed(2), answered, allRows };
+}
+
+function resetForm() {
+  if (!confirm('ต้องการรีเซ็ตข้อมูลทั้งหมดหรือไม่?')) return;
+  document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+  document.querySelectorAll('.note-input').forEach(t => t.value = '');
+  document.querySelectorAll('.td-score .score-val').forEach(s => {
+    if (!s.classList.contains('total-score')) { s.textContent = '–'; s.style.color = ''; }
+  });
+  document.querySelectorAll('.td-score').forEach(td => { td.style.background = ''; });
+  document.getElementById('total-score').textContent = '0.00';
+  document.getElementById('result-badge').innerHTML = '';
+}
+
+function submitForm() {
+  const allRows = SECTIONS.reduce((a, s) => a + s.rows.length, 0);
+  let missing = [];
+  SECTIONS.forEach(sec => {
+    sec.rows.forEach(row => {
+      const uid = `q${row.no}`;
+      if (!document.querySelector(`input[name="${uid}"]:checked`)) {
+        missing.push(row.topic);
+      }
+    });
+  });
+  if (missing.length > 0) {
+    alert(`กรุณาให้คะแนนในหัวข้อที่ยังไม่ได้เลือก:\n• ${missing.join('\n• ')}`);
+    return;
+  }
+  const { total } = calcTotal();
+  const ref = document.getElementById('ref-no').value;
+  const badgeClass = parseFloat(total) >= 70 ? 'badge-pass' : parseFloat(total) >= 50 ? 'badge-cond' : 'badge-fail';
+  const badgeText = parseFloat(total) >= 70 ? '✓ ผ่าน (Approved)' : parseFloat(total) >= 50 ? '~ ผ่านมีเงื่อนไข' : '✗ ไม่ผ่าน (Rejected)';
+
+  document.getElementById('ov-ref').textContent = ref;
+  document.getElementById('ov-score').textContent = total + ' / 100';
+  document.getElementById('ov-result').innerHTML = `<span class="result-badge ${badgeClass}">${badgeText}</span>`;
+  document.getElementById('overlay').classList.add('show');
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('ref-no').value = genRef();
+  document.getElementById('eval-date').value = new Date().toISOString().split('T')[0];
+  buildTable();
+});
 </script>
 </body>
 </html>
